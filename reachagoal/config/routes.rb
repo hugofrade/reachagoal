@@ -1,4 +1,10 @@
 Reachagoal::Application.routes.draw do
+  resources :friends
+
+  resources :moneyboxes
+
+  resources :currencies
+
   resources :users
 
   # The priority is based upon order of creation: first created -> highest priority.

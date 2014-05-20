@@ -1,0 +1,39 @@
+<h1>Listing objectives</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Start day</th>
+      <th>End day</th>
+      <th>Price</th>
+      <th>Objective type</th>
+      <th>Privacy</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @objectives.each do |objective| %>
+      <tr>
+        <td><%= objective.name %></td>
+        <td><%= objective.description %></td>
+        <td><%= objective.start_day %></td>
+        <td><%= objective.end_day %></td>
+        <td><%= objective.price %></td>
+        <td><%= objective.objective_type %></td>
+        <td><%= objective.privacy %></td>
+        <td><%= link_to 'Show', objective %></td>
+        <td><%= link_to 'Edit', edit_objective_path(objective) %></td>
+        <td><%= link_to 'Destroy', objective, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Objective', new_objective_path %>

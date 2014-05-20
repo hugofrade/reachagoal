@@ -1,0 +1,49 @@
+<%= form_for(@objective) do |f| %>
+  <% if @objective.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@objective.errors.count, "error") %> prohibited this objective from being saved:</h2>
+
+      <ul>
+      <% @objective.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :photo %><br>
+    <%= f.file_field :photo %>
+  </div>
+  <div class="field">
+    <%= f.label :start_day %><br>
+    <%= f.date_select :start_day %>
+  </div>
+  <div class="field">
+    <%= f.label :end_day %><br>
+    <%= f.date_select :end_day %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.number_field :price %>
+  </div>
+  <div class="field">
+    <%= f.label :objective_type %><br>
+    <%= f.number_field :objective_type %>
+  </div>
+  <div class="field">
+    <%= f.label :privacy %><br>
+    <%= f.number_field :privacy %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

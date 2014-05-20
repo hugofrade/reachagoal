@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  description: MyText
+  start_day: 2014-05-20
+  end_day: 2014-05-20
+  price: 1
+  objective_type: 1
+  privacy: 1
+
+two:
+  name: MyString
+  description: MyText
+  start_day: 2014-05-20
+  end_day: 2014-05-20
+  price: 1
+  objective_type: 1
+  privacy: 1

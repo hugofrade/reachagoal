@@ -1,0 +1,82 @@
+<p id="notice"><%= notice %></p>
+
+
+
+<p>
+  <strong>Name:</strong>
+  <%= @objective.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @objective.description %>
+</p>
+
+<%= image_tag @objective.image.url(:large) %>
+
+<p>
+  <strong>Start day:</strong>
+  <%= @objective.start_day %>
+</p>
+
+<p>
+  <strong>End day:</strong>
+  <%= @objective.end_day %>
+</p>
+
+<p style="font-size: 30px">
+  <strong>Saved:</strong>
+    <%= number_to_currency(@objective.missing_value, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %> /
+  <%= number_to_currency(@objective.price, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %>
+</p>
+
+<!--
+<p>
+  <strong>Objective type:</strong>
+  <%= @objective.objective_type %>
+</p>
+
+<p>
+  <strong>Privacy:</strong>
+  <%= @objective.privacy %>
+</p>
+-->
+
+
+<div>
+  <h2>Valores poupados</h2>
+  
+  
+  
+  <ol>
+      <% @objective.objective_values.each do |value| %>
+      <li> <%= number_to_currency(value.value, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %><br>
+      <time><%= value.created_at%></time>
+      <p><%= value.description%></p>
+      </li>
+    <% end %>
+  </ol>
+  
+
+    
+  <h3>Adicionar novo</h3>
+  <%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>
+
+    <div class="field">
+      <label for="value">Value</label><br>
+      <input type="text" name="value" value="0">€
+    </div>
+    <div class="field">
+      <label for="description">Description</label><br>
+      <input type="text" name="description">
+    </div>
+    <div class="actions">
+      <input type="submit">
+    </div>
+
+  <% end %>
+
+</div>
+
+
+<%= link_to 'Edit', edit_objective_path(@objective) if user_signed_in? && @objective.user_id == current_user.id %>

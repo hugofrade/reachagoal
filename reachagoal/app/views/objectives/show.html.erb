@@ -12,7 +12,11 @@
   <%= @objective.description %>
 </p>
 
-<%= image_tag @objective.image.url(:large) %>
+<p>
+  <strong>Foto:</strong>
+  <%= image_tag @objective.photo.url %> %>
+</p>
+
 
 <p>
   <strong>Start day:</strong>
@@ -80,3 +84,4 @@
 
 
 <%= link_to 'Edit', edit_objective_path(@objective) if user_signed_in? && @objective.user_id == current_user.id %>
+<%= link_to 'Back', objectives_path %>

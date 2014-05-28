@@ -45,4 +45,5 @@ end
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise'
-gem 'paperclip'
+gem "paperclip"
+gem "cocaine", "= 0.3.2" 

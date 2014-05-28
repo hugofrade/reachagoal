@@ -26,14 +26,18 @@ class ObjectivesController < ApplicationController
   # POST /objectives
   # POST /objectives.json
   def create
+ 
     @objective = Objective.new(objective_params)
     @objective.user_id = current_user.id
-
+    
       if @objective.save
+        @user_objective=UserObjective.new(user_id: @objective.user_id, objective_id: @objective.id)
+  	    @user_objective.save
        	redirect_to @objective, notice: 'Objective was successfully created.'
       else
         render action: 'new'
       end
+    
   end
 
   # PATCH/PUT /objectives/1

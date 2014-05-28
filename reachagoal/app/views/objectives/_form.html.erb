@@ -1,4 +1,5 @@
-<%= form_for(@objective) do |f| %>
+<%= form_for @objective , :html => { :multipart => true } do |f| %>
+  
   <% if @objective.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@objective.errors.count, "error") %> prohibited this objective from being saved:</h2>
@@ -10,7 +11,8 @@
       </ul>
     </div>
   <% end %>
-
+  
+  
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
@@ -37,11 +39,11 @@
   </div>
   <div class="field">
     <%= f.label :objective_type %><br>
-    <%= f.number_field :objective_type %>
+    <%= f.select :objective_type, Enumerators::ObjectiveType.map{ |t| [t[1],t[0]] } %>
   </div>
   <div class="field">
     <%= f.label :privacy %><br>
-    <%= f.number_field :privacy %>
+    <%= f.select :privacy, Enumerators::Privacy.map{ |t| [t[1],t[0]] } %>
   </div>
   <div class="actions">
     <%= f.submit %>

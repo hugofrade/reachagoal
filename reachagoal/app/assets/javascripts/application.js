@@ -14,3 +14,40 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(document).ready(function() {
+  fullScreenContainer();
+});
+
+
+function fullScreenContainer() {
+
+  // Set Initial Screen Dimensions
+
+  var screenWidth = $(window).width() + "px";
+  var screenHeight = $(window).height() + "px";
+
+  $("#intro, #intro .item").css({
+    width: screenWidth,
+    height: screenHeight
+  });
+
+  // Every time the window is resized...
+
+  $(window).resize( function () {
+
+    // Fetch Screen Dimensions
+
+    var screenWidth = $(window).width() + "px";
+    var screenHeight = $(window).height() + "px";
+      
+    // Set Slides to new Screen Dimensions
+    
+    $("#intro, #intro .item").css({
+      width: screenWidth,
+      height: screenHeight
+    }); 
+      
+  });
+
+}

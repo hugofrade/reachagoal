@@ -2,10 +2,29 @@
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
+  
+  <div><%= f.label :nome %><br />
+  <%= f.text_field :nome, autofocus: true %></div>
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email, autofocus: true %></div>
 
+   <div class="field">
+   	<%= f.label :photo %><br>
+    <%= image_tag current_user.photo.url(:thumb), :class => "img-rounded" %>
+    <%= f.file_field :photo %>
+  </div>
+  
+  <div><%= f.label :local %><br />
+  <%= f.text_field :local %></div>
+  
+  <div><%= f.label :biography %><br />
+  <%= text_area_tag :biography %></div>
+  
+   <div><%= f.label :facebook_user %><br />
+  <%= f.text_field :facebook_user %></div>
+  
+  
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>

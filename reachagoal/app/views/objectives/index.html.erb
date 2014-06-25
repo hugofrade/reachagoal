@@ -1,39 +1,77 @@
-<h1>Listing objectives</h1>
+<section>
+  <div class='item background-cover'>
+    <div class='container'>
+      <div class='row'>
+	      
+		<h1>Listing objectives</h1>
+		<table>
+		  <thead>
+		    <tr>
+		      <th>Name</th>
+		      <th>Start day</th>
+		      <th>End day</th>
+		      <th>Price</th>
+		      <th>Objective type</th>
+		      <th>Privacy</th>
+		      <th></th>
+		      <th></th>
+		      <th></th>
+		    </tr>
+		  </thead>
+		
+		  <tbody>
+		  
+		  <% if current_user.user_objectives != nil  %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Start day</th>
-      <th>End day</th>
-      <th>Price</th>
-      <th>Objective type</th>
-      <th>Privacy</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+			  <% if user_signed_in?%>
+	
+			  	<% current_user.user_objectives.each do |userobj| %>
+			  		
+		  			<tr>
+				        <td><%= userobj.objective.name %></td>
+				        <td><%= userobj.objective.start_day %></td>
+				        <td><%= userobj.objective.end_day %></td>
+				        <td><%= userobj.objective.price %></td>
+				        <td><%= Enumerators::ObjectiveType[userobj.objective.objective_type] %></td>
+				        <td><%= Enumerators::Privacy[userobj.objective.objective_type] %></td>
+				        <td><%= link_to 'Show', userobj.objective %></td>
+				        <td><%= link_to 'Edit', edit_objective_path(userobj.objective) %></td>
+				        <td><%= link_to 'Destroy', userobj.objective, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+				      </tr>
+					
+				<% end %>
+			
+			
+			  <% else %>
+				  	<%= @objectives.each do |objective| %>
+			  			<tr>
+					        <td><%= objective.name %></td>
+					        <td><%= objective.description %></td>
+					        <td><%= objective.start_day %></td>
+					        <td><%= objective.end_day %></td>
+					        <td><%= objective.price %></td>
+					        <td><%= objective.objective_type %></td>
+					        <td><%= objective.privacy %></td>
+					        <td><%= link_to 'Show', objective %></td>
+					        <td><%= link_to 'Edit', edit_objective_path(objective) %></td>
+					        <td><%= link_to 'Destroy', objective, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					      </tr>
+					<%end %>
+				<%end%>
+		  <% else %>
+		  
+		  Nenhum objectivo
+		  
+		  <%end%>
 
-  <tbody>
-    <% @objectives.each do |objective| %>
-      <tr>
-        <td><%= objective.name %></td>
-        <td><%= objective.description %></td>
-        <td><%= objective.start_day %></td>
-        <td><%= objective.end_day %></td>
-        <td><%= objective.price %></td>
-        <td><%= objective.objective_type %></td>
-        <td><%= objective.privacy %></td>
-        <td><%= link_to 'Show', objective %></td>
-        <td><%= link_to 'Edit', edit_objective_path(objective) %></td>
-        <td><%= link_to 'Destroy', objective, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+		  </tbody>
+		</table>
+		
+		<br>
+		
+		<%= link_to 'New Objective', new_objective_path %>
 
-<%= link_to 'New Objective', new_objective_path %>
+      </div>
+    </div>
+ </section>

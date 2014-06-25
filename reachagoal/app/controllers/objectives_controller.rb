@@ -1,8 +1,9 @@
 class ObjectivesController < ApplicationController
   before_action :set_objective, only: [:show, :edit, :update, :destroy]
 
-  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :authenticate_user!, except: [:index]
 
+  
   # GET /objectives
   # GET /objectives.json
   def index
@@ -57,10 +58,11 @@ class ObjectivesController < ApplicationController
   # DELETE /objectives/1
   # DELETE /objectives/1.json
   def destroy
+  
+  	@objective.user_objectives.destroy_all
     @objective.destroy
     respond_to do |format|
       format.html { redirect_to objectives_url }
-      format.json { head :no_content }
     end
   end
 

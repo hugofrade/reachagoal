@@ -1,22 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-
-
 <p>
   <strong>Name:</strong>
   <%= @objective.name %>
 </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @objective.description %>
-</p>
 
 <p>
   <strong>Foto:</strong>
-  <%= image_tag @objective.photo.url %>
+  <%= image_tag @objective.photo.url(:wide) %>
 </p>
-
 
 <p>
   <strong>Start day:</strong>

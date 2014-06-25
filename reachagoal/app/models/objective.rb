@@ -1,9 +1,10 @@
 class Objective < ActiveRecord::Base
     has_attached_file :photo,
-      :styles => { :medium => "300x300>", :thumb => "100x100>" },
-      :default_url => "/images/:style/missing.png",
-      :url => "/system/:attachment/:id/:style/:filename",
-      :path => ":rails_root/public/system/:attachment/:id/:style/:filename"
+      :styles => { :wide => "1000x400#", :dashboard => "500x300#" },
+      :default_url => "/assets/objective/:style/placeholder.jpg",
+      :url => "/system/objectives/:attachment/:id/:style/:filename",
+      
+      :path => ":rails_root/public/system/objectives/:attachment/:id/:style/:filename"
       
     validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 	has_many :objective_values

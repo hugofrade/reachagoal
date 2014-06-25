@@ -1,6 +1,6 @@
 class PrivateController < ApplicationController
-	before_filter :check_user
-
+	before_action :authenticate_user!
+	
 	def user_dashboard
 	
 	end

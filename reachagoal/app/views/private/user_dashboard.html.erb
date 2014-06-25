@@ -1,2 +1,49 @@
-<h1>User dashboard</h1>
+<section>
 
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-sm-6 hidden-xs">
+				<%= image_tag current_user.photo.url(:dashboard), :class => "img-rounded img-responsive" %>
+				<%= link_to 'Edit profile', edit_user_registration_path %>
+			</div>
+			<div class="col-md-4 col-sm-6 col-xs-6">
+				<p><%= current_user.nome %></p>
+				<p><%= current_user.local %></p>
+				<p><%= current_user.facebook_user %></p>
+			</div>
+			<div class="col-md-4 col-sm-12 col-xs-6">
+				Badges
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section>
+	<div class="container">
+		<div class="row">
+
+			<% if current_user.user_objectives != nil  %>
+				<% current_user.user_objectives.reverse!.each do |userobj| %>
+					<div class="col-md-4 col-sm-6">
+							<%= link_to image_tag( userobj.objective.photo.url(:dashboard), :class => "img-rounded img-responsive"), userobj.objective  %>
+					        <h1><%= userobj.objective.name %></h1>
+					        <p><%= userobj.objective.start_day %></p>
+					        <p><%= userobj.objective.end_day %></p>
+					        <p><%= userobj.objective.price %></p>
+					        <p><%= Enumerators::ObjectiveType[userobj.objective.objective_type] %></p>
+					        <p><%= Enumerators::Privacy[userobj.objective.objective_type] %></p>
+								<%= link_to 'Edit', edit_objective_path(userobj.objective) %>
+						        <%= link_to 'Destroy', userobj.objective, method: :delete, data: { confirm: 'Are you sure?' } %>
+						    </p>
+					</div>
+				<% end %>
+			<% else %>
+				<div class="col-md-12">
+					Nenhum objectivo
+				</div>
+			<% end %>
+		</div>
+	</div>
+	
+</section>

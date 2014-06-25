@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140520215341) do
+ActiveRecord::Schema.define(version: 20140624223306) do
+
+  create_table "_objectives_old_20140625", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.date     "start_day"
+    t.date     "end_day"
+    t.integer  "price"
+    t.integer  "objective_type"
+    t.integer  "privacy"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+  end
 
   create_table "_users_old_20140520", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -28,6 +45,93 @@ ActiveRecord::Schema.define(version: 20140520215341) do
     t.datetime "updated_at"
   end
 
+  create_table "_users_old_20140624", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "confirmed_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "nome"
+  end
+
+  create_table "_users_old_20140624_1", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "confirmed_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "name"
+  end
+
+  create_table "_users_old_20140624_2", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "confirmed_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "user_name"
+  end
+
+  create_table "_users_old_20140624_3", force: true do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.datetime "confirmed_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "nome"
+    t.string   "local"
+    t.text     "biography"
+    t.string   "facebook_users"
+  end
+
   create_table "objective_values", force: true do |t|
     t.integer  "user_id"
     t.integer  "objective_id"
@@ -39,7 +143,6 @@ ActiveRecord::Schema.define(version: 20140520215341) do
 
   create_table "objectives", force: true do |t|
     t.string   "name"
-    t.text     "description"
     t.date     "start_day"
     t.date     "end_day"
     t.integer  "price"
@@ -75,6 +178,14 @@ ActiveRecord::Schema.define(version: 20140520215341) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "confirmed_at"
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
+    t.string   "nome"
+    t.string   "local"
+    t.text     "biography"
+    t.string   "facebook_user"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

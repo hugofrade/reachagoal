@@ -92,6 +92,6 @@ class ObjectivesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def objective_params
-      params.require(:objective).permit(:name, :description, :start_day, :end_day, :price, :objective_type, :privacy, :user_id, :photo)
+      params.require(:objective).permit(:name, :start_day, :end_day, :price, :objective_type, :privacy, :user_id, :photo)
     end
 end

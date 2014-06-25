@@ -1,0 +1,27 @@
+<h1>Listing moneyboxes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Codenumber</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @moneyboxes.each do |moneybox| %>
+      <tr>
+        <td><%= moneybox.codenumber %></td>
+        <td><%= link_to 'Show', moneybox %></td>
+        <td><%= link_to 'Edit', edit_moneybox_path(moneybox) %></td>
+        <td><%= link_to 'Destroy', moneybox, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Moneybox', new_moneybox_path %>

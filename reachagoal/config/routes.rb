@@ -1,5 +1,15 @@
 Reachagoal::Application.routes.draw do
 
+  resources :currencies
+
+  resources :moneyboxes
+
+  resources :friends
+
+  resources :badges
+
+  resources :categories
+
   devise_for :users
   resources :objectives
   

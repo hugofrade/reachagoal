@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140624223306) do
+ActiveRecord::Schema.define(version: 20140625155535) do
 
   create_table "_objectives_old_20140625", force: true do |t|
     t.string   "name"
@@ -132,6 +132,43 @@ ActiveRecord::Schema.define(version: 20140624223306) do
     t.string   "facebook_users"
   end
 
+  create_table "badges", force: true do |t|
+    t.string   "statement"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "icon_file_name"
+    t.string   "icon_content_type"
+    t.integer  "icon_file_size"
+    t.datetime "icon_updated_at"
+  end
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "currencies", force: true do |t|
+    t.string   "name"
+    t.string   "symbol"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "friends", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.integer  "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "moneyboxes", force: true do |t|
+    t.string   "codenumber"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "objective_values", force: true do |t|
     t.integer  "user_id"
     t.integer  "objective_id"
@@ -155,6 +192,13 @@ ActiveRecord::Schema.define(version: 20140624223306) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+  end
+
+  create_table "user_badges", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "badge_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_objectives", force: true do |t|

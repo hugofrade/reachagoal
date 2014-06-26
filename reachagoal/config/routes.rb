@@ -25,8 +25,11 @@ Reachagoal::Application.routes.draw do
   get "dashboard" => "private#user_dashboard"
   post "/objectives/:objective_id/add_value" => "objectives#add_value"
   get "public/index" 
+  
 
- 
+  get "publicprofile/:id" => "private#public_profile", :as=>"public_profile"
+  get "add_friend/:id" => "private#add_friend", :as=>"add_friend"
+  get "remove_friend/:id" => "private#remove_friend", :as=>"remove_friend"
 
 end
 

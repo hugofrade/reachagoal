@@ -12,8 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require_tree .
+//= require bootstrap
+//= require private
+//= require_tree
 
 $(document).ready(function() {
   fullScreenContainer();

@@ -3,19 +3,18 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-sm-6 hidden-xs">
-				<%= image_tag current_user.photo.url(:dashboard), :class => "img-rounded img-responsive" %>
-				<%= link_to 'Edit profile', edit_user_registration_path %>
+				<%= image_tag @user.photo.url(:dashboard), :class => "img-rounded img-responsive" %>
+				
+				<% if Friend.is_friend?(current_user.id, @user.id)%>
+					<%= link_to 'Remover amigo', remove_friend_path(@user.id) %>
+				<% else %>
+					<%= link_to 'Adicionar como amigo', add_friend_path(@user.id) %>
+				<% end %>
 			</div>
 			<div class="col-md-4 col-sm-6 col-xs-6">
-				<p><%= current_user.nome %></p>
-				<p><%= current_user.local %></p>
-				<p><%= current_user.facebook_user %></p>
-				<div class="friends_list">
-					<% current_user.friends.each do |friendline| %>
-						<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"img-circle"), public_profile_path(friendline.friend.id)%>
-						<p class="nome"><%= friendline.friend.nome %></p>
-					<% end %>
-				</div>
+				<p><%= @user.nome %></p>
+				<p><%= @user.local %></p>
+				<p><%= @user.facebook_user %></p>
 			</div>
 			<div class="col-md-4 col-sm-12 col-xs-6">
 				Badges
@@ -29,8 +28,8 @@
 	<div class="container">
 		<div class="row">
 
-			<% if current_user.user_objectives != nil  %>
-				<% current_user.user_objectives.reverse!.each do |userobj| %>
+			<% if @user.user_objectives != nil  %>
+				<% @user.user_objectives.reverse!.each do |userobj| %>
 					<div class="col-md-4 col-sm-6">
 							<%= link_to image_tag( userobj.objective.photo.url(:dashboard), :class => "img-rounded img-responsive"), userobj.objective %>
 					        <h1><%= userobj.objective.name %></h1>

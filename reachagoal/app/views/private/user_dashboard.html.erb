@@ -10,12 +10,18 @@
 				<p><%= current_user.nome %></p>
 				<p><%= current_user.local %></p>
 				<p><%= current_user.facebook_user %></p>
+				
+				
 				<div class="friends_list">
 					<% current_user.friends.each do |friendline| %>
-						<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"img-circle"), public_profile_path(friendline.friend.id)%>
-						<p class="nome"><%= friendline.friend.nome %></p>
+						<div class="friend">
+							<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"img-circle"), 
+										public_profile_path(friendline.friend.id)%>
+							<p><%= friendline.friend.nome %></p>
+						</div>
 					<% end %>
 				</div>
+				
 			</div>
 			<div class="col-md-4 col-sm-12 col-xs-6">
 				Badges

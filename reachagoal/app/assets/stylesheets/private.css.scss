@@ -3,7 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.nome{
-	display: none;
-	z-index: 999;
+.friends_list .friend p{
+	opacity: 0;
+}
+
+
+.friends_list .friend:hover p{
+	opacity: 1;
 }

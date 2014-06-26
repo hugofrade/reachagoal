@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :objective_values
   has_many :user_objectives
   has_many :friends
+  has_many :user_badges
   
          
 end

@@ -16,39 +16,71 @@
 //= require private
 //= require_tree
 
+
+// FUNÇÕES INICIAS
 $(document).ready(function() {
-  fullScreenContainer();
+	fullScreenContainer();
+	dashboardScroll();
+	parallaxBg();
 });
 
+$('.userFriends .body a').tooltip();
 
+
+// INTRO FULLSCREEN
 function fullScreenContainer() {
 
-  // Set Initial Screen Dimensions
+	// Set Initial Screen Dimensions
 
-  var screenWidth = $(window).width() + "px";
-  var screenHeight = $(window).height() + "px";
+	var screenWidth = $(window).width() + "px";
+	var screenHeight = $(window).height() + "px";
 
-  $("#intro, #intro .item").css({
-    width: screenWidth,
-    height: screenHeight
-  });
+	$("#intro, #intro .item").css({
+		width: screenWidth,
+		height: screenHeight
+	});
 
-  // Every time the window is resized...
+	// Every time the window is resized...
 
-  $(window).resize( function () {
+	$(window).resize( function () {
 
-    // Fetch Screen Dimensions
+		// Fetch Screen Dimensions
 
-    var screenWidth = $(window).width() + "px";
-    var screenHeight = $(window).height() + "px";
-      
-    // Set Slides to new Screen Dimensions
-    
-    $("#intro, #intro .item").css({
-      width: screenWidth,
-      height: screenHeight
-    }); 
-      
-  });
+		var screenWidth = $(window).width() + "px";
+		var screenHeight = $(window).height() + "px";
+			
+		// Set Slides to new Screen Dimensions
+		
+		$("#intro, #intro .item").css({
+			width: screenWidth,
+			height: screenHeight
+		}); 
+			
+	});
 
 }
+
+
+
+// PARALLAX
+function parallaxBg(){
+   // cache the window object
+   $window = $(window);
+ 
+   $('.parallax-bg[data-type="background-parallax"]').each(function(){
+     // declare the variable to affect the defined data-type
+     var $scroll = $(this);
+                     
+      $(window).scroll(function() {
+        // HTML5 proves useful for helping with creating JS functions!
+        // also, negative value because we're scrolling upwards                            
+        var yPos = -($window.scrollTop() / $scroll.data('speed'));
+         
+        // background position
+        var coords = '50% '+ yPos + 'px';
+ 
+        // move the background
+        $scroll.css({ backgroundPosition: coords });   
+      }); // end window scroll
+   });  // end section function
+};

@@ -1,53 +1,199 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset='utf-8'>
+  <meta content='IE=edge' http-equiv='X-UA-Compatible'>
+  <meta content='width=device-width, initial-scale=1' name='viewport'>
   <title>Reachagoal</title>
+  <%= stylesheet_link_tag    "typekit", media: "all" %>
+  <%= stylesheet_link_tag    "fonts/reachagoal-custom.css", media: "all" %>
+  <%= stylesheet_link_tag    "public", media: "all" %>
   <%= stylesheet_link_tag    "application", media: "all" %>
   <%= javascript_include_tag "application" %>
+  <%= javascript_include_tag 'https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %>
+  <%= javascript_include_tag 'https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js' %>
   <%= csrf_meta_tags %>
+
+  
 </head>
 <body>
-
     <nav class='navbar-wrapper navbar-default navbar-fixed-top' role='navigation'>
       <div class='container'>
-        <div class='row'>
+        <div class='row'> 
+     
+		<!-- Begin logo-->
           <div class='col-md-4'>
             <div class='navbar-header'>
-             <% if user_signed_in? %>
-              <a class='logo' href='<%=dashboard_path %>'>
-                <img alt='Reachagoal' src='/assets/logo.png'>
-              </a>
-              <% else %>
-              <a class='logo' href='<%=root_path%>'>
-                <img alt='Reachagoal' src='/assets/logo.png'>
-              </a>
-              <% end %>
+				<% if user_signed_in? %>
+					<a class='logo' href='<%=dashboard_path %>'>
+						<img alt='Reachagoal' src='/assets/logo.png'>
+					</a>
+				<% else %>
+					<a class='logo' href='<%=root_path%>'>
+						<img alt='Reachagoal' src='/assets/logo.png'>
+					</a>
+				<% end %>
             </div>
           </div>
+		 <!--  End logo -->
+		           
           <div class='col-md-8'>
-            <nav class='navigation pull-right'>
+            <div class='user-nav pull-right'>
               <ul class='nav navbar-nav'>
-                <% if user_signed_in? %>
-                
-				  <li> <%= link_to 'New Objective', new_objective_path %> </li>
-                  
-                  <li> <%= if current_user.photo
-                  				image_tag current_user.photo.url(:nav)
-                  			else
-                  				image_tag "placeholder_user_60.jpg"
-                  			end %></li>
-                  <li> <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> </li>
-				  <li> <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %> </li>
-				<% else %>
+              	<% if user_signed_in? %>
+	                <li class='challenges'>
+                  <div class='title'>OS TEUS DESAFIOS</div>
+                  <div class='selectbox-wrapper'>
+                    <a data-toggle='dropdown' href='javascript:;'>
+                      Seleccionar desafio
+                      <i class='fa fa-angle-down'></i>
+                    </a>
+                    <div class='dropdown-menu dropdown-menu-right'>
+                      <div class='panel'>
+                        <ul class='list-group'>
+                          <li class='list-group-item'>
+                            <a href='javascript:;'>
+                              Ibiza espera-me!
+                            </a>
+                          </li>
+                          <li class='list-group-item'>
+                            <a href='javascript:;'>
+                              Comprar Rollex de s…
+                            </a>
+                          </li>
+                          <li class='list-group-item footer'>
+                            <%= link_to '<i class="fa fa-plus"></i> Criar desafio'.html_safe, new_objective_path %>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+	                <li class='mrPig'>
+                  <div class='inner-wrapper'>
+                    <a href='javascript:;'>
+                      <i class='icon icon-mrpig'></i>
+                    </a>
+                  </div>
+                </li>
+	                <li class='notification'>
+                  <a data-toggle='dropdown' href='javascript:;'>
+                    <i class='fa fa-trophy'></i>
+                  </a>
+                  <div class='dropdown-menu cornered dropdown-menu-right'>
+                    <div class='panel'>
+                      <div class='panel-heading'>
+                        Progresso
+                      </div>
+                      <ul class='list-group'>
+                        <li class='list-group-item progress-positive'>
+                          <a href='javascript:;'>
+                            <p>
+                              <span class='icon-wrap'>
+                                <i class='fa fa-trophy icon'></i>
+                              </span>
+                              <span class='bold'>Parabéns Rodrigo!</span>
+                              Atingiste 25% do teu objectivo, cada vez mais perto.
+                            </p>
+                          </a>
+                        </li>
+                        <li class='list-group-item progress-neutral'>
+                          <a href='javascript:;'>
+                            <p>
+                              <span class='icon-wrap'>
+                                <i class='fa fa-ellipsis-h icon'></i>
+                              </span>
+                              O teu objectivo está à espera de receber as tuas poupanças de hoje.
+                            </p>
+                          </a>
+                        </li>
+                        <li class='list-group-item progress-negative'>
+                          <a href='javascript:;'>
+                            <p>
+                              <span class='icon-wrap'>
+                                <i class='fa fa-exclamation-circle icon'></i>
+                              </span>
+                              O prazo limite do teu objectivo está a aproximar-se.
+                            </p>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+	                <li class='user-picture'>
+	                  <a data-toggle='dropdown' href='javascript:;'>
+	                    <%= if current_user.photo
+		          				image_tag current_user.photo.url(:nav)
+		          			else
+		          				image_tag "placeholder_user_60.jpg"
+		          			end %>
+	                  </a>
+	                  <div class='dropdown-menu cornered dropdown-menu-right'>
+	                    <div class='panel'>
+	                      <ul class='list-group'>
+	                        <li class='list-group-item'>
+	                          <a href='javascript:;'>Definições</a>
+	                        </li>
+	                        <li class="list-group-item">
+								<%= link_to "Sair", destroy_user_session_path, method: :delete   %>
+	                        </li>
+	                        <li class='list-group-item upgrade-link'>
+	                          <a href='javascript:;'>Upgrade de conta</a>
+	                        </li>
+	                        <li class='list-group-item'>
+	                          <a href='javascript:;'>Ajuda</a>
+	                        </li>
+	                        <li class='list-group-item'>
+	                          <a href='javascript:;'>Comunicar um problema</a>
+	                        </li>
+	                      </ul>
+	                    </div>
+	                  </div>
+	                </li>
+	                
+                <% else %>
+				  <!-- User not signed in-->
                   <li><%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> </li>
 				  <li><%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %></li>
-               <% end %>
+				<% end %>
+                
               </ul>
-            </nav>
+              
+            </div>
           </div>
         </div>
       </div>
     </nav>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <% if notice %>
   <p class="alert alert-success"><%= notice %></p>

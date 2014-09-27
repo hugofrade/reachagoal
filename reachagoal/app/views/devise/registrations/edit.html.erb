@@ -9,20 +9,25 @@
   <div><%= f.label :email %><br />
   <%= f.email_field :email, autofocus: true , :autocomplete => :off%></div>
 
-   <div class="field">
+  <div>
    	<%= f.label :photo %><br>
     <%= image_tag current_user.photo.url(:thumb), :class => "img-rounded" %>
     <%= f.file_field :photo %>
   </div>
   
+  <div>
+   	<%= f.label :cover %><br>
+    <%= image_tag current_user.cover.url(:cover_thumb), :class => "img-rounded" %>
+    <%= f.file_field :cover %>
+  </div>
   <div><%= f.label :local %><br />
   <%= f.text_field :local %></div>
   
-  <div><%= f.label :biography %><br />
-  <%= text_area_tag :biography %></div>
+  <div><%= f.label  :biography %><br />
+  <%= f.text_area :biography %></div>
   
    <div><%= f.label :facebook_user %><br />
-  <%= f.text_field :facebook_user %></div>
+  <%= f.text_field  :facebook_user %></div>
   
   
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

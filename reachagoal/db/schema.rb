@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140626194705) do
+ActiveRecord::Schema.define(version: 20140925150357) do
 
   create_table "badges", force: true do |t|
     t.string   "statement"
@@ -112,6 +112,10 @@ ActiveRecord::Schema.define(version: 20140626194705) do
     t.string   "local"
     t.text     "biography"
     t.string   "facebook_user"
+    t.string   "cover_file_name"
+    t.string   "cover_content_type"
+    t.integer  "cover_file_size"
+    t.datetime "cover_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -5,11 +5,14 @@
   <meta content='IE=edge' http-equiv='X-UA-Compatible'>
   <meta content='width=device-width, initial-scale=1' name='viewport'>
   <title>Reachagoal</title>
+  
+  
   <%= stylesheet_link_tag    "typekit", media: "all" %>
   <%= stylesheet_link_tag    "fonts/reachagoal-custom.css", media: "all" %>
   <%= stylesheet_link_tag    "public", media: "all" %>
   <%= stylesheet_link_tag    "application", media: "all" %>
-  <%= javascript_include_tag "application" %>
+  
+  
   <%= javascript_include_tag 'https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %>
   <%= javascript_include_tag 'https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js' %>
   <%= csrf_meta_tags %>
@@ -36,39 +39,42 @@
             </div>
           </div>
 		 <!--  End logo -->
+		  
+		  
 		           
           <div class='col-md-8'>
             <div class='user-nav pull-right'>
               <ul class='nav navbar-nav'>
               	<% if user_signed_in? %>
-	                <li class='challenges'>
-                  <div class='title'>OS TEUS DESAFIOS</div>
-                  <div class='selectbox-wrapper'>
-                    <a data-toggle='dropdown' href='javascript:;'>
-                      Seleccionar desafio
-                      <i class='fa fa-angle-down'></i>
-                    </a>
-                    <div class='dropdown-menu dropdown-menu-right'>
-                      <div class='panel'>
-                        <ul class='list-group'>
-                          <li class='list-group-item'>
-                            <a href='javascript:;'>
-                              Ibiza espera-me!
-                            </a>
-                          </li>
-                          <li class='list-group-item'>
-                            <a href='javascript:;'>
-                              Comprar Rollex de s…
-                            </a>
-                          </li>
-                          <li class='list-group-item footer'>
-                            <%= link_to '<i class="fa fa-plus"></i> Criar desafio'.html_safe, new_objective_path %>
-                          </li>
-                        </ul>
-                      </div>
+	                <li class='challenges'>						  
+	                <% if current_user.user_objectives %>
+	                  <div class='title'>OS TEUS DESAFIOS</div>
+	                  <div class='selectbox-wrapper'>
+	                    <a data-toggle='dropdown' href='javascript:;'>
+	                      Seleccionar desafio
+	                      <i class='fa fa-angle-down'></i>
+	                    </a>
+	                    <div class='dropdown-menu dropdown-menu-right'>
+	                      <div class='panel'>
+		                        <ul class='list-group'>
+		                        	<% current_user.user_objectives.reverse!.each do |userobj| %>
+										<li class='list-group-item'>
+											<%= link_to userobj.objective.name, userobj.objective %>
+										</li>
+									<% end %>                          
+		                          <li class='list-group-item footer'>
+		                            <%= link_to '<i class="fa fa-plus"></i> Criar desafio'.html_safe, new_objective_path %>
+		                          </li>
+		                        </ul>
+	                    </div>
                     </div>
                   </div>
-                </li>
+	                <% else %>
+		                      
+					  <%= link_to '<i class="fa fa-plus"></i> Criar desafio'.html_safe, new_objective_path, :class => 'navbar-link'  %>
+	
+					<% end %>
+	                </li>
 	                <li class='mrPig'>
                   <div class='inner-wrapper'>
                     <a href='javascript:;'>
@@ -168,42 +174,22 @@
     
 
 
+	<% if notice %>
+	  <p class="alert alert-success"><%= notice %></p>
+	<% end %>
+	<% if alert %>
+	  <p class="alert alert-danger"><%= alert %></p>
+	<% end %>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
-
-			<%= yield %>
+	<%= yield %>
+			
+	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" %>
+<!-- 	<%= javascript_include_tag "bootstrap.min.js" %> -->
+	<%= javascript_include_tag "application" %>
+	
 	</body>
+
+
 </html>
 
 

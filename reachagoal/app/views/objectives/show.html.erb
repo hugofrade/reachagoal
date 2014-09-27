@@ -77,4 +77,5 @@
 
 
 <%= link_to 'Edit', edit_objective_path(@objective) if user_signed_in? && @objective.user_id == current_user.id %>
+<%= link_to 'Destroy', @objective, method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in? && @objective.user_id == current_user.id %>
 <%= link_to 'Back', dashboard_path %>

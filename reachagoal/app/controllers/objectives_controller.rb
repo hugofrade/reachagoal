@@ -67,6 +67,7 @@ class ObjectivesController < ApplicationController
   end
 
 
+
   def add_value
   	@objective_value = ObjectiveValue.new()
     @objective_value.value = params[:value]
@@ -82,6 +83,17 @@ class ObjectivesController < ApplicationController
 
   end
 
+
+
+
+  def remove_value
+  	@objective_value = ObjectiveValue.find(params[:id])
+  	@objective=@objective_value.objective
+    @objective_value.destroy
+    respond_to do |format|
+      format.html { redirect_to @objective }
+    end
+  end
 
 
   private

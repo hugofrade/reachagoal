@@ -105,11 +105,15 @@
       <article class='challengeActivity'>
         <div class='container'>
           <div class='row'>
+          
             <div class='col-md-6'>
               <div class='row'>
                 <div class='col-md-12 graph'>
                   <canvas id='canvas'></canvas>
                 </div>
+               
+               
+               
                 <div class='col-md-12 userEntries'>
                   <div class='modalBox'>
                     <div class='header'>
@@ -119,83 +123,40 @@
                       </h1>
                     </div>
                     <div class='body'>
+                    
+				                    
+				      <% @objective.objective_values.reverse!.each do |value| %>
+				      
+				                          
                       <div class='newEntry'>
                         <i class='fa fa-eur green'></i>
                         <p class='entryText'>
                           Adicionaste
-                          <span class='bold'>7,50€</span>
-                          ao desafio
-                          <span class='italic'>
-                            <a alt='Ibiza espera-me!' href='javascript:;'>Ibiza espera-me!</a>
+                          <span class='bold'><%= number_to_currency(value.value, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %></span>
+                          <% unless value.description.blank? %>
+                          com a descrição
+						  <span class='italic'>
+                            <%= value.description%>
                           </span>
+                          <% end %>
                         </p>
-                        <time>20min</time>
+                        <time><%= time_ago_in_words(value.created_at)%></time>
+                        <%= link_to 'Apagar', remove_value_path(value), data: { confirm: 'Are you sure?' } if user_signed_in? && @objective.user_id == current_user.id %>
+
                       </div>
-                      <div class='newEntry'>
-                        <i class='fa fa-eur green'></i>
-                        <p class='entryText'>
-                          Adicionaste
-                          <span class='bold'>2,00€</span>
-                          ao desafio
-                          <span class='italic'>
-                            <a alt='Ibiza espera-me!' href='javascript:;'>Ibiza espera-me!</a>
-                          </span>
-                        </p>
-                        <time>2d</time>
-                      </div>
-                      <div class='newEntry'>
-                        <i class='fa fa-eur green'></i>
-                        <p class='entryText'>
-                          Adicionaste
-                          <span class='bold'>12,00€</span>
-                          ao desafio
-                          <span class='italic'>
-                            <a alt='Ibiza espera-me!' href='javascript:;'>Comprar Rollex de Sonho</a>
-                          </span>
-                        </p>
-                        <time>26/06</time>
-                      </div>
-                      <div class='newEntry'>
-                        <i class='fa fa-eur green'></i>
-                        <p class='entryText'>
-                          Adicionaste
-                          <span class='bold'>7,50€</span>
-                          ao desafio
-                          <span class='italic'>
-                            <a alt='Ibiza espera-me!' href='javascript:;'>Ibiza espera-me!</a>
-                          </span>
-                        </p>
-                        <time>20min</time>
-                      </div>
-                      <div class='newEntry'>
-                        <i class='fa fa-eur green'></i>
-                        <p class='entryText'>
-                          Adicionaste
-                          <span class='bold'>2,00€</span>
-                          ao desafio
-                          <span class='italic'>
-                            <a alt='Ibiza espera-me!' href='javascript:;'>Ibiza espera-me!</a>
-                          </span>
-                        </p>
-                        <time>2d</time>
-                      </div>
-                      <div class='newEntry'>
-                        <i class='fa fa-eur green'></i>
-                        <p class='entryText'>
-                          Adicionaste
-                          <span class='bold'>12,00€</span>
-                          ao desafio
-                          <span class='italic'>
-                            <a alt='Ibiza espera-me!' href='javascript:;'>Comprar Rollex de Sonho</a>
-                          </span>
-                        </p>
-                        <time>26/06</time>
-                      </div>
+                      
+                      
+				      <% end %>
+				      
+				      
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+            
+            
+            
             <div class='col-md-6 comments'>
               <p>comments</p>
               <p>comments</p>
@@ -235,25 +196,6 @@
 -->
 
 
-<div>
-  <h2>Valores poupados</h2>
-  
-  
-  
-  <ol>
-      <% @objective.objective_values.each do |value| %>
-      <li> <%= number_to_currency(value.value, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %><br>
-      <time><%= value.created_at%></time>
-      <p><%= value.description%></p>
-      </li>
-    <% end %>
-  </ol>
-  
-
-    
-
-
-</div>
 
 
 <%= link_to 'Edit', edit_objective_path(@objective) if user_signed_in? && @objective.user_id == current_user.id %>

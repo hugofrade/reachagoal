@@ -27,6 +27,8 @@ class User < ActiveRecord::Base
   has_many :friends
   has_many :user_badges
   
-  
+  	def number_of_friends()
+	  	return self.friends.length
+	end
          
 end

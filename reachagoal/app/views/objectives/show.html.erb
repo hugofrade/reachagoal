@@ -1,29 +1,224 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @objective.name %>
-</p>
+    <section id='challenge'>
 
 
-<p>
-  <strong>Foto:</strong>
-  <%= image_tag @objective.photo.url(:wide) %>
-</p>
+      <article class='bigAddSavings'>
+        
+        
+        <div class='background parallax-bg' data-speed='6' data-type='background-parallax' style="background-image: url(<%= @objective.photo.url(:wide) %>)" >
+          <div class='container'>
+            <div class='row headerChallenge'>
+              <div class='col-md-8'>
+                <h1 class='h3 challengeTitle'><%= @objective.name %></h1>
+              </div>
+              <div class='col-md-4'>
+                <h1 class='h5'>Progresso</h1>
+                 <%= bootstrap_progress_bar(@objective.completed_percentage, :color => 'info', :tiny => true) %>
+              </div>
+            </div>
+          </div>
+          
+          
+		  <!-- Friends -->
+          <div class='container'>
+            <div class='row'>
+              <div class='col-md-12'>
+                <ul class='challengeFriends'>
+                  <li>
+                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
+                      <img alt='João Tigre' class='img-responsive' src='images/f04.jpg'>
+                    </a>
+                  </li>
+                  <li>
+                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
+                      <img alt='João Tigre' class='img-responsive' src='images/f03.jpg'>
+                    </a>
+                  </li>
+                  <li>
+                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
+                      <img alt='João Tigre' class='img-responsive' src='images/f01.jpg'>
+                    </a>
+                  </li>
+                  <li>
+                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
+                      <img alt='João Tigre' class='img-responsive' src='images/f06.jpg'>
+                    </a>
+                  </li>
+                  <li>
+                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
+                      <img alt='João Tigre' class='img-responsive' src='images/f07.jpg'>
+                    </a>
+                  </li>
+                  <li>
+                    <a class='friendPicture addMore' href='#' title='Adicionar amigo'>
+                      <i class='fa fa-plus'></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+          
+          <div class='container addSavings'>
+            <div class='row'>
+              <div class='col-md-4 col-md-offset-4'>
+                <div class='addSavings-header'>
+                  <h1 class='secondary'>Faltam</h1>
+                  <h1 class='main'><%= number_to_currency(@objective.missing_value, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %></h1>
+                </div>
+                <div class='addSavings-body'>
+                  <p>Quanto poupaste hoje?</p>
+  					  <%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>
+					
+					    <div class="savingInput">
+					      <input type="text" name="value">
+						  <span class='currencySymbol'>€</span>
+					    </div>
+					    <div class="descriptionInput">
+					      <input type="text" name="description" placeholder='Descrição (opcional)'>
+					    </div>
+					    <div class="actions">
+					      <input type="submit">
+					    </div>
+					
+					  <% end %>
+					                  
+                  
+   
+                  
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- ### End Add savings ### -->
+      
+      
+      
+      
+      
+      <!-- ### Challenge Activity ### -->
+      <article class='challengeActivity'>
+        <div class='container'>
+          <div class='row'>
+            <div class='col-md-6'>
+              <div class='row'>
+                <div class='col-md-12 graph'>
+                  <canvas id='canvas'></canvas>
+                </div>
+                <div class='col-md-12 userEntries'>
+                  <div class='modalBox'>
+                    <div class='header'>
+                      <h1 class='h5'>
+                        Diário de bordo
+                        <small>Últimas entradas</small>
+                      </h1>
+                    </div>
+                    <div class='body'>
+                      <div class='newEntry'>
+                        <i class='fa fa-eur green'></i>
+                        <p class='entryText'>
+                          Adicionaste
+                          <span class='bold'>7,50€</span>
+                          ao desafio
+                          <span class='italic'>
+                            <a alt='Ibiza espera-me!' href='javascript:;'>Ibiza espera-me!</a>
+                          </span>
+                        </p>
+                        <time>20min</time>
+                      </div>
+                      <div class='newEntry'>
+                        <i class='fa fa-eur green'></i>
+                        <p class='entryText'>
+                          Adicionaste
+                          <span class='bold'>2,00€</span>
+                          ao desafio
+                          <span class='italic'>
+                            <a alt='Ibiza espera-me!' href='javascript:;'>Ibiza espera-me!</a>
+                          </span>
+                        </p>
+                        <time>2d</time>
+                      </div>
+                      <div class='newEntry'>
+                        <i class='fa fa-eur green'></i>
+                        <p class='entryText'>
+                          Adicionaste
+                          <span class='bold'>12,00€</span>
+                          ao desafio
+                          <span class='italic'>
+                            <a alt='Ibiza espera-me!' href='javascript:;'>Comprar Rollex de Sonho</a>
+                          </span>
+                        </p>
+                        <time>26/06</time>
+                      </div>
+                      <div class='newEntry'>
+                        <i class='fa fa-eur green'></i>
+                        <p class='entryText'>
+                          Adicionaste
+                          <span class='bold'>7,50€</span>
+                          ao desafio
+                          <span class='italic'>
+                            <a alt='Ibiza espera-me!' href='javascript:;'>Ibiza espera-me!</a>
+                          </span>
+                        </p>
+                        <time>20min</time>
+                      </div>
+                      <div class='newEntry'>
+                        <i class='fa fa-eur green'></i>
+                        <p class='entryText'>
+                          Adicionaste
+                          <span class='bold'>2,00€</span>
+                          ao desafio
+                          <span class='italic'>
+                            <a alt='Ibiza espera-me!' href='javascript:;'>Ibiza espera-me!</a>
+                          </span>
+                        </p>
+                        <time>2d</time>
+                      </div>
+                      <div class='newEntry'>
+                        <i class='fa fa-eur green'></i>
+                        <p class='entryText'>
+                          Adicionaste
+                          <span class='bold'>12,00€</span>
+                          ao desafio
+                          <span class='italic'>
+                            <a alt='Ibiza espera-me!' href='javascript:;'>Comprar Rollex de Sonho</a>
+                          </span>
+                        </p>
+                        <time>26/06</time>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class='col-md-6 comments'>
+              <p>comments</p>
+              <p>comments</p>
+              <p>comments</p>
+              <p>comments</p>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-md-6 pull-right share'>
+              <p style='text-align: right;'>cenas</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- ### end of Challenge Infos ### -->
+    </section>
+ 
 
-<p>
-  <strong>Start day:</strong>
-  <%= @objective.start_day %>
-</p>
 
-<p>
-  <strong>End day:</strong>
-  <%= @objective.end_day %>
-</p>
 
 <p style="font-size: 30px">
   <strong>Saved:</strong>
-    <%= number_to_currency(@objective.missing_value, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %> /
+     /
   <%= number_to_currency(@objective.price, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %>
 </p>
 
@@ -56,22 +251,7 @@
   
 
     
-  <h3>Adicionar novo</h3>
-  <%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>
 
-    <div class="field">
-      <label for="value">Value</label><br>
-      <input type="text" name="value" value="0">€
-    </div>
-    <div class="field">
-      <label for="description">Description</label><br>
-      <input type="text" name="description">
-    </div>
-    <div class="actions">
-      <input type="submit">
-    </div>
-
-  <% end %>
 
 </div>
 
@@ -79,3 +259,6 @@
 <%= link_to 'Edit', edit_objective_path(@objective) if user_signed_in? && @objective.user_id == current_user.id %>
 <%= link_to 'Destroy', @objective, method: :delete, data: { confirm: 'Are you sure?' } if user_signed_in? && @objective.user_id == current_user.id %>
 <%= link_to 'Back', dashboard_path %>
+
+	<%= javascript_include_tag "Chart.min.js" %>
+

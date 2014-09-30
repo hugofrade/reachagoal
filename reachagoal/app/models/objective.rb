@@ -17,5 +17,9 @@ class Objective < ActiveRecord::Base
 	   0
 	  end
 	end
-
+	
+	def completed_percentage 
+		return (((self.price-self.missing_value)/self.price)*100)
+	end
+	
 end

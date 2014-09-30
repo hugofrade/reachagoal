@@ -79,18 +79,27 @@
         
               <div class='userBio col-md-2'>
                 <div class='userDetails'>
-                  <div class='userDetails-location'>
-                    <i class='fa fa-lg fa-map-marker'></i>
-                    <span class='userDetails-text'><%= current_user.local %></span>
-                  </div>
-                  <div class='userDetails-social'>
-                    <i class='fa fa-lg fa-facebook-square'></i>
-                    <%= link_to current_user.facebook_user, "http://facebook.com/#{current_user.facebook_user}", :class => 'userDetails-text', target: "_blank"%>
-                  </div>
-                  <div class='userDetails-about'>
-                    <i class='fa fa-lg fa-quote-left'></i>
-                    <span class='userDetails-text'><%= current_user.biography %></span>
-                  </div>
+                	<%unless current_user.local.blank? %>
+	                  <div class='userDetails-location'>
+	                    <i class='fa fa-lg fa-map-marker'></i>
+	                    <span class='userDetails-text'><%= current_user.local %></span>
+	                  </div>
+					<%end%>
+					 
+					<%unless current_user.facebook_user.blank? %>
+	                  <div class='userDetails-social'>
+	                    <i class='fa fa-lg fa-facebook-square'></i>
+	                    <%= link_to current_user.facebook_user, "http://facebook.com/#{current_user.facebook_user}", :class => 'userDetails-text', target: "_blank"%>
+	                  </div>
+					 <%end%>
+					 
+					 <%unless current_user.biography.blank? %>
+		                  <div class='userDetails-about'>
+		                    <i class='fa fa-lg fa-quote-left'></i>
+		                    <span class='userDetails-text'><%= current_user.biography %></span>
+		                  </div>
+					  <%end%>
+
                 </div>
               </div>
        
@@ -165,7 +174,7 @@
                       <div class='col-md-6'>
                         <h1 class='h5'>
                           Amigos
-                          <span>(143)</span>
+                          <span>(<%= current_user.number_of_friends()%>)</span>
                         </h1>
                       </div>
                       
@@ -230,17 +239,18 @@
           
           
           <div class='row'>
-          
-	          <% if current_user.user_objectives != nil  %> condição errada
+	          <% unless current_user.user_objectives.blank?  %> 
 					<% current_user.user_objectives.reverse!.each do |userobj| %>
 						<div class='col-md-4'>
+						
+						<%if (userobj.objective.completed_percentage<100) %>
+
 			              <div class='challenge'>
 			                
 			                
 			                <div class='challengeImage-wrapper'>
 			                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
 			                </div>
-			                
 			                
 			                <div class='black-wrapper'>
 			                  <div class='hiddenInfo'>
@@ -257,13 +267,27 @@
 			                      </a>
 			                      <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
 			                    </div>
-			                    <div class='challengeProgress'>
-			                      Progresso:
+			                    <div class='challengeProgress' style="left: 20px; right: 20px;">
+			                    Progresso:
+								  <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>  
 			                    </div>
 			                  </div>
 			                  
 			                </div>
-			                
+			              <% else %>
+				              <div class='challenge completed'>
+				                
+				                
+				                <div class='challengeImage-wrapper'>
+				                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
+				                </div>
+				                
+								<div class='black-wrapper'>
+				                  <div class='completedBadge'>
+				                    <i class='fa fa-check fa-3x'></i>
+				                  </div>
+				                </div>
+			                <%end%>
 			                
 			                <div class='challengeTitle'>
 			                  <h1 class='h3'>
@@ -292,12 +316,12 @@
 -->
 						
 					<% end %>
-					
 					<div class='col-md-4'>
-		            	<div class='challenge addNew'>
-							<%= link_to '<i class="fa fa-plus fa-4x"></i>'.html_safe, new_objective_path %>
-			            </div>
-					 </div>
+						<div class='challenge addNew'>
+						  <%= link_to '<i class="fa fa-plus fa-4x"></i>'.html_safe, new_objective_path %>
+						</div>
+					</div>
+
 					
 				<% else %>
 					<div class='col-md-4'>

@@ -1,56 +1,281 @@
-<section>
+<section id='dashboard'>
+  <article class='cover'>
+        <div class='background-cover'>
+        	<%= image_tag @user.cover.url(:cover) %>
+        </div>
+        
+        <div class='container userPicture-container'>
+          <div class='row'>
+            <div class='col-md-2'>
+              <div class='userPicture'>
+                <div class='userPicture-inner'>
+                  <%= image_tag @user.photo.url(:dashboard), :class => "userPicture-image" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </article>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-md-4 col-sm-6 hidden-xs">
-				<%= image_tag @user.photo.url(:dashboard), :class => "img-rounded img-responsive" %>
-				
-				<% if Friend.is_friend?(current_user.id, @user.id)%>
+  <article class='userInfo'>
+        <div class='userInfo-header'>
+          <div class='container'>
+            <div class='row'>
+            
+            
+              <div class='userName col-md-5 col-md-offset-2'>
+                <h1 class='h3'><%= @user.nome %><span><% if Friend.is_friend?(current_user.id, @user.id)%>
 					<%= link_to 'Remover amigo', remove_friend_path(@user.id) %>
 				<% else %>
 					<%= link_to 'Adicionar como amigo', add_friend_path(@user.id) %>
+				<% end %></span></h1>
+              </div>
+                            
+              <div class='col-md-5'>
+                <ul class='userInfo-header-right pull-right'>
+                  <li class='userAwards'>
+                    <h2>
+                      Medalhas
+                      <span>(16)</span>
+                    </h2>
+                    <div class='userAward-wrapper'>
+                      <a alt='' class='award hexagon green' href='javascript:;'>
+                        <i class='fa fa-star fa-lg'></i>
+                      </a>
+                      <a alt='' class='award hexagon red' href='javascript:;'>
+                        <i class='fa fa-trophy fa-lg'></i>
+                      </a>
+                      <a alt='' class='award hexagon green' href='javascript:;'>
+                        <i class='fa fa-tree fa-lg'></i>
+                      </a>
+                      <a alt='' class='award hexagon green' href='javascript:;'>
+                        <i class='fa fa-plane fa-lg'></i>
+                      </a>
+                    </div>
+                  </li>
+                  <li class='configs'>
+                    <a alt='Configurações' class='configBtn' href='javascript:;'>
+                      <i class='fa fa-cog fa-2x'></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              
+              
+              
+              
+              
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+        <div class='container'>
+          <div class='userInfo-body'>
+            <div class='row'>
+        
+              <div class='userBio col-md-2'>
+                <div class='userDetails'>
+                	<%unless @user.local.blank? %>
+	                  <div class='userDetails-location'>
+	                    <i class='fa fa-lg fa-map-marker'></i>
+	                    <span class='userDetails-text'><%= @user.local %></span>
+	                  </div>
+					<%end%>
+					 
+					<%unless @user.facebook_user.blank? %>
+	                  <div class='userDetails-social'>
+	                    <i class='fa fa-lg fa-facebook-square'></i>
+	                    <%= link_to @user.facebook_user, "http://facebook.com/#{current_user.facebook_user}", :class => 'userDetails-text', target: "_blank"%>
+	                  </div>
+					 <%end%>
+					 
+					 <%unless @user.biography.blank? %>
+		                  <div class='userDetails-about'>
+		                    <i class='fa fa-lg fa-quote-left'></i>
+		                    <span class='userDetails-text'><%= @user.biography %></span>
+		                  </div>
+					  <%end%>
+
+                </div>
+              </div>
+                     
+              <!--User Friends-->
+              <div class='userFriends col-md-4'>
+                <div class='modalBox'>
+                  <div class='header'>
+                    <div class='row'>
+                      <div class='col-md-6'>
+                        <h1 class='h5'>
+                          Amigos
+                          <span>(<%= @user.number_of_friends()%>)</span>
+                        </h1>
+                      </div>
+                      
+                      
+                      <div class='col-md-6'>
+                        <div class='search'>
+                          <form action='#' class='form-search'>
+                            <label class='sr-only' for='searchFriends'>Consulta de busca</label>
+                            <input class='search-input' id='searchFriends' placeholder='Procurar...' type='text'>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                  
+                  <div class='body'>
+                    <div class='row'>
+                    
+                    <% @user.friends.each do |friendline| %>
+                    	<div class='col-md-3'>
+                    		<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"friendPicture img-responsive"), 
+										public_profile_path(friendline.friend.id), :class => "withTooltip", 
+										'data-placement' => 'top', 
+										'data-toggle' => 'tooltip', 
+										'title' => friendline.friend.nome %>
+	                   </div>
+					<% end %>
+                      <div class='col-md-3'>
+                        <a alt='Adicionar amigo' class='addFriend' href='javascript:;'>
+                          <i class='fa fa-plus fa-3x'></i>
+                        </a>
+                      </div>
+                      
+                      
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </article>
+
+  <article class='userChallenges'>
+        <div class='container'>
+          <div class='row'>
+            <div class='challengesTitle col-md-6'>
+              <h1 class='h4'>Desafios</h1>
+            </div>
+            <div class='challengesFilter col-md-6'>
+              <p>
+                <span>• TODOS</span>
+                <span>• A DECORRER</span>
+                <span>• CONCLUÍDO</span>
+              </p>
+            </div>
+          </div>
+          
+          
+          <div class='row'>
+	          <% unless @user.user_objectives.blank?  %> 
+					<% @user.user_objectives.reverse!.each do |userobj| %>
+						<div class='col-md-4'>
+						
+						<%if (userobj.objective.completed_percentage<100) %>
+
+			              <div class='challenge'>
+			                
+			                
+			                <div class='challengeImage-wrapper'>
+			                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
+			                </div>
+			                
+			                <div class='black-wrapper'>
+			                  <div class='hiddenInfo'>
+			                  
+			                    <div class='challengeFriends'>
+			                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+			                        <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
+			                      </a>
+			                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+			                        <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
+			                      </a>
+			                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+			                        <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
+			                      </a>
+			                      <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
+			                    </div>
+			                    <div class='challengeProgress' style="left: 20px; right: 20px;">
+			                    Progresso:
+								  <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>  
+			                    </div>
+			                  </div>
+			                </div>
+			              <% else %>
+				              <div class='challenge completed'>
+				                
+				                
+				                <div class='challengeImage-wrapper'>
+				                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
+				                </div>
+				                
+								<div class='black-wrapper'>
+				                  <div class='completedBadge'>
+				                    <i class='fa fa-check fa-3x'></i>
+				                  </div>
+				                </div>
+			                <%end%>
+			                
+			                <div class='challengeTitle'>
+			                  <h1 class='h3'>
+			                  	<%= link_to userobj.objective.name, userobj.objective %>
+			                  </h1>
+			                </div>
+			                
+			                
+			              </div>
+			            </div>
+					
+					
+	<!--
+					<div class="col-md-4 col-sm-6">
+								<%= link_to image_tag( userobj.objective.photo.url(:dashboard), :class => "img-rounded img-responsive"), userobj.objective %>
+						        <h1><%= userobj.objective.name %></h1>
+						        <p><%= userobj.objective.start_day %></p>
+						        <p><%= userobj.objective.end_day %></p>
+						        <p><%= userobj.objective.price %></p>
+						        <p><%= Enumerators::ObjectiveType[userobj.objective.objective_type] %></p>
+						        <p><%= Enumerators::Privacy[userobj.objective.objective_type] %></p>
+									<%= link_to 'Edit', edit_objective_path(userobj.objective) %>
+							        
+							    </p>
+						</div>
+-->
+						
+					<% end %>
+
+
+					
+				<% else %>
+					
+					Nenhum objectivo
+
+
 				<% end %>
-			</div>
-			<div class="col-md-4 col-sm-6 col-xs-6">
-				<p><%= @user.nome %></p>
-				<p><%= @user.local %></p>
-				<p><%= @user.facebook_user %></p>
-			</div>
-			<div class="col-md-4 col-sm-12 col-xs-6">
-				Badges
+
+				
+          
+            	Badges
 				<%= link_to 'Oferecer Badge', "#" %>
 
-			</div>
-		</div>
-	</div>
-</section>
+            
+            
+            
+           
+          </div>
+        </div>
+      </article>
 
-
-<section>
-	<div class="container">
-		<div class="row">
-
-			<% if @user.user_objectives != nil  %>
-				<% @user.user_objectives.reverse!.each do |userobj| %>
-					<div class="col-md-4 col-sm-6">
-							<%= link_to image_tag( userobj.objective.photo.url(:dashboard), :class => "img-rounded img-responsive"), userobj.objective %>
-					        <h1><%= userobj.objective.name %></h1>
-					        <p><%= userobj.objective.start_day %></p>
-					        <p><%= userobj.objective.end_day %></p>
-					        <p><%= userobj.objective.price %></p>
-					        <p><%= Enumerators::ObjectiveType[userobj.objective.objective_type] %></p>
-					        <p><%= Enumerators::Privacy[userobj.objective.objective_type] %></p>
-								<%= link_to 'Edit', edit_objective_path(userobj.objective) %>
-						        <%= link_to 'Destroy', userobj.objective, method: :delete, data: { confirm: 'Are you sure?' } %>
-						    </p>
-					</div>
-				<% end %>
-			<% else %>
-				<div class="col-md-12">
-					Nenhum objectivo
-				</div>
-			<% end %>
-		</div>
-	</div>
-	
 </section>

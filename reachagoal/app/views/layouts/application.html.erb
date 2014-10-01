@@ -47,13 +47,10 @@
               <ul class='nav navbar-nav'>
               	<% if user_signed_in? %>
 	                <li class='challenges'>						  
-	                <% unless current_user.user_objectives.blank? %>
+	                <% unless current_user.user_objectives.blank?%>
 	                  <div class='title'>OS TEUS DESAFIOS</div>
 	                  <div class='selectbox-wrapper'>
-	                    <a data-toggle='dropdown' href='javascript:;'>
-	                      Seleccionar desafio
-	                      <i class='fa fa-angle-down'></i>
-	                    </a>
+		                    <a data-toggle='dropdown' href='javascript:;'><%= (controller_name == "objectives" && action_name == "show" && @objective != nil) ? @objective.name : "Seleccionar desafio" %> <i class='fa fa-angle-down'></i></a>
 	                    <div class='dropdown-menu dropdown-menu-right'>
 	                      <div class='panel'>
 		                        <ul class='list-group'>
@@ -182,14 +179,10 @@
 	<% end %>
 
 	<%= yield %>
-			
-	<%= javascript_include_tag "https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js" %>
-	<%= javascript_include_tag "application" %>
 	
-	</body>
-
-
+	
+	<%= javascript_include_tag "application" %>
+	<%= yield :js %>
+	
+</body>
 </html>
-
-
-

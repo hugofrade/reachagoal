@@ -5,6 +5,26 @@ class PrivateController < ApplicationController
 	
 	end
 	
+	def ajax_challenges
+		user_objectives = UserObjective.where("user_id=?", current_user)
+		@challenges = []
+		
+		if params["estado"] == "1"
+			user_objectives.each do |user_objective|
+			  @challenges << user_objective if user_objective.objective.completed_percentage < 100
+			end
+		elsif params["estado"] == "2"
+			
+			user_objectives.each do |user_objective|
+			  @challenges << user_objective if user_objective.objective.completed_percentage == 100
+			end
+		else
+			@challenges = user_objectives
+		end
+		
+		render :template => "layouts/_challenge", :layout => false
+	end
+	
 	def public_profile
 		@user = User.find(params[:id])
 	end

@@ -11,10 +11,10 @@ class Objective < ActiveRecord::Base
 	has_many :user_objectives	
 	
 	def missing_value
-	  if objective_values.length >0
+	  if objective_values.length>0
 	  	price - objective_values.map { |o| o.value }.inject{|sum,x| sum + x }
 	  else
-	   0
+	   price
 	  end
 	end
 	

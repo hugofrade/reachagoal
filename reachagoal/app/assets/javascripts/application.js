@@ -14,8 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require private
-//= require_tree
-
 
 // FUNÇÕES INICIAS
 
@@ -84,29 +82,40 @@ function parallaxBg(){
 };
 
 
-/* CHART */
 
-var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
-var lineChartData = {
-	labels : ["January","February","March","April","May","June","July"],
-	datasets : [
-		{
-			label: "My First dataset",
-			fillColor : "rgba(220,220,220,0.2)",
-			strokeColor : "rgba(220,220,220,1)",
-			pointColor : "rgba(220,220,220,1)",
-			pointStrokeColor : "#fff",
-			pointHighlightFill : "#fff",
-			pointHighlightStroke : "rgba(220,220,220,1)",
-			data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-		}
-	]
 
-}
-
-window.onload = function(){
-var ctx = document.getElementById("canvas").getContext("2d");
-window.myLine = new Chart(ctx).Line(lineChartData, {
-	responsive: true
+$(".filtro_obj").click(function() { 
+	var estado = $(this).data('estado');
+	loadObjectives(estado);
 });
+
+function loadObjectives(estado) {
+	
+	$.ajax({
+		url: "ajax_challenges",
+		data: "estado="+estado,
+		contentType: 'application/json; charset=utf-8',
+		success: function (result) {
+            $("#challenges").html(result);
+        },
+        error: function (err) {
+            console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+        }
+	});
+	
+	
+	
 }
+
+loadObjectives(0);
+
+$(document).ready(function() {
+	fullScreenContainer();
+	parallaxBg();
+
+});
+
+
+
+
+

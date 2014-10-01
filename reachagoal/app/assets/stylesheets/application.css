@@ -1,6 +1,4 @@
-/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 *= require 'css3-progress-bar'
-
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -9672,6 +9670,98 @@ footer ul li a:hover {
 .italic {
   font-style: italic;
 }
+/* MODALS */
+.userEntries .modalBox,
+.userFriends .modalBox {
+  background-color: #FFF;
+  border: 1px solid #f4f4f4;
+  border-radius: 6px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 1px 0 #e0e0e0;
+  box-shadow: 0 1px 0 #e0e0e0;
+}
+.userEntries .modalBox .header,
+.userFriends .modalBox .header {
+  height: 50px;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-bottom: 1em;
+  border-bottom: 1px solid #f4f4f4;
+}
+.userEntries .modalBox .header h1,
+.userFriends .modalBox .header h1 {
+  margin: 0;
+  line-height: 55px;
+}
+.userEntries .modalBox .header h1 small,
+.userFriends .modalBox .header h1 small {
+  line-height: 55px;
+  float: right;
+}
+.userEntries .modalBox .body,
+.userFriends .modalBox .body {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+.userEntries .modalBox .newEntry,
+.userFriends .modalBox .newEntry {
+  color: #9b9b9b;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 1em;
+  height: 25px;
+  line-height: 25px;
+}
+.userEntries .modalBox .newEntry .fa,
+.userFriends .modalBox .newEntry .fa {
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 0;
+  padding-top: 5px;
+  text-align: center;
+  border-radius: 25px;
+  border: 1px solid #9b9b9b;
+}
+.userEntries .modalBox .newEntry .fa.green,
+.userFriends .modalBox .newEntry .fa.green {
+  color: #43b8b2;
+  border-color: #43b8b2;
+}
+.userEntries .modalBox .newEntry .fa.red,
+.userFriends .modalBox .newEntry .fa.red {
+  color: #D74A4A;
+  border-color: #D74A4A;
+}
+.userEntries .modalBox .newEntry .entryText,
+.userFriends .modalBox .newEntry .entryText {
+  display: inline;
+}
+.userEntries .modalBox .newEntry .entryText a,
+.userFriends .modalBox .newEntry .entryText a {
+  color: #9b9b9b;
+}
+.userEntries .modalBox .newEntry time,
+.userFriends .modalBox .newEntry time {
+  float: right;
+  color: #e0e0e0;
+  font-size: 90%;
+}
+.userEntries .modalBox .footer,
+.userFriends .modalBox .footer {
+  margin-top: 1.2em;
+  height: 40px;
+}
+.userEntries .modalBox .footer a.viewAll,
+.userFriends .modalBox .footer a.viewAll {
+  text-transform: uppercase;
+  line-height: 40px;
+  display: block;
+  font-size: 80%;
+  font-weight: 400;
+  text-align: center;
+  background-color: #DCE7F2;
+}
 /* NAV BAR */
 .user-nav > ul > li {
   display: table;
@@ -10333,83 +10423,6 @@ section#dashboard article.userChallenges .challenge.addNew a .fa {
 section#dashboard article.userChallenges .challenge.addNew a:hover {
   color: #9b9b9b;
 }
-.userEntries .modalBox {
-  background-color: #FFF;
-  border: 1px solid #f4f4f4;
-  border-radius: 6px;
-  overflow: hidden;
-  -webkit-box-shadow: 0 1px 0 #e0e0e0;
-  box-shadow: 0 1px 0 #e0e0e0;
-}
-.userEntries .modalBox .header {
-  height: 50px;
-  padding-right: 20px;
-  padding-left: 20px;
-  margin-bottom: 1em;
-  border-bottom: 1px solid #f4f4f4;
-}
-.userEntries .modalBox .header h1 {
-  margin: 0;
-  line-height: 55px;
-}
-.userEntries .modalBox .header h1 small {
-  line-height: 55px;
-  float: right;
-}
-.userEntries .modalBox .body {
-  padding-right: 20px;
-  padding-left: 20px;
-}
-.userEntries .modalBox .newEntry {
-  color: #9b9b9b;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 1em;
-  height: 25px;
-  line-height: 25px;
-}
-.userEntries .modalBox .newEntry .fa {
-  width: 25px;
-  height: 25px;
-  position: absolute;
-  left: 0;
-  padding-top: 5px;
-  text-align: center;
-  border-radius: 25px;
-  border: 1px solid #9b9b9b;
-}
-.userEntries .modalBox .newEntry .fa.green {
-  color: #43b8b2;
-  border-color: #43b8b2;
-}
-.userEntries .modalBox .newEntry .fa.red {
-  color: #D74A4A;
-  border-color: #D74A4A;
-}
-.userEntries .modalBox .newEntry .entryText {
-  display: inline;
-}
-.userEntries .modalBox .newEntry .entryText a {
-  color: #9b9b9b;
-}
-.userEntries .modalBox .newEntry time {
-  float: right;
-  color: #e0e0e0;
-  font-size: 90%;
-}
-.userEntries .modalBox .footer {
-  margin-top: 1.2em;
-  height: 40px;
-}
-.userEntries .modalBox .footer a.viewAll {
-  text-transform: uppercase;
-  line-height: 40px;
-  display: block;
-  font-size: 80%;
-  font-weight: 400;
-  text-align: center;
-  background-color: #DCE7F2;
-}
 /* CHALLENGE PAGE */
 #challenge {
   position: relative;
@@ -10419,6 +10432,7 @@ section#dashboard article.userChallenges .challenge.addNew a:hover {
   overflow: hidden;
 }
 #challenge .bigAddSavings .background {
+  background-image: url("../images/challenge01-blur.png");
   background-attachment: fixed;
   background-size: cover;
   background-position: 50% 0;

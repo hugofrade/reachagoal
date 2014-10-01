@@ -13,6 +13,8 @@ class ObjectivesController < ApplicationController
   # GET /objectives/1
   # GET /objectives/1.json
   def show
+    @dataset = @objective.objective_values.map{ |obj| obj.value }
+    @labelsset = @objective.objective_values.map{ |obj| obj.created_at.to_date }
   end
 
   # GET /objectives/new

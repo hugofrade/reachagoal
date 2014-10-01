@@ -230,117 +230,16 @@
             </div>
             <div class='challengesFilter col-md-6'>
               <p>
-                <span>• TODOS</span>
-                <span>• A DECORRER</span>
-                <span>• CONCLUÍDO</span>
+<!--0 -> Todos  1-> A Decorrer  2-> Concluido -->
+              	<span><%= link_to("• TODOS", "javascript:;", { :class => "filtro_obj", :data => { :estado => 0 } }) %></span>
+			  	<span><%= link_to("• A DECORRER", "javascript:;", { :class => "filtro_obj", :data => { :estado => 1 } }) %></span>
+			  	<span><%= link_to("• CONCLUÍDO" , "javascript:;", { :class => "filtro_obj", :data => { :estado => 2 } }) %></span>
               </p>
             </div>
           </div>
           
           
-          <div class='row'>
-	          <% unless current_user.user_objectives.blank?  %> 
-					<% current_user.user_objectives.reverse!.each do |userobj| %>
-						<div class='col-md-4'>
-						
-						<%if (userobj.objective.completed_percentage<100) %>
-
-			              <div class='challenge'>
-			                
-			                
-			                <div class='challengeImage-wrapper'>
-			                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
-			                </div>
-			                
-			                <div class='black-wrapper'>
-			                  <div class='hiddenInfo'>
-			                  
-			                    <div class='challengeFriends'>
-			                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-			                        <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
-			                      </a>
-			                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-			                        <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
-			                      </a>
-			                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-			                        <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
-			                      </a>
-			                      <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
-			                    </div>
-			                    <div class='challengeProgress' style="left: 20px; right: 20px;">
-			                    Progresso:
-								  <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>  
-			                    </div>
-			                  </div>
-			                  
-			                </div>
-			              <% else %>
-				              <div class='challenge completed'>
-				                
-				                
-				                <div class='challengeImage-wrapper'>
-				                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
-				                </div>
-				                
-								<div class='black-wrapper'>
-				                  <div class='completedBadge'>
-				                    <i class='fa fa-check fa-3x'></i>
-				                  </div>
-				                </div>
-			                <%end%>
-			                
-			                <div class='challengeTitle'>
-			                  <h1 class='h3'>
-			                  	<%= link_to userobj.objective.name, userobj.objective %>
-			                  </h1>
-			                </div>
-			                
-			                
-			              </div>
-			            </div>
-					
-					
-	<!--
-					<div class="col-md-4 col-sm-6">
-								<%= link_to image_tag( userobj.objective.photo.url(:dashboard), :class => "img-rounded img-responsive"), userobj.objective %>
-						        <h1><%= userobj.objective.name %></h1>
-						        <p><%= userobj.objective.start_day %></p>
-						        <p><%= userobj.objective.end_day %></p>
-						        <p><%= userobj.objective.price %></p>
-						        <p><%= Enumerators::ObjectiveType[userobj.objective.objective_type] %></p>
-						        <p><%= Enumerators::Privacy[userobj.objective.objective_type] %></p>
-									<%= link_to 'Edit', edit_objective_path(userobj.objective) %>
-							        
-							    </p>
-						</div>
--->
-						
-					<% end %>
-					<div class='col-md-4'>
-						<div class='challenge addNew'>
-						  <%= link_to '<i class="fa fa-plus fa-4x"></i>'.html_safe, new_objective_path %>
-						</div>
-					</div>
-
-					
-				<% else %>
-					<div class='col-md-4'>
-						<div class='challenge addNew'>
-						  <%= link_to '<i class="fa fa-plus fa-4x"></i>'.html_safe, new_objective_path %>
-						</div>
-					</div>
-				<% end %>
-
-          
-          
-            
-
-            
-            
-            
-           
-          </div>
-        </div>
+          <div class='row' id="challenges"></div>
       </article>
 
 </section>

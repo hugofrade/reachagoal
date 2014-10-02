@@ -107,8 +107,6 @@ function loadObjectives(estado) {
 	
 }
 
-loadObjectives(0);
-
 $(document).ready(function() {
 	fullScreenContainer();
 	parallaxBg();

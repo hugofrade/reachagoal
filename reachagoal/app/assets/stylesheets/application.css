@@ -1,4 +1,5 @@
 *= require 'css3-progress-bar'
+/*! normalize.css v3.0.0 | MIT License | git.io/normalize */
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -3892,7 +3893,6 @@ a.thumbnail.active {
 .progress {
   overflow: hidden;
   height: 20px;
-/*   margin-bottom: 20px; */
   background-color: #f5f5f5;
   border-radius: 4px;
   -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -9671,8 +9671,7 @@ footer ul li a:hover {
   font-style: italic;
 }
 /* MODALS */
-.userEntries .modalBox,
-.userFriends .modalBox {
+.modalBox {
   background-color: #FFF;
   border: 1px solid #f4f4f4;
   border-radius: 6px;
@@ -9680,31 +9679,26 @@ footer ul li a:hover {
   -webkit-box-shadow: 0 1px 0 #e0e0e0;
   box-shadow: 0 1px 0 #e0e0e0;
 }
-.userEntries .modalBox .header,
-.userFriends .modalBox .header {
+.modalBox .header {
   height: 50px;
   padding-right: 20px;
   padding-left: 20px;
   margin-bottom: 1em;
   border-bottom: 1px solid #f4f4f4;
 }
-.userEntries .modalBox .header h1,
-.userFriends .modalBox .header h1 {
+.modalBox .header h1 {
   margin: 0;
   line-height: 55px;
 }
-.userEntries .modalBox .header h1 small,
-.userFriends .modalBox .header h1 small {
+.modalBox .header h1 small {
   line-height: 55px;
   float: right;
 }
-.userEntries .modalBox .body,
-.userFriends .modalBox .body {
+.modalBox .body {
   padding-right: 20px;
   padding-left: 20px;
 }
-.userEntries .modalBox .newEntry,
-.userFriends .modalBox .newEntry {
+.modalBox .newEntry {
   color: #9b9b9b;
   position: relative;
   padding-left: 35px;
@@ -9712,8 +9706,7 @@ footer ul li a:hover {
   height: 25px;
   line-height: 25px;
 }
-.userEntries .modalBox .newEntry .fa,
-.userFriends .modalBox .newEntry .fa {
+.modalBox .newEntry > .fa {
   width: 25px;
   height: 25px;
   position: absolute;
@@ -9723,37 +9716,43 @@ footer ul li a:hover {
   border-radius: 25px;
   border: 1px solid #9b9b9b;
 }
-.userEntries .modalBox .newEntry .fa.green,
-.userFriends .modalBox .newEntry .fa.green {
+.modalBox .newEntry > .fa.green {
   color: #43b8b2;
   border-color: #43b8b2;
 }
-.userEntries .modalBox .newEntry .fa.red,
-.userFriends .modalBox .newEntry .fa.red {
+.modalBox .newEntry > .fa.red {
   color: #D74A4A;
   border-color: #D74A4A;
 }
-.userEntries .modalBox .newEntry .entryText,
-.userFriends .modalBox .newEntry .entryText {
+.modalBox .newEntry .entryText {
   display: inline;
 }
-.userEntries .modalBox .newEntry .entryText a,
-.userFriends .modalBox .newEntry .entryText a {
+.modalBox .newEntry .entryText a {
   color: #9b9b9b;
 }
-.userEntries .modalBox .newEntry time,
-.userFriends .modalBox .newEntry time {
+.modalBox .newEntry .deleteEntry {
+  color: #d74a4a;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  display: none;
+}
+.modalBox .newEntry .deleteEntry:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+.modalBox .newEntry:hover > .deleteEntry {
+  display: inline;
+}
+.modalBox .newEntry time {
   float: right;
   color: #e0e0e0;
   font-size: 90%;
 }
-.userEntries .modalBox .footer,
-.userFriends .modalBox .footer {
+.modalBox .footer {
   margin-top: 1.2em;
   height: 40px;
 }
-.userEntries .modalBox .footer a.viewAll,
-.userFriends .modalBox .footer a.viewAll {
+.modalBox .footer a.viewAll {
   text-transform: uppercase;
   line-height: 40px;
   display: block;
@@ -10423,6 +10422,20 @@ section#dashboard article.userChallenges .challenge.addNew a .fa {
 section#dashboard article.userChallenges .challenge.addNew a:hover {
   color: #9b9b9b;
 }
+.progress {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  width: 220px;
+  float: left;
+}
+.progress .progress-bar {
+  background-color: #FFF;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 /* CHALLENGE PAGE */
 #challenge {
   position: relative;
@@ -10470,16 +10483,51 @@ section#dashboard article.userChallenges .challenge.addNew a:hover {
 #challenge .bigAddSavings .headerChallenge [class*="col-"]:last-child {
   padding-right: 0;
 }
+#challenge .bigAddSavings .headerChallenge .progressWrap {
+  float: right;
+}
 #challenge .bigAddSavings .headerChallenge .challengeTitle,
-#challenge .bigAddSavings .headerChallenge h1 {
+#challenge .bigAddSavings .headerChallenge h1,
+#challenge .bigAddSavings .headerChallenge .challengeTotal {
   color: #FFF;
   margin: 0;
+  float: left;
+}
+#challenge .bigAddSavings .headerChallenge .challengeEdit {
+  float: left;
+  color: #FFF;
+  padding: 4px 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  font-size: 0.9em;
+  font-weight: 300;
+  text-transform: uppercase;
+  text-decoration: none;
+  margin-left: 10px;
+}
+#challenge .bigAddSavings .headerChallenge .challengeEdit:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+#challenge .bigAddSavings .headerChallenge .challengeEdit .fa {
+  font-size: 1em;
+}
+#challenge .bigAddSavings .headerChallenge .progressTitle {
+  height: 20px;
+  line-height: 20px;
+  margin: 0;
+  margin-right: 15px;
+  font-weight: 400;
+}
+#challenge .bigAddSavings .headerChallenge .challengeTotal {
+  margin-left: 10px;
+  font-weight: 600;
 }
 #challenge .bigAddSavings ul.challengeFriends {
   margin: 0;
   padding: 0;
-  margin-top: 1.5em;
+  margin-top: 20px;
   list-style: none;
+  float: left;
 }
 #challenge .bigAddSavings ul.challengeFriends li {
   float: left;
@@ -10507,6 +10555,16 @@ section#dashboard article.userChallenges .challenge.addNew a:hover {
 #challenge .bigAddSavings ul.challengeFriends li .friendPicture.addMore:hover {
   opacity: 1;
   filter: alpha(opacity=100);
+}
+#challenge .bigAddSavings .challengeDate {
+  margin-top: 15px;
+  color: #FFF;
+  text-align: right;
+  font-size: 0.9em;
+  font-weight: 300;
+}
+#challenge .bigAddSavings .challengeDate .fa {
+  margin-right: 5px;
 }
 #challenge .bigAddSavings .addSavings {
   margin-top: 6em;
@@ -10590,15 +10648,177 @@ section#dashboard article.userChallenges .challenge.addNew a:hover {
 #challenge .bigAddSavings .addSavings .addSavings-body .descriptionInput input::-webkit-input-placeholder {
   color: rgba(255, 255, 255, 0.7);
 }
-#challenge .challengeActivity {
-  padding-bottom: 80px;
+#challenge .bigAddSavings .addSavings .addSavings-body .helpText {
+  margin-top: 1em;
+  font-size: 0.8em;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.7);
 }
-#challenge .challengeActivity .comments,
-#challenge .challengeActivity .share {
-  background-color: #eee;
-  border: 1px solid black;
+#challenge .challengeActivity {
+  padding-top: 60px;
+  padding-bottom: 100px;
+}
+#challenge .challengeActivity #lineChart {
+  height: 270px;
 }
 #challenge .challengeActivity #canvas {
+  position: relative;
+}
+#challenge .challengeActivity .userEntries {
+  margin-top: 40px;
+}
+#challenge .challengeActivity .userEntries .modalBox .btn-group {
+  margin-top: 18px;
+  color: #9b9b9b;
+  font-family: "brandom-grotesque";
+}
+#challenge .challengeActivity .userEntries .modalBox .btn-group .btn {
+  font-size: 0.9em;
+  text-transform: uppercase;
+  background: none;
+  border-radius: 0;
+  text-align: right;
+  font-weight: 300;
+  padding: 0;
+}
+#challenge .challengeActivity .userEntries .modalBox .btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+#challenge .challengeActivity .userEntries .modalBox .btn-group .dropdown-menu {
+  text-align: right;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  background-color: #ffffff;
+  border: 1px solid #f4f4f4;
+  border-radius: 3px;
+  min-width: 110px;
+  font-size: 90%;
+}
+#challenge .challengeActivity .userEntries .modalBox .btn-group .dropdown-menu > li > a {
+  padding: 5px 12px;
+  color: #9b9b9b;
+  font-weight: 300;
+}
+#challenge .challengeActivity .userEntries .modalBox .btn-group .dropdown-menu > li > a:hover {
+  background-color: #f4f4f4;
+}
+#challenge .challengeActivity .comments .headerOut {
+  padding: 15px 20px;
+}
+#challenge .challengeActivity .comments .headerOut h1 {
+  margin: 0;
+}
+#challenge .challengeActivity .comments .headerOut h1 small {
+  float: right;
+  font-size: 100%;
+  text-transform: initial;
+}
+#challenge .challengeActivity .comments .modalBox .body {
+  padding: 0;
+}
+#challenge .challengeActivity .comments .modalBox .body .commentBox {
+  padding: 20px;
+  margin: 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+#challenge .challengeActivity .comments .modalBox .body .commentBox .comment-avatar {
+  float: left;
+  height: 30px;
+  border-radius: 30px;
+}
+#challenge .challengeActivity .comments .modalBox .body .commentBox .comment-body {
+  margin-left: 45px;
+}
+#challenge .challengeActivity .comments .modalBox .body .commentBox .comment-body .comment-by a {
+  font-weight: 600;
+  color: #475f77;
+}
+#challenge .challengeActivity .comments .modalBox .body .commentBox .comment-body .comment-text {
+  margin: 0;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+#challenge .challengeActivity .comments .modalBox .body .commentBox .comment-body .comment-actions {
+  font-size: 0.8em;
+  font-weight: 300;
+  color: #9b9b9b;
+}
+#challenge .challengeActivity .comments .modalBox .body .commentBox .comment-body .comment-actions a {
+  display: none;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+  font-weight: 400;
+  color: #d74a4a;
+  text-decoration: none;
+}
+#challenge .challengeActivity .comments .modalBox .body .commentBox .comment-body .comment-actions a:hover {
+  opacity: 1;
+  filter: alpha(opacity=100);
+}
+#challenge .challengeActivity .comments .modalBox .body .commentBox .comment-body:hover > .comment-actions > a {
+  display: block;
+}
+#challenge .challengeActivity .comments .modalBox .body .newComment {
+  padding: 20px;
+}
+#challenge .challengeActivity .comments .modalBox .body .newComment .commentArea {
+  position: relative;
+  overflow: hidden;
+}
+#challenge .challengeActivity .comments .modalBox .body .newComment .commentArea .avatar {
+  float: left;
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+}
+#challenge .challengeActivity .comments .modalBox .body .newComment .commentArea .inputWrap {
+  overflow: hidden;
+  padding-left: 10px;
+}
+#challenge .challengeActivity .comments .modalBox .body .newComment .commentArea .inputWrap textarea {
+  resize: none;
+  height: 30px;
+  overflow: hidden;
   width: 100%;
-  height: 400px;
+  border: 1px solid #e0e0e0;
+  padding: 5px 5px;
+  font-size: 0.9em;
+  vertical-align: top;
+}
+#challenge .challengeActivity .comments .modalBox .body .newComment .commentArea .inputWrap textarea::-moz-placeholder {
+  color: #9b9b9b;
+  opacity: 1;
+}
+#challenge .challengeActivity .comments .modalBox .body .newComment .commentArea .inputWrap textarea:-ms-input-placeholder {
+  color: #9b9b9b;
+}
+#challenge .challengeActivity .comments .modalBox .body .newComment .commentArea .inputWrap textarea::-webkit-input-placeholder {
+  color: #9b9b9b;
+}
+#challenge .challengeActivity .share-report {
+  padding: 30px 20px 0 20px;
+  display: block;
+  width: 100%;
+}
+#challenge .challengeActivity .share-report p,
+#challenge .challengeActivity .share-report a {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+#challenge .challengeActivity .share-report p.share {
+  font-size: 1em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+#challenge .challengeActivity .share-report a {
+  color: #9b9b9b;
+}
+#challenge .challengeActivity .share-report a.report {
+  margin: 7px 0 0;
+  text-align: right;
+  float: right;
+  font-size: 0.8em;
 }

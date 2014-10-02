@@ -1,6 +1,7 @@
 class Objective < ActiveRecord::Base
     has_attached_file :photo,
-      :styles => { :wide => "1000x400#", :dashboard => "500x300#" },
+      :styles => { :wide => "1440x900#", :dashboard => "500x300#", :thumb_obj => "200x125#" },
+      :convert_options => { :wide => "-blur 0x5" },
       :default_url => "/assets/objective/:style/placeholder.jpg",
       :url => "/system/objectives/:attachment/:id/:style/:filename",
       

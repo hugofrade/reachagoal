@@ -10,7 +10,7 @@
               <div class='userPicture'>
                 <div class='userPicture-inner'>
                   <%= image_tag current_user.photo.url(:dashboard), :class => "userPicture-image" %>
-                  <%= link_to '<i class="fa fa-lg fa-pencil-square-o"></i> Editar perfil'.html_safe, edit_user_registration_path, :class=>"userPicture-edit" %>
+                  <%= link_to '<i class="fa fa-lg fa-pencil-square-o"></i> Editar perfil'.html_safe, edit_user_registration_path, :class =>"userPicture-edit" %>
                 </div>
               </div>
             </div>
@@ -243,3 +243,13 @@
       </article>
 
 </section>
+
+
+<% content_for :js do %>
+<script>
+
+
+
+loadObjectives(0);
+</script>
+<% end %>

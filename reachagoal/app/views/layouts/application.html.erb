@@ -55,7 +55,9 @@
 	                      <div class='panel'>
 		                        <ul class='list-group'>
 		                        	<% current_user.user_objectives.reverse!.each do |userobj| %>
-										<li class='list-group-item'>
+
+
+										<li <%if (controller_name == "objectives" && action_name == "show" && @objective != nil && !userobj.objective.blank? && userobj.objective.id == @objective.id) %> class='list-group-item active' <%else%> class='list-group-item' <%end%>>
 											<%= link_to userobj.objective.name, userobj.objective %>
 										</li>
 									<% end %>                          
@@ -180,7 +182,39 @@
 
 	<%= yield %>
 	
-	
+	<footer>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-6'>
+            <p>
+              Copyright
+              <span class='bold'>Reachagoal</span>
+              © 2014 All rights reserved.
+            </p>
+          </div>
+          <div class='col-md-6'>
+            <ul>
+              <li>
+                <a alt='Sobre nós' href='javascript:;'>Sobre nós</a>
+              </li>
+              <li>
+                <a alt='Ajuda' href='javascript:;'>Ajuda</a>
+              </li>
+              <li>
+                <a alt='Contacto' href='javascript:;'>Contacto</a>
+              </li>
+              <li>
+                <a alt='Termos' href='javascript:;'>Termos</a>
+              </li>
+              <li>
+                <a alt='Privacidade' href='javascript:;'>Privacidade</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
 	<%= javascript_include_tag "application" %>
 	<%= yield :js %>
 	

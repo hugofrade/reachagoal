@@ -1,17 +1,50 @@
-<h2>Sign in</h2>
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
 
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
+    <section id='newChallenge'>
+      <!-- ### New challenge form ### -->
+      <article class='challengeForm'>
+        <div class='container'>
+          <div class='row'>
+            <div class='col-md-4 col-md-offset-4'>
+              <h1 class='formTitle'>Iniciar Sessão</h1>
+              
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+			
+			  	<div class='row'>
+	              <div class='form-group col-md-12'>
+	                <%= f.label :email, "Insira o seu email" %>
+	                <div class='wrapper'>
+	                	<%= f.email_field :email, :class => 'form-control input-lg' %>
+	                    <i class='fa fa-2x fa-envelope'></i>
+	                </div>
+	              </div>
+	            </div>
+				<div class='row'>
+	              <div class='form-group col-md-12'>
+	                <%= f.label :password, "Insira a sua password" %>
+	                <div class='wrapper'>
+	                	<%= f.password_field :password, autocomplete: "off", :class => 'form-control input-lg' %>
+	                    <i class='fa fa-2x fa-asterisk'></i>
+	                </div>
+	              </div>
+	            </div>
+			
+				  <% if devise_mapping.rememberable? -%>
+				    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+				  <% end -%>
+			
+			
+				<div class='row'>
+				  <div class='form-group col-md-6 pull-right'>
+				  	<%= f.submit "Iniciar Sessão", :class => 'btn btn-lg btn-success' %>
+				  </div>
+				</div>
+			<% end %>
+			<%= render "devise/shared/links" %>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
-
-  <div><%= f.submit "Sign in" %></div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+                           
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>

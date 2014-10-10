@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140925150357) do
+ActiveRecord::Schema.define(version: 20141009191257) do
 
   create_table "badges", force: true do |t|
     t.string   "statement"
@@ -50,6 +50,14 @@ ActiveRecord::Schema.define(version: 20140925150357) do
     t.datetime "updated_at"
   end
 
+  create_table "objective_comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "objective_id"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "objective_values", force: true do |t|
     t.integer  "user_id"
     t.integer  "objective_id"
@@ -73,6 +81,7 @@ ActiveRecord::Schema.define(version: 20140925150357) do
     t.string   "photo_content_type"
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
+    t.integer  "category_id"
   end
 
   create_table "user_badges", force: true do |t|

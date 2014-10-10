@@ -2,7 +2,7 @@ class ObjectivesController < ApplicationController
   before_action :set_objective, only: [:show, :edit, :update, :destroy]
 
   before_action :authenticate_user!, except: [:index]
-
+  before_filter :is_private?
   
   # GET /objectives
   # GET /objectives.json
@@ -13,8 +13,29 @@ class ObjectivesController < ApplicationController
   # GET /objectives/1
   # GET /objectives/1.json
   def show
-    @dataset = @objective.objective_values.map{ |obj| obj.value }
-    @labelsset = @objective.objective_values.map{ |obj| obj.created_at }
+  	
+  	
+
+	 labelsset = @objective.objective_values.map do |obj|  
+		 	if ((((Time.now - obj.created_at) / 1.hour).round) <= 72 ) 
+		 		obj.created_at
+		 	else 
+		 		obj.created_at.to_date 
+		 	end
+	 	end 
+	 		    
+     dataset = @objective.objective_values.map{ |obj| obj.value }
+     
+# 	zip = labelsset.map{|obj| obj.to_date}.zip(dataset).group_by{|k,v| k}
+# 	hash= Hash[zip.collect {|k,v| [k, v.map{|v| v.last}.inject(0, :+)]}]
+	
+	hash = Hash[labelsset.uniq.map{|v| [v,0]}]
+	labelsset.each_with_index{|v,i| hash[v] = hash[v] + dataset[i] }
+
+    @dataset = hash.values
+    @labelsset = hash.keys
+
+	@values = ObjectiveValue.where("objective_id=?",@objective.id).paginate(:page => params[:page], :per_page => 5)
   end
 
   # GET /objectives/new
@@ -29,14 +50,15 @@ class ObjectivesController < ApplicationController
   # POST /objectives
   # POST /objectives.json
   def create
- 
     @objective = Objective.new(objective_params)
+    @objective.start_day=DateTime.now
+	@objective.privacy= "1"
+	@objective.objective_type= "0"
     @objective.user_id = current_user.id
-    
       if @objective.save
         @user_objective=UserObjective.new(user_id: @objective.user_id, objective_id: @objective.id)
   	    @user_objective.save
-       	redirect_to @objective, notice: 'Objective was successfully created.'
+       	redirect_to @objective, notice: t('sucnovodes').capitalize
       else
         render action: 'new'
       end
@@ -62,6 +84,7 @@ class ObjectivesController < ApplicationController
   def destroy
   
   	@objective.user_objectives.destroy_all
+  	@objective.objective_values.destroy_all
     @objective.destroy
     respond_to do |format|
       format.html { redirect_to root_path }
@@ -96,16 +119,49 @@ class ObjectivesController < ApplicationController
       format.html { redirect_to @objective }
     end
   end
+  
+  def add_comment
+  	@new_comment = ObjectiveComment.new()
+    @new_comment.comment = params[:comment]
+    @new_comment.objective_id = params[:objective_id]
+    @new_comment.user_id = current_user.id
+
+    if @new_comment.save
+     	redirect_to @new_comment.objective, notice: 'Objective Value was successfully created.'
+    else
+     	redirect_to @new_comment.objective, error: 'Error creating new Objective Value'
+    end
+
+  end
+  
+  def remove_comment
+  	@comment = ObjectiveComment.find(params[:id])
+  	@objective=@comment.objective
+    @comment.destroy
+    respond_to do |format|
+      format.html { redirect_to @objective }
+    end
+  end
+
+
+
+
 
 
   private
     # Use callbacks to share common setup or constraints between actions.
+  
+     def is_private?
+     	if (((!current_user.has_ownership?(@objective.id) if !@objective.blank?) || (!current_user.has_ownership?(params[:objective_id]) if !params[:objective_id].blank?)) && @objective.privacy == 0)
+		 	redirect_to :back
+      	end
+	 end
     def set_objective
       @objective = Objective.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def objective_params
-      params.require(:objective).permit(:name, :start_day, :end_day, :price, :objective_type, :privacy, :user_id, :photo)
+      params.require(:objective).permit(:name, :start_day, :end_day, :price, :objective_type, :privacy, :user_id, :photo, :category_id)
     end
 end

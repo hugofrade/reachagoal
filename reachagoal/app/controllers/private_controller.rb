@@ -8,15 +8,22 @@ class PrivateController < ApplicationController
 	def ajax_challenges
 		user_objectives = UserObjective.where("user_id=?", current_user)
 		@challenges = []
-		
-		if params["estado"] == "1"
-			user_objectives.each do |user_objective|
-			  @challenges << user_objective if user_objective.objective.completed_percentage < 100
+		if params["estado"] != "aaa"
+			if params["estado"] == "1"
+				user_objectives.each do |user_objective|
+				  @challenges << user_objective if user_objective.objective.completed_percentage < 100
+				end
+			elsif params["estado"] == "2"
+				
+				user_objectives.each do |user_objective|
+				  @challenges << user_objective if user_objective.objective.completed_percentage == 100
+				end
+			else
+				@challenges = user_objectives
 			end
-		elsif params["estado"] == "2"
-			
+		elsif params["catid"] != "aaa"
 			user_objectives.each do |user_objective|
-			  @challenges << user_objective if user_objective.objective.completed_percentage == 100
+			  @challenges << user_objective if (user_objective.objective.category_id.to_i == params["catid"].to_i)
 			end
 		else
 			@challenges = user_objectives

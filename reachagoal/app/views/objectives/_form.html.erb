@@ -37,6 +37,10 @@
     <%= f.number_field :price %>
   </div>
   <div class="field">
+    <%= f.label :category_id %><br>
+	<%= f.select :category_id, Category.all.map{ |c| [c.name, c.id] }%>							
+  </div>
+  <div class="field">
     <%= f.label :objective_type %><br>
     <%= f.select :objective_type, Enumerators::ObjectiveType.map{ |t| [t[1],t[0]] } %>
   </div>

@@ -1,5 +1,73 @@
-<h1>New objective</h1>
+    <section id='newChallenge'>
+      <!-- ### New challenge form ### -->
+      <article class='challengeForm'>
+        <div class='container'>
+          <div class='row'>
+            <div class='col-md-4 col-md-offset-4'>
+              <h1 class='formTitle'>Começar desafio</h1>
+              <%= form_for @objective , :html => { :multipart => true } do |f| %>
+  
+				  <% if @objective.errors.any? %>
+				    <div id="error_explanation">
+				      <h2><%= pluralize(@objective.errors.count, "error") %> prohibited this objective from being saved:</h2>
+				
+				      <ul>
+				      <% @objective.errors.full_messages.each do |msg| %>
+				        <li><%= msg %></li>
+				      <% end %>
+				      </ul>
+				    </div>
+				  <% end %>
+					<div class='row'>
+						<div class='form-group col-md-12'>
+							<%= f.label :category_id, "Que tipo de desafio procuras?" %>
+							<%= f.select :category_id, Category.all.map{ |c| [c.name, c.id] }, :class =>'form-control input-lg', :prompt =>'Selecione a categoria' %>							
+						</div>
+					</div>
+	
+					<div class='row'>
+	                  <div class='form-group col-md-12'>
+	                    <%= f.label :name, "Que nome queres atribuir ao desafio?" %>
+	                    <div class='wrapper'>
+	                    	<%= f.text_field :name, :placeholder => "Ibiza espera-me!, Rollex de sonho", :class => 'form-control input-lg' %>
+	                        <i class='fa fa-2x fa-tag'></i>
+	                    </div>
+	                  </div>
+	                </div>
+	                
+	                <div class='row'>
+                  <div class='form-group col-md-12'>
+                    <%= f.label :price, "Quanto dinheiro pretendes guardar?" %>
+                    <div class='wrapper'>
+						<%= f.number_field :price, :placeholder => "300€", :class => 'form-control input-lg', :min => "1" %>
+	                    <i class='fa fa-2x fa-eur'></i>
+                    </div>
+                  </div>
+                </div>
+					
+					<div class='row'>
+	                  <div class='form-group col-md-12'>
+	                  	<%= f.label :end_day, "Até quando pretendes concluir o desafio?" %>
+	                    <div class='wrapper'>
+							<%= f.date_field :end_day, :placeholder => "DD-MM-AAA", :class=> 'form-control input-lg' %>
+							<i class='fa fa-2x fa-calendar-o'></i>
+	                    </div>
+	                  </div>
+	                </div>
 
-<%= render 'form' %>
-
-<%= link_to 'Back', dashboard_path %>
+				  
+				  <div class="field">
+				    <br>
+				  </div>
+				  
+					<div class='row'>
+					  <div class='form-group col-md-6 pull-right'>
+					  	<%= f.submit "Criar desafio", :class => 'btn btn-lg btn-success' %>
+					  </div>
+					</div>
+				<% end %>                            
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>

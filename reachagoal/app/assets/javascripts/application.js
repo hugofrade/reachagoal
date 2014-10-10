@@ -20,10 +20,6 @@
 $('.withTooltip').tooltip();
 
 
-
-
-
-
 function fullScreenContainer() {
 
 	// Set Initial Screen Dimensions
@@ -31,7 +27,7 @@ function fullScreenContainer() {
 	var screenWidth = $(window).width() + "px";
 	var screenHeight = $(window).height() + "px";
 
-	$(".bigAddSavings, .bigAddSavings > .background").css({
+	$(".bigAddSavings, .bigAddSavings > .background, .fullscreen").css({
 		width: screenWidth,
 		height: screenHeight
 	});
@@ -47,7 +43,7 @@ function fullScreenContainer() {
 			
 		// Set Slides to new Screen Dimensions
 		
-		$(".bigAddSavings, .bigAddSavings > .background").css({
+		$(".bigAddSavings, .bigAddSavings > .background, .fullscreen").css({
 			width: screenWidth,
 			height: screenHeight
 		}); 
@@ -56,7 +52,11 @@ function fullScreenContainer() {
 
 }
 
-
+setTimeout(function(){
+  if ($('.alertWrapper').length > 0) {
+    $('.alertWrapper').remove();
+  }
+}, 5000)
 
 // PARALLAX
 function parallaxBg(){
@@ -81,19 +81,21 @@ function parallaxBg(){
    });  // end section function
 };
 
-
-
-
 $(".filtro_obj").click(function() { 
 	var estado = $(this).data('estado');
-	loadObjectives(estado);
+	var cat_id = $(this).data('catid');
+	if (estado ==undefined){
+		estado = "aaa";}
+	if (cat_id == undefined){
+		cat_id = "aaa";}
+	loadObjectives(estado,cat_id);
 });
 
-function loadObjectives(estado) {
+function loadObjectives(estado,cat_id) {
 	
 	$.ajax({
 		url: "ajax_challenges",
-		data: "estado="+estado,
+		data: "estado="+estado+"&catid="+cat_id,
 		contentType: 'application/json; charset=utf-8',
 		success: function (result) {
             $("#challenges").html(result);
@@ -103,14 +105,25 @@ function loadObjectives(estado) {
         }
 	});
 	
-	
-	
 }
+
+
+var completeBadgeWidth = $('.completedBadge .textWrapper').width();
+function completeBadge() {
+	$('.completedBadge .textWrapper').css({
+		'height':completeBadgeWidth+'px',
+		'border-radius':completeBadgeWidth+'px'
+	});
+};
+
+//Run function when window resizes
+$(window).resize(completeBadge);
+
 
 $(document).ready(function() {
 	fullScreenContainer();
 	parallaxBg();
-
+	completeBadge();
 });
 
 

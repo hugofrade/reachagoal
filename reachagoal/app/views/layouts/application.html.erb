@@ -128,23 +128,19 @@
                 </li>
 	                <li class='user-picture'>
 	                  <a data-toggle='dropdown' href='javascript:;'>
-	                    <%= if current_user.photo
-		          				image_tag current_user.photo.url(:nav)
-		          			else
-		          				image_tag "placeholder_user_60.jpg"
-		          			end %>
+	                    <%= image_tag current_user.photo.url(:nav)%>
 	                  </a>
 	                  <div class='dropdown-menu cornered dropdown-menu-right'>
 	                    <div class='panel'>
 	                      <ul class='list-group'>
 	                        <li class='list-group-item'>
-	                          <a href='javascript:;'>Definições</a>
-	                        </li>
+	                        <%= link_to "Definições", edit_user_registration_path   %>
+							</li>
 	                        <li class="list-group-item">
 								<%= link_to "Sair", destroy_user_session_path, method: :delete   %>
 	                        </li>
 	                        <li class='list-group-item upgrade-link'>
-	                          <a href='javascript:;'>Upgrade de conta</a>
+	                          <a>Upgrade de conta <span class="badge"> BETA</span></a>
 	                        </li>
 	                        <li class='list-group-item'>
 	                          <a href='javascript:;'>Ajuda</a>
@@ -172,12 +168,39 @@
     </nav>
     
 
-
 	<% if notice %>
-	  <p class="alert alert-success"><%= notice %></p>
+		<div class='alertWrapper'>
+	      <div class='container'>
+	        <div class='row'>
+	          <div class='col-md-4 col-md-offset-4'>
+	            <div class='alert alert-success alert-dismissible' role='alert'>
+	              <button class='close' data-dismiss='alert' type='button'>
+	                <span aria-hidden='true'>&#215;</span>
+	              </button>
+	              <strong>Sucesso.</strong>
+	              <%= notice %>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
 	<% end %>
 	<% if alert %>
-	  <p class="alert alert-danger"><%= alert %></p>
+		<div class='alertWrapper'>
+	      <div class='container'>
+	        <div class='row'>
+	          <div class='col-md-4 col-md-offset-4'>
+				 <div class='alert alert-warning alert-dismissible' role='alert'>
+	              <button class='close' data-dismiss='alert' type='button'>
+	                <span aria-hidden='true'>&#215;</span>
+	              </button>
+	              <strong>Ocorreu um erro.</strong>
+				  <%= alert %>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
 	<% end %>
 
 	<%= yield %>

@@ -22,14 +22,15 @@
         <div class='userInfo-header'>
           <div class='container'>
             <div class='row'>
-            
-            
-              <div class='userName col-md-5 col-md-offset-2'>
-                <h1 class='h3'><%= @user.nome %><span><% if Friend.is_friend?(current_user.id, @user.id)%>
-					<%= link_to 'Remover amigo', remove_friend_path(@user.id) %>
-				<% else %>
-					<%= link_to 'Adicionar como amigo', add_friend_path(@user.id) %>
-				<% end %></span></h1>
+             <div class='userName col-md-5 col-md-offset-2'>
+                <h1 class='h3'><%= @user.nome %></h1>
+                <div class='addFriendBtn'>
+					<% if Friend.is_friend?(current_user.id, @user.id)%>
+						<%= link_to '<i class="fa fa-lg fa-minus-circle"></i> Remover amigo'.html_safe, remove_friend_path(@user.id) %>
+					<% else %>
+						<%= link_to '<i class="fa fa-lg fa-plus-circle"></i> Adicionar como amigo'.html_safe, add_friend_path(@user.id) %>
+					<% end %>          
+                </div>
               </div>
                             
               <div class='col-md-5'>
@@ -54,11 +55,27 @@
                       </a>
                     </div>
                   </li>
-                  <li class='configs'>
-                    <a alt='Configurações' class='configBtn' href='javascript:;'>
-                      <i class='fa fa-cog fa-2x'></i>
-                    </a>
-                  </li>
+				  <li class='configs'>
+                      <a alt='Configurações' class='configBtn' data-toggle='dropdown' href='javascript:;'>
+                        <i class='fa fa-cog fa-2x'></i>
+                      </a>
+                      <div class='dropdown-menu dropdown-menu-right cornered'>
+                        <div class='panel'>
+                          <ul class='list-group'>
+                            <li class='list-group-item'>
+                              <a href='#'>
+                                Denunciar
+                              </a>
+                            </li>
+                            <li class='list-group-item'>
+                              <a href='#'>
+                                Bloquear
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </li>
                 </ul>
               </div>
               
@@ -137,11 +154,19 @@
                     
                     <% @user.friends.each do |friendline| %>
                     	<div class='col-md-3'>
-                    		<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"friendPicture img-responsive"), 
+                    		<%if friendline.friend.id != current_user.id%>
+                    			<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"friendPicture img-responsive"), 
 										public_profile_path(friendline.friend.id), :class => "withTooltip", 
 										'data-placement' => 'top', 
 										'data-toggle' => 'tooltip', 
 										'title' => friendline.friend.nome %>
+							<% else %>
+								<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"friendPicture img-responsive"), 
+										dashboard_path, :class => "withTooltip", 
+										'data-placement' => 'top', 
+										'data-toggle' => 'tooltip', 
+										'title' => friendline.friend.nome %>
+							<% end%>
 	                   </div>
 					<% end %>
                       <div class='col-md-3'>
@@ -178,104 +203,69 @@
           </div>
           
           
-          <div class='row'>
-	          <% unless @user.user_objectives.blank?  %> 
-					<% @user.user_objectives.reverse!.each do |userobj| %>
+		<div class='row'>
+			<% unless @user.user_objectives.blank?  %>
+			 
+				<% @user.user_objectives.reverse!.each do |userobj| %>
+				
+					<%if userobj.objective.privacy != 0 %>	
 						<div class='col-md-4'>
-						
-						<%if (userobj.objective.completed_percentage<100) %>
-
-			              <div class='challenge'>
-			                
-			                
-			                <div class='challengeImage-wrapper'>
-			                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
-			                </div>
-			                
-			                <div class='black-wrapper'>
-			                  <div class='hiddenInfo'>
-			                  
-			                    <div class='challengeFriends'>
-			                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-			                        <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
-			                      </a>
-			                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-			                        <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
-			                      </a>
-			                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-			                        <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
-			                      </a>
-			                      <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
-			                    </div>
-			                    <div class='challengeProgress' style="left: 20px; right: 20px;">
-			                    Progresso:
-								  <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>  
-			                    </div>
-			                  </div>
-			                </div>
-			              <% else %>
-				              <div class='challenge completed'>
-				                
-				                
-				                <div class='challengeImage-wrapper'>
+							<%if (userobj.objective.completed_percentage<100) %>
+					          <div class='challenge'>
+					            <div class='challengeImage-wrapper'>
 				                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
 				                </div>
-				                
-								<div class='black-wrapper'>
-				                  <div class='completedBadge'>
-				                    <i class='fa fa-check fa-3x'></i>
+					            <div class='black-wrapper'>
+				                  <div class='hiddenInfo'>
+				                    <div class='challengeFriends'>
+				                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+				                        <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
+				                      </a>
+				                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+				                        <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
+				                      </a>
+				                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+				                        <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
+				                      </a>
+				                      <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
+				                    </div>
+				                    <div class='challengeProgress' style="left: 20px; right: 20px;">
+				                    	Progresso:
+									  <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>  
+				                    </div>
 				                  </div>
+								</div>
+							<% else %>
+							  <div class='challenge completed'>
+							    <div class='challengeImage-wrapper'>
+							    	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
+							    </div>
+								<div class='black-wrapper'>
+							      <div class='completedBadge'>
+							        <i class='fa fa-check fa-3x'></i>
+							      </div>
+							    </div>
+							<%end%>
+					            <div class='challengeTitle'>
+				                  <h1 class='h3'>
+				                  	<%= link_to userobj.objective.name, userobj.objective %>
+				                  </h1>
 				                </div>
-			                <%end%>
-			                
-			                <div class='challengeTitle'>
-			                  <h1 class='h3'>
-			                  	<%= link_to userobj.objective.name, userobj.objective %>
-			                  </h1>
-			                </div>
-			                
-			                
-			              </div>
-			            </div>
-					
-					
-	<!--
-					<div class="col-md-4 col-sm-6">
-								<%= link_to image_tag( userobj.objective.photo.url(:dashboard), :class => "img-rounded img-responsive"), userobj.objective %>
-						        <h1><%= userobj.objective.name %></h1>
-						        <p><%= userobj.objective.start_day %></p>
-						        <p><%= userobj.objective.end_day %></p>
-						        <p><%= userobj.objective.price %></p>
-						        <p><%= Enumerators::ObjectiveType[userobj.objective.objective_type] %></p>
-						        <p><%= Enumerators::Privacy[userobj.objective.objective_type] %></p>
-									<%= link_to 'Edit', edit_objective_path(userobj.objective) %>
-							        
-							    </p>
-						</div>
--->
-						
-					<% end %>
-
-
-					
-				<% else %>
-					
-					Nenhum objectivo
-
-
+					          </div>
+					    </div>
+					<%end%>
 				<% end %>
-
-				
-          
-            	Badges
-				<%= link_to 'Oferecer Badge', "#" %>
-
-            
-            
-            
-           
-          </div>
-        </div>
+			<% else %>
+					
+				Nenhum objectivo
+			
+			<% end %>
+			Badges
+			<%= link_to 'Oferecer Badge', "#" %>   
+		
+						
+		</div>
+						
       </article>
 
 </section>

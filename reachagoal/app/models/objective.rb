@@ -10,6 +10,8 @@ class Objective < ActiveRecord::Base
     validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 	has_many :objective_values
 	has_many :user_objectives	
+	has_many :objective_comments
+
 	
 	def missing_value
 	  if objective_values.length>0
@@ -23,4 +25,6 @@ class Objective < ActiveRecord::Base
 		return (((self.price-self.missing_value)/self.price)*100)
 	end
 	
+
+		
 end

@@ -51,17 +51,8 @@
                       </a>
                     </div>
                   </li>
-                  <li class='configs'>
-                    <a alt='Configurações' class='configBtn' href='javascript:;'>
-                      <i class='fa fa-cog fa-2x'></i>
-                    </a>
-                  </li>
                 </ul>
               </div>
-              
-              
-              
-              
               
             </div>
           </div>
@@ -234,6 +225,10 @@
               	<span><%= link_to("• TODOS", "javascript:;", { :class => "filtro_obj", :data => { :estado => 0 } }) %></span>
 			  	<span><%= link_to("• A DECORRER", "javascript:;", { :class => "filtro_obj", :data => { :estado => 1 } }) %></span>
 			  	<span><%= link_to("• CONCLUÍDO" , "javascript:;", { :class => "filtro_obj", :data => { :estado => 2 } }) %></span>
+			  	<% Category.all.each do |c, i|%>
+			  		<span><%= link_to("• #{c.name.upcase}", "javascript:;", { :class => "filtro_obj", :data => { :catid => c.id } }) %></span>
+			  	<%end%>
+
               </p>
             </div>
           </div>
@@ -243,7 +238,6 @@
       </article>
 
 </section>
-
 
 <% content_for :js do %>
 <script>

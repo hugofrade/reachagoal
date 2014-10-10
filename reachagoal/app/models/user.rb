@@ -26,9 +26,15 @@ class User < ActiveRecord::Base
   has_many :user_objectives
   has_many :friends
   has_many :user_badges
+  has_many :objective_comments
+
   
   	def number_of_friends()
 	  	return self.friends.length
 	end
+	
+	 def has_ownership?(objective_id)
+		 self.user_objectives.where("objective_id=?", objective_id).present?
+	 end
          
 end

@@ -187,12 +187,12 @@
             </h1>
           </div>
           <div class='modal-body'>
-			  	<%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>					
+			  	<%= form_tag "#", method: "post" do %>					
 					<div class='row'>
 						<div class='form-group col-md-12'>
 							<%= label_tag :obj, "Desafio a adicionar a poupança:" %>
 							<%= select_tag :obj, options_from_collection_for_select( current_user.user_objectives.reverse!.reject{ |c| c.objective.missing_value == 0}.collect{ |c| c.objective}, "id", "name"), 
-:class => 'form-control input-lg' %> 
+:class => 'form-control input-lg', :onchange => "this.up.('form').action = '/objective/' + this.value + '/add_value/'" %> 
 						</div>
 					</div>
 					<div class='row'>
@@ -229,8 +229,7 @@
 
 					
 					
-				<% end %>
-						          
+				<% end %>		          
         </div>
       </div>
     </div>
@@ -269,7 +268,6 @@
 	      </div>
 	    </div>
 	<% end %>
-
 	<%= yield %>
 	
 	<footer>

@@ -58,7 +58,7 @@ class ObjectivesController < ApplicationController
       if @objective.save
         @user_objective=UserObjective.new(user_id: @objective.user_id, objective_id: @objective.id)
   	    @user_objective.save
-       	redirect_to @objective, notice: t('sucnovodes').capitalize
+       	redirect_to @objective, notice: t('sucnewchal').capitalize
       else
         render action: 'new'
       end
@@ -70,7 +70,7 @@ class ObjectivesController < ApplicationController
   def update
     respond_to do |format|
       if @objective.update(objective_params)
-        format.html { redirect_to @objective, notice: 'Objective was successfully updated.' }
+        format.html { redirect_to @objective, notice: t('newobj').capitalize }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -101,9 +101,9 @@ class ObjectivesController < ApplicationController
     @objective_value.user_id = current_user.id
 
     if @objective_value.save
-     	redirect_to @objective_value.objective, notice: 'Objective Value was successfully created.'
+     	redirect_to @objective_value.objective, notice: t('addvaluesuc').capitalize
     else
-     	redirect_to @objective_value.objective, error: 'Error creating new Objective Value'
+     	redirect_to @objective_value.objective, error: t('erroraddvalue').capitalize
     end
 
   end

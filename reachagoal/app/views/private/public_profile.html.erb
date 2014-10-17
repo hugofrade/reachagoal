@@ -24,37 +24,207 @@
             <div class='row'>
              <div class='userName col-md-5 col-md-offset-2'>
                 <h1 class='h3'><%= @user.nome %></h1>
-                <div class='addFriendBtn'>
+				<div class='actionFriendBtn'>
+
 					<% if Friend.is_friend?(current_user.id, @user.id)%>
-						<%= link_to '<i class="fa fa-lg fa-minus-circle"></i> Remover amigo'.html_safe, remove_friend_path(@user.id) %>
+		            	<%= link_to '<i class="fa fa-lg fa-minus-circle"></i> Remover amigo'.html_safe, remove_friend_path(@user.id), :class => "remove" %>
 					<% else %>
-						<%= link_to '<i class="fa fa-lg fa-plus-circle"></i> Adicionar como amigo'.html_safe, add_friend_path(@user.id) %>
+						<%= link_to '<i class="fa fa-lg fa-plus-circle"></i> Adicionar como amigo'.html_safe, add_friend_path(@user.id), :class => "add" %>
 					<% end %>          
                 </div>
               </div>
                             
               <div class='col-md-5'>
                 <ul class='userInfo-header-right pull-right'>
-                  <li class='userAwards'>
-                    <h2>
-                      Medalhas
-                      <span>(16)</span>
-                    </h2>
-                    <div class='userAward-wrapper'>
-                      <a alt='' class='award hexagon green' href='javascript:;'>
-                        <i class='fa fa-star fa-lg'></i>
-                      </a>
-                      <a alt='' class='award hexagon red' href='javascript:;'>
-                        <i class='fa fa-trophy fa-lg'></i>
-                      </a>
-                      <a alt='' class='award hexagon green' href='javascript:;'>
-                        <i class='fa fa-tree fa-lg'></i>
-                      </a>
-                      <a alt='' class='award hexagon green' href='javascript:;'>
-                        <i class='fa fa-plane fa-lg'></i>
-                      </a>
-                    </div>
-                  </li>
+                
+                
+                
+                
+                    <li class='userAwards'>
+                      <h2>
+                        Medalhas
+                        <a data-target='#viewAwards-modal' data-toggle='modal' href='#'>(16)</a>
+                      </h2>
+                      <div class='userAward-wrapper'>
+                        <a class='award green' href='javascript:;'>
+                          <i class='fa fa-star fa-lg'></i>
+                        </a>
+                        <a class='award red' href='javascript:;'>
+                          <i class='fa fa-trophy fa-lg'></i>
+                        </a>
+                        <a class='award green' href='javascript:;'>
+                          <i class='fa fa-tree fa-lg'></i>
+                        </a>
+                        <a class='award green' href='javascript:;'>
+                          <i class='fa fa-plane fa-lg'></i>
+                        </a>
+                        <a class='award addOne' data-target='#newAward-modal' data-toggle='modal' href='javascript:;'>
+                          <i class='fa fa-plus fa-lg'></i>
+                        </a>
+                        <!-- Modal -->
+                        <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='newAward-modal' role='dialog' tabindex='-1'>
+                          <div class='modal-dialog'>
+                            <div class='modal-content'>
+                              <div class='selectMedal-wrap'>
+                                <div class='modal-body clearfix'>
+                                  <h1 class='h6 title medals'>Escolhe a medalha que queres oferecer:</h1>
+                                  <form>
+                                    <div class='medal'>
+                                      <label>
+                                        <input name='radio' type='radio'>
+                                        <span class='lbl first'></span>
+                                      </label>
+                                      <p class='description'>Mudança</p>
+                                    </div>
+                                    <div class='medal'>
+                                      <label>
+                                        <input name='radio' type='radio'>
+                                        <span class='lbl second'></span>
+                                      </label>
+                                      <p class='description'>Surpresa</p>
+                                    </div>
+                                    <div class='medal'>
+                                      <label>
+                                        <input name='radio' type='radio'>
+                                        <span class='lbl third'></span>
+                                      </label>
+                                      <p class='description'>Superou</p>
+                                    </div>
+                                    <div class='medal'>
+                                      <label>
+                                        <input name='radio' type='radio'>
+                                        <span class='lbl fourth'></span>
+                                      </label>
+                                      <p class='description'>Companheiro</p>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                              <div class='modal-body'>
+                                <h1 class='h6 title'>Porquê?</h1>
+                                <input class='form-control why' placeholder='Explica o porquê de merecer esta medalha…' type='text'>
+                              </div>
+                              <div class='modal-footer'>
+                                <div class='row'>
+                                  <div class='col-md-6' id='left'>
+                                    <button class='btn btn-default' data-dismiss='modal' type='button'>Cancelar</button>
+                                  </div>
+                                  <div class='col-md-6' id='right'>
+                                    <button class='btn btn-primary' type='button'>Oferecer</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='viewAwards-modal' role='dialog' tabindex='-1'>
+                          <div class='modal-dialog'>
+                            <div class='modal-content'>
+                              <div class='modal-header'>
+                                <button class='close' data-dismiss='modal' type='button'>
+                                  <span aria-hidden='true'>&#215;</span>
+                                  <span class='sr-only'>Close</span>
+                                </button>
+                                <h1 class='h6 title'>
+                                  Total de medalhas:
+                                  <span>16</span>
+                                </h1>
+                              </div>
+                              <div class='modal-body'>
+                                <div class='row'>
+                                  <div class='col-md-12'>
+                                    <div class='icon-wrap green'>
+                                      <i class='fa fa-bicycle'></i>
+                                    </div>
+                                    <div class='awardInfo'>
+                                      <h1 class='h6 title'>
+                                        Mudança
+                                        <span>
+                                          de
+                                          <a href='#' title='Nome do user'>Hugo Frade</a>
+                                        </span>
+                                      </h1>
+                                      <p class='description'>Mauris non tempor quam, et lacinia sapien. Mauris accumsan eros eget libero posuere vulputate.</p>
+                                      <time>2 dias atrás</time>
+                                    </div>
+                                    <div class='separator'></div>
+                                  </div>
+                                </div>
+                                <div class='row'>
+                                  <div class='col-md-12'>
+                                    <div class='icon-wrap green'>
+                                      <i class='fa fa-dashboard'></i>
+                                    </div>
+                                    <div class='awardInfo'>
+                                      <h1 class='h6 title'>
+                                        Surpreendeu
+                                        <span>
+                                          de
+                                          <a href='#' title='Nome do user'>Rafael Viana</a>
+                                        </span>
+                                      </h1>
+                                      <p class='description'>Mauris non tempor quam, et lacinia sapien. Mauris accumsan.</p>
+                                      <time>2 dias atrás</time>
+                                    </div>
+                                    <div class='separator'></div>
+                                  </div>
+                                </div>
+                                <div class='row'>
+                                  <div class='col-md-12'>
+                                    <div class='icon-wrap red'>
+                                      <i class='fa fa-trophy'></i>
+                                    </div>
+                                    <div class='awardInfo completed'>
+                                      <h1 class='h6 title'>
+                                        1º Desafio completo!
+                                      </h1>
+                                      <p class='description'>
+                                        de 14/05/2014 a 14/09/2014
+                                        <span class='challengeName'>"Ibiza espera-me!"</span>
+                                      </p>
+                                      <time>2 dias atrás</time>
+                                    </div>
+                                    <div class='separator'></div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class='modal-footer'>
+                                <div class='row'>
+                                  <div class='col-md-6' id='left'>
+                                    <ul class='pagination'>
+                                      <li class='active'>
+                                        <a href='#'>
+                                          1
+                                          <span class='sr-only'>(current)</span>
+                                        </a>
+                                      </li>
+                                      <li>
+                                        <a href='#'>
+                                          2
+                                        </a>
+                                      </li>
+                                      <li>
+                                        <a href='#'>
+                                          3
+                                        </a>
+                                      </li>
+                                    </ul>
+                                  </div>
+                                  <div class='col-md-6' id='right'>
+                                    <button class='btn btn-primary' data-dismiss='modal' data-keyboard='true' data-target='#newAward-modal' data-toggle='modal' type='button'>Oferecer</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+
+                  
+                  
+                  
+                  
 				  <li class='configs'>
                       <a alt='Configurações' class='configBtn' data-toggle='dropdown' href='javascript:;'>
                         <i class='fa fa-cog fa-2x'></i>

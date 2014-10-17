@@ -11,12 +11,12 @@
               <div class='col-md-6'>
                 <h1 class='h3 challengeTitle'><%= @objective.name %></h1>
                 <% if @objective.completed_percentage < 100 %>
-                <%= link_to "<i class='fa fa-lg fa-pencil-square-o'></i> #{t('editar')}".html_safe , edit_objective_path(@objective), :class => "challengeEdit" if user_signed_in? && @objective.user_id == current_user.id  %>
+                <%= link_to "<i class='fa fa-lg fa-pencil-square-o'></i> #{t('edit')}".html_safe , edit_objective_path(@objective), :class => "challengeEdit" if user_signed_in? && @objective.user_id == current_user.id  %>
 				<%end%>
               </div>
               <div class='col-md-6'>
                 <div class='progressWrap'>
-                  <h1 class='h6 progressTitle'><%= t('progresso')%></h1>
+                  <h1 class='h6 progressTitle'><%= t('progress')%></h1>
                   <div class='progress'>
                   	<%= bootstrap_progress_bar(@objective.completed_percentage, :color => "info", :class => "progress-bar", :tiny => true) %>
                   </div>
@@ -80,7 +80,7 @@
 				        <div class='row'>
 				          <div class='col-md-4 col-md-offset-4'>
 								<div class='addSavings-header'>
-			                  <h1 class='secondary'><%= t('faltam')%></h1>
+			                  <h1 class='secondary'><%= t('missing')%></h1>
 			                  <h1 class='main'>
 			                  		<%= number_to_currency(@objective.missing_value, 
 			                  			:unit => "#{t('currencyicon_html')}".html_safe, 
@@ -91,23 +91,24 @@
 			                  </h1>
 			                </div>   
 				                <div class='addSavings-body'>
-			                  <p><%= t('quantopoupaste').capitalize %></p>
-								  <%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>
-								    <div class="savingInput">
-								      <input type="text" name="value">
-									  <span class='currencySymbol'><%= t('currencyicon_html')%></span>
-								    </div>
-								    <div class="descriptionInput">
-								      <input type="text" name="description" placeholder='<%= t('descricaoopt').capitalize%>'>
-								    </div>
-								    <div class="actions">
-								      <input type="submit" class="sr-only">
-								    </div>
-									<p class='helpText'>
-				                      <%= t('adicionarpoupanca').capitalize %>
-				                    </p>
-							  <% end %>
-							</div>
+									<p><%= t('howmanysave').capitalize %></p>
+									<%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>
+										
+										<div class="savingInput">
+										  <input type="text" name="value">
+										  <span class='currencySymbol'><%= t('currencyicon_html')%></span>
+										</div>
+										<div class="descriptionInput">
+										  <input type="text" name="description" placeholder='<%= t('descriptionopt').capitalize%>'>
+										</div>
+										<div class="actions">
+										  <input type="submit" class="sr-only">
+										</div>
+										<p class='helpText'>
+										  <%= t('addsaving').capitalize %>
+										</p>
+									<% end %>
+								</div>
 							</div>
 				        </div>
 				      </div>
@@ -117,10 +118,10 @@
 			              <div class='col-md-4 col-md-offset-4'>
 			                <div class='textWrapper'>
 			                  <div class='text'>
-			                    <p class='completed'><%= t("desafioconcluido").upcase %></p>
-			                    <p><%= t('parabensfimdesafio').capitalize%></p>
+			                    <p class='completed'><%= t("challengecompleted").upcase %></p>
+			                    <p><%= t('congratzendchallenge').capitalize%></p>
 			                    <div class='newChallenge'>
-			                    	<%= link_to t('comecarnovodesafio').capitalize, new_objective_path, :class => 'navbar-link'  %>
+			                    	<%= link_to t('startnewchallenge').capitalize, new_objective_path, :class => 'navbar-link'  %>
 			                    </div>
 			                  </div>
 			                </div>
@@ -163,8 +164,8 @@
 		
 								<div class='header'>
 							      <h1 class='h5'>
-							        <%= t('diariobordo')%>
-							        <small><%= t('ultimasentradas')%></small>
+							        <%= t('diary')%>
+							        <small><%= t('lastentries')%></small>
 							      </h1>
 							    </div>
 							    
@@ -177,7 +178,7 @@
 									    	<%else%> 
 									    		class="entryText" 
 									    	<%end%> >
-											<%= t('adicionaste').capitalize%>
+											<%= t('youadd').capitalize%>
 									      	<span class='bold'>
 									      		<%= number_to_currency(value.value, 
 									      				:unit => "#{t('currencyicon_html')}".html_safe, 
@@ -186,20 +187,20 @@
 									      				:delimiter => " ", 
 									      				:precision => 2) %>
 									      	</span>
-										  	<%= t('aodesafio')%>
+										  	<%= t('tochallenge')%>
 									    </p>
 									    <%= link_to '<i class="fa fa-times"></i>'.html_safe, 
 									    		remove_value_path(value), 
 									    		:class => "deleteEntry", 
-									    		data: { confirm: "#{t('temcerteza').capitalize}" } if user_signed_in? && @objective.user_id == current_user.id %> 
+									    		data: { confirm: "#{t('sure').capitalize}" } if user_signed_in? && @objective.user_id == current_user.id %> 
 									    <time>
 									    	<%=
-										    	if ((((Time.now - value.created_at) / 1.hour).round) <= 72 ) 
+										    	if ((((Time.now - value.created_at) / 1.hour).round) <= 48 ) 
 											 		time_ago_in_words(value.created_at)
 											 	else 
 											 		time_ago_in_words(value.created_at.to_date) 
 											 	end
-										 	%> <%= t('atras')%>
+										 	%> <%= t('ago')%>
 									     </time>
 									  </div>
 									<% end %>
@@ -215,8 +216,8 @@
 				
 					<div class='headerOut'>
 						<h1 class='h5'>
-						  <%= t('actividade') %>
-						  <small><%= t('daopiniao').capitalize %></small>
+						  <%= t('activity') %>
+						  <small><%= t('giveopinion').capitalize %></small>
 						</h1>
 					</div>
 					
@@ -236,10 +237,10 @@
 							      </p>
 							      <div class='comment-actions'>
 							        <time><%= time_ago_in_words(comment.created_at)%></time>
-									<%= link_to "<i class='fa fa-times'></i> #{t('remover').capitalize}".html_safe, 
+									<%= link_to "<i class='fa fa-times'></i> #{t('remove').capitalize}".html_safe, 
 											remove_comment_path(comment), 
 											:class => "pull-right", 
-											data: { confirm: "#{t('temcerteza').capitalize}" } if user_signed_in? && comment.user_id == current_user.id %> 
+											data: { confirm: "#{t('sure').capitalize}" } if user_signed_in? && (comment.user_id == current_user.id || current_user.has_ownership?(@objective.id)) %> 
 							      </div>
 							    </div>
 							  </div>
@@ -252,7 +253,7 @@
 										<div class='inputWrap'>
 											<%= text_field_tag :comment %>
 										</div>
-										<%= submit_tag "#{t('submeter').capitalize}", :class=>"sr-only"%>
+										<%= submit_tag "#{t('submit').capitalize}", :class=>"sr-only"%>
 									</div>
 								<% end %>
 							</div>
@@ -265,7 +266,7 @@
 			<div class='row'>
 				<div class='col-md-6 pull-right'>
 					<div class='share-report'>
-						<p class='share'><%= t('partilhar').capitalize%></p>
+						<p class='share'><%= t('share').capitalize%></p>
 						<a href='#'>
 						  <i class='fa fa-2x fa-facebook-square'></i>
 						</a>
@@ -275,7 +276,7 @@
 						<a href='#'>
 						  <i class='fa fa-2x fa-google-plus-square'></i>
 						</a>
-						<a class='report' href='#'><%= t('denunciarutilobj').capitalize%></a>
+						<a class='report' href='#'><%= t('reportuserobj').capitalize%></a>
 					</div>
 				</div>
 			</div>
@@ -291,7 +292,7 @@
 	<script>
 
 	var lineChartData = {
-		labels : ["<%= @labelsset.map{ |date| "#{time_ago_in_words(date)} #{t('atras')}" }.join('", "').html_safe %>"],    
+		labels : ["<%= @labelsset.map{ |date| "#{time_ago_in_words(date)} #{t('ago')}" }.join('", "').html_safe %>"],    
 		datasets: [{
 			label: "Savings Graph",
 			fillColor : "rgba(220,220,220,0.2)",

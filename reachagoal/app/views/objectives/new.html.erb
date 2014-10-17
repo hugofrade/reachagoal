@@ -20,16 +20,18 @@
 				  <% end %>
 					<div class='row'>
 						<div class='form-group col-md-12'>
-							<%= f.label :category_id, "Que tipo de desafio procuras?" %>
-							<%= f.select :category_id, Category.all.map{ |c| [c.name, c.id] }, :class =>'form-control input-lg', :prompt =>'Selecione a categoria' %>							
+							<%= f.label 	:category_id, t('newobjtype').capitalize %>
+							<%= f.select 	:category_id, Category.all.map{ |c| [c.name, c.id] }, 
+											:class =>'form-control input-lg', 
+											:prompt => t('selectcategory').capitalize %>							
 						</div>
 					</div>
 	
 					<div class='row'>
 	                  <div class='form-group col-md-12'>
-	                    <%= f.label :name, "Que nome queres atribuir ao desafio?" %>
+	                    <%= f.label :name, t('challengename').capitalize %>
 	                    <div class='wrapper'>
-	                    	<%= f.text_field :name, :placeholder => "Ibiza espera-me!, Rollex de sonho", :class => 'form-control input-lg' %>
+	                    	<%= f.text_field :name, :placeholder => t('nameexamples').capitalize, :class => 'form-control input-lg' %>
 	                        <i class='fa fa-2x fa-tag'></i>
 	                    </div>
 	                  </div>
@@ -47,7 +49,7 @@
 					
 					<div class='row'>
 	                  <div class='form-group col-md-12'>
-	                  	<%= f.label :end_day, "Até quando pretendes concluir o desafio?" %>
+	                  	<%= f.label :end_day, t('enddate').capitalize %>
 	                    <div class='wrapper'>
 							<%= f.date_field :end_day, :placeholder => "DD-MM-AAA", :class=> 'form-control input-lg' %>
 							<i class='fa fa-2x fa-calendar-o'></i>
@@ -62,7 +64,7 @@
 				  
 					<div class='row'>
 					  <div class='form-group col-md-6 pull-right'>
-					  	<%= f.submit "Criar desafio", :class => 'btn btn-lg btn-success' %>
+					  	<%= f.submit t('createchallenge').capitalize, :class => 'btn btn-lg btn-success' %>
 					  </div>
 					</div>
 				<% end %>                            

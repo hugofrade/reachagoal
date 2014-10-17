@@ -33,8 +33,8 @@ class User < ActiveRecord::Base
 	  	return self.friends.length
 	end
 	
-	 def has_ownership?(objective_id)
+	def has_ownership?(objective_id)
 		 self.user_objectives.where("objective_id=?", objective_id).present?
-	 end
-         
+	end
+
 end

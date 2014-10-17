@@ -51,4 +51,7 @@ class PrivateController < ApplicationController
 		redirect_to public_profile_path(params[:id])
 	end
 	
+	
+
+	
 end

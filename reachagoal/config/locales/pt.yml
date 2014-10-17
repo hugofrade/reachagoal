@@ -1,29 +1,119 @@
 pt:
-  actividade: actividades
-  adicionaste: adicionaste
-  adicionarpoupanca: pressione enter para adicionar a poupança
-  aodesafio: ao desafio
-  atras: atrás
-  comecarnovodesafio: começar novo desafio
+  activity: actividade
+  add: adicionar
+  addvaluesuc: o valor foi adicionado com sucesso ao desafio
+  addsaving: pressione enter para adicionar a poupança
+  ago: atrás
+  
+  
+  challengename: que nome queres atribuir ao desafio?
+  challengecompleted: desafio ConcluÍdo
+  congratzendchallenge: parabéns, concluíste o teu desafio!
+  createchallenge: criar desafio
   currencyicon_html: "&euro;"
-  daopiniao: dá a tua opinião sobre o desafio
-  denunciarutilobj: denunciar utilizador/desafio
-  desafioconcluido: Desafio ConcluÍdo
-  descricaoopt: descrição (opcional)
-  diariobordo: diário de bordo
-  editar: editar
-  faltam: faltam
-  parabensfimdesafio: parabéns, concluíste o teu desafio!
-  partilhar: partilhar
-  progresso: progresso
-  quantopoupaste: quanto poupaste hoje?
-  remover: remover
-  submeter: submeter
-  sucnovodes: desafio criado com sucesso
-  temcerteza: tem a certeza?
-  ultimasentradas: últimas entradas
   
   
+  descriptionopt: descrição (opcional)
+  diary: diário de bordo
+  
+  edit: editar
+  enddate: até quando pretendes concluir o desafio?
+  
+  erroraddvalue: não foi possível adicionar valor
+  
+  giveopinion: dá a tua opinião sobre o desafio
+
+  
+  howmanysave: quanto poupaste hoje?
+
+  lastentries: últimas entradas
+
+
+  missing: faltam
+  
+  nameexamples: ibiza espera-me!, rollex de sonho
+  newobjtype: que tipo de desafio procuras?
+  newobj: objectivo criado com sucesso
+  
+  
+  progress: progresso
+  
+  
+  remove: remover
+  reportuserobj: denunciar utilizador/desafio
+
+  saved: guardaste
+  selectcategory: selecione a categoria
+  share: partilhar
+  startnewchallenge: começar novo desafio
+  submit: submeter
+  sucnewchal: desafio criado com sucesso
+  sure: tem a certeza?
+  
+  
+  tochallenge: ao desafio
+
+  
+  youadd: adicionaste
+
+  
+  
+  
+  
+  
+  
+  
+  
+  errors:
+    messages:
+      expired: "expirou, por favor solicite um novo"
+      not_found: "não foi encontrado"
+      already_confirmed: "já foi confirmado, por favor tente efectuar a autenticação"
+      not_locked: "não foi bloqueado"
+      not_saved:
+        one: "1 erro impediu %{resource} de ser gravado:"
+        other: "%{count} erros impediram %{resource} de ser gravado:"
+ 
+  devise:
+    failure:
+      already_authenticated: 'Já se encontra autenticado.'
+      unauthenticated: 'Antes de continuar tem de se autenticar ou efectuar um registo.'
+      unconfirmed: 'Tem de confirmar a sua conta antes de continuar.'
+      locked: 'A sua conta está bloqueada.'
+      invalid: 'O endereço de correio electrónico ou a palavra-passe são inválidos.'
+      invalid_token: 'O "token" de autenticação é inválido.'
+      timeout: 'A sua sessão expirou, por favor autentique-se novamente para continuar.'
+      inactive: 'A sua conta ainda não foi activada.'
+    sessions:
+      signed_in: 'Autenticação efectuada com sucesso.'
+      signed_out: 'Saíu da sessão com sucesso.'
+    passwords:
+      send_instructions: 'Dentro de alguns minutos irá receber um email com instruções de reinicialização da palavra-passe.'
+      updated: 'A sua palavra-passe foi alterada com sucesso. Agora está autenticado.'
+      send_paranoid_instructions: 'Se o seu e-mail existir na nossa base de dados, irá receber dentro de alguns minutos um e-mail com instruções para recuperar a sua senha.'
+    confirmations:
+      send_instructions: 'Dentro de alguns minutos irá receber um email com instruções para confirmar  sua conta.'
+      send_paranoid_instructions: 'Se o seu e-mail existir na nossa base de dados, irá receber dentro de alguns minutos um email com instruções para confirmar a sua conta.'
+      confirmed: 'A sua conta foi confirmada com sucesso. Agora está autenticado.'
+    registrations:
+      signed_up: 'Bem-vindo! A autenticação foi efectuada com sucesso.'
+      inactive_signed_up: 'A autenticação foi efectuada com sucesso. No entanto, não foi possível autorizá-lo porque a sua conta está %{reason}.'
+      updated: 'A sua conta foi actualizada com sucesso.'
+      destroyed: 'A sua conta foi cancelada com sucesso.'
+    unlocks:
+      send_instructions: 'Dentro de alguns minutos irá receber um email com as instruções para desbloquear a sua conta.'
+      unlocked: 'A sua conta foi desbloqueada com sucesso. Agora está autenticado.'
+      send_paranoid_instructions: 'Se a sua conta existir, irá receber dentro de alguns minutos um email com instruções para a desbloquear.'
+    omniauth_callbacks:
+      success: 'Successfully authorized from %{kind} account.'
+      failure: 'Could not authorize you from %{kind} because "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Instruções de confirmação'
+      reset_password_instructions:
+        subject: 'Instruções de recuperação de palavra-passe'
+      unlock_instructions:
+        subject: 'Instruções de desbloqueio'
   
   
   

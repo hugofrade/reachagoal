@@ -1,0 +1,114 @@
+<section id='editChallenge'>
+  <!-- ### Edit challenge form ### -->
+  <article class='challengeForm'>
+    <div class='container'>
+      <div class='row'>
+      
+		<%= form_for @objective , :html => { :multipart => true } do |f| %>
+		  
+			<% if @objective.errors.any? %>
+				<div id="error_explanation">
+				  <h2><%= pluralize(@objective.errors.count, "error") %> prohibited this objective from being saved:</h2>
+				
+				  <ul>
+				  <% @objective.errors.full_messages.each do |msg| %>
+				    <li><%= msg %></li>
+				  <% end %>
+				  </ul>
+				</div>
+			<% end %>
+      
+			<div class='col-md-4 col-md-offset-4'>
+				<h1 class='formTitle'>
+					Editar desafio
+					<br>
+					<small><%= @objective.name%></small>
+				</h1>
+
+
+				<div class='row'>
+					<div class='form-group col-md-12'>
+						<%= f.label 	:category_id, t('newobjtype').capitalize %>
+						<%= f.select 	:category_id, Category.all.map{ |c| [c.name, c.id] }, 
+										:class =>'form-control input-lg', 
+										:prompt => t('selectcategory').capitalize %>							
+					</div>
+				</div>
+	
+				<div class='row'>
+                  <div class='form-group col-md-12'>
+                    <%= f.label :name, t('challengename').capitalize %>
+                    <div class='wrapper'>
+                    	<%= f.text_field :name, :placeholder => t('nameexamples').capitalize, :class => 'form-control input-lg' %>
+                        <i class='fa fa-2x fa-tag'></i>
+                    </div>
+                  </div>
+                </div>
+	                
+				<div class='row'>
+                  <div class='form-group col-md-12'>
+                    <%= f.label :price, "Quanto dinheiro pretendes guardar?" %>
+                    <div class='wrapper'>
+						<%= f.number_field :price, :placeholder => "300€", :class => 'form-control input-lg', :min => "1" %>
+	                    <i class='fa fa-2x fa-eur'></i>
+                    </div>
+                  </div>
+                </div>
+					
+				<div class='row'>
+                  <div class='form-group col-md-12'>
+                  	<%= f.label :end_day, t('enddate').capitalize %>
+                    <div class='wrapper'>
+						<%= f.date_field :end_day, :placeholder => "DD-MM-AAAA ou AAAA-MM-DD", :class=> 'form-control input-lg' %>
+						<i class='fa fa-2x fa-calendar-o'></i>
+                    </div>
+                  </div>
+                </div>
+
+				
+				<div class='row'>
+				  <div class='col-md-12 form-group'>
+					<%= f.label :privacy %><br>
+				    <%= f.select :privacy, Enumerators::Privacy.map{ |t| [t[1],t[0]] }, :class =>'form-control input-lg' %>
+				  </div>
+				</div>
+				
+				
+				
+				
+				<div class='row'>
+				  <div class='col-md-12 form-group'>
+					<%= f.label :photo, t('challengephoto') %><br>
+					<%= image_tag @objective.photo.url(:dashboard), :class => "cover img-responsive img-rounded" %><br>
+					<%= f.file_field :photo, :class => 'btn btn-default', :id => 'exampleInputFile1'%>
+				    <p class='help-block'>Selecciona uma foto para o teu desafio</p>
+				  </div>
+				</div>
+				
+
+				
+					
+				<!--
+				  <div class="field">
+				    <%= f.label :objective_type %><br>
+				    <%= f.select :objective_type, Enumerators::ObjectiveType.map{ |t| [t[1],t[0]] } %>
+				  </div>
+				-->
+				
+
+				
+				<div class='row footer'>
+				  <div class='form-group col-md-6'>
+				  	<%= link_to t('delete').capitalize, @objective, method: :delete, :class => 'btn btn-lg btn-default delete', data: { confirm: t('sure') } if user_signed_in? && @objective.user_id == current_user.id%>
+				  </div>
+				  <div class='form-group col-md-6'>
+				    <%= f.submit t('save'), :class => 'btn btn-lg btn-success'%>
+				  </div>
+				</div>
+			<% end %>
+        </div>
+      </div>
+    </div>
+  </article>
+</section>
+

@@ -15,6 +15,7 @@ pt:
   
   
   descriptionopt: descrição (opcional)
+  delete: apagar
   diary: diário de bordo
   
   edit: editar
@@ -44,7 +45,8 @@ pt:
   
   remove: remover
   reportuserobj: denunciar utilizador/desafio
-
+  
+  save: guardar
   saved: guardaste
   selectcategory: selecione a categoria
   share: partilhar

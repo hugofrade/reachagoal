@@ -7,7 +7,8 @@ pt:
   
   
   challengename: que nome queres atribuir ao desafio?
-  challengecompleted: desafio ConcluÍdo
+  challengecompleted: desafio concluÍdo
+  change: mudança
   congratzendchallenge: parabéns, concluíste o teu desafio!
   createchallenge: criar desafio
   currencyicon_html: "&euro;"
@@ -35,7 +36,9 @@ pt:
   newobjtype: que tipo de desafio procuras?
   newobj: objectivo criado com sucesso
   
+  overcome: superou
   
+  partner: companheiro
   progress: progresso
   
   
@@ -49,6 +52,7 @@ pt:
   submit: submeter
   sucnewchal: desafio criado com sucesso
   sure: tem a certeza?
+  surprise: surpresa
   
   
   tochallenge: ao desafio
@@ -59,11 +63,6 @@ pt:
   
   
   
-  
-  
-  
-  
-  
   errors:
     messages:
       expired: "expirou, por favor solicite um novo"
@@ -71,7 +70,7 @@ pt:
       already_confirmed: "já foi confirmado, por favor tente efectuar a autenticação"
       not_locked: "não foi bloqueado"
       not_saved:
-        one: "1 erro impediu %{resource} de ser gravado:"
+        one: '1 erro impediu %{resource} de ser gravado:'
         other: "%{count} erros impediram %{resource} de ser gravado:"
  
   devise:

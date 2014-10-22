@@ -3,7 +3,8 @@
 <table>
   <thead>
     <tr>
-      <th>Statement</th>
+      <th>Icon</th>
+      <th>Type badge</th>
       <th></th>
       <th></th>
       <th></th>
@@ -13,7 +14,8 @@
   <tbody>
     <% @badges.each do |badge| %>
       <tr>
-        <td><%= badge.statement %></td>
+        <td><%= badge.icon %></td>
+        <td><%= badge.type_badge %></td>
         <td><%= link_to 'Show', badge %></td>
         <td><%= link_to 'Edit', edit_badge_path(badge) %></td>
         <td><%= link_to 'Destroy', badge, method: :delete, data: { confirm: 'Are you sure?' } %></td>

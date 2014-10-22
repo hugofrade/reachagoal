@@ -4,6 +4,7 @@ class CreateUserBadges < ActiveRecord::Migration
       t.integer :giver_id
       t.integer :receiver_id
       t.integer :badge_id
+      t.text :statement
 
       t.timestamps
     end

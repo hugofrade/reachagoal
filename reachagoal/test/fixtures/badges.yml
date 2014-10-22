@@ -1,7 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  statement: MyString
+  icon: MyText
+  type_badge: MyText
 
 two:
-  statement: MyString
+  icon: MyText
+  type_badge: MyText

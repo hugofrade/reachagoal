@@ -31,13 +31,23 @@
                 </div>
 -->
 
-                <div class='challengeProgress' style="left: 20px; right: 20px;">
-                Progresso:
-				  <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>  
-                </div>
+                  <div class='progressWrap'>
+	                  <h1 class='h6 progressTitle'>Progresso</h1>
+	                  <div class='progress'>
+	                    <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>
+	                  </div>
+					  <div class='challengeTotal'> <%= userobj.objective.price %> </div>
+				  </div>
               </div>
               
+              
+              
             </div>
+            
+            
+            
+                
+                
           <% else %>
               <div class='challenge completed'>
                 
@@ -62,22 +72,6 @@
             
           </div>
         </div>
-	
-	
-<!--
-	<div class="col-md-4 col-sm-6">
-				<%= link_to image_tag( userobj.objective.photo.url(:dashboard), :class => "img-rounded img-responsive"), userobj.objective %>
-		        <h1><%= userobj.objective.name %></h1>
-		        <p><%= userobj.objective.start_day %></p>
-		        <p><%= userobj.objective.end_day %></p>
-		        <p><%= userobj.objective.price %></p>
-		        <p><%= Enumerators::ObjectiveType[userobj.objective.objective_type] %></p>
-		        <p><%= Enumerators::Privacy[userobj.objective.objective_type] %></p>
-					<%= link_to 'Edit', edit_objective_path(userobj.objective) %>
-			        
-			    </p>
-		</div>
--->
 		
 	<% end %>
 	<div class='col-md-4'>
@@ -88,10 +82,15 @@
 
 	
 <% else %>
-	<div class='col-md-4'>
-		<div class='challenge addNew'>
-		  <%= link_to '<i class="fa fa-plus fa-4x"></i>'.html_safe, new_objective_path %>
-		</div>
+
+	<div class='col-md-12'>
+	  <div class='noChallenges'>
+	    <p>
+	      Ainda não tens nenhum desafio. Porque não te aventuras e começas por
+	      <%= link_to 'criar um novo desafio', new_objective_path %>
+	      ?
+	    </p>
+	  </div>
 	</div>
 <% end %>
 

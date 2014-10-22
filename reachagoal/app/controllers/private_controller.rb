@@ -2,7 +2,9 @@ class PrivateController < ApplicationController
 	before_action :authenticate_user!
 	
 	def user_dashboard
-	
+		@user_badges = UserBadges.where("receiver_id = ?", current_user.id)
+		@last_values_added = ObjectiveValue.where("user_id = ?", current_user.id).reverse.first(5)
+
 	end
 	
 	def ajax_challenges
@@ -34,6 +36,18 @@ class PrivateController < ApplicationController
 	
 	def public_profile
 		@user = User.find(params[:id])
+		@badges = Badge.all
+		@user_badges = UserBadges.where("receiver_id = ?", @user.id)
+	end
+	
+	def add_badge
+		@badge = UserBadges.new()
+		@badge.giver_id = current_user.id
+		@badge.receiver_id = params[:friend_id]
+		@badge.statement = params[:statement]
+		@badge.badge_id = params[:badge_id]
+		@badge.save
+		redirect_to public_profile_path(params[:friend_id]), notice: 'Ofereceste um crachá ao utilizador com sucesso'
 	end
 	
 	def add_friend

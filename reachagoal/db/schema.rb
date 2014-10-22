@@ -11,16 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141009191257) do
+ActiveRecord::Schema.define(version: 20141022184628) do
 
   create_table "badges", force: true do |t|
-    t.string   "statement"
+    t.text     "icon"
+    t.text     "type_badge"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "icon_file_name"
-    t.string   "icon_content_type"
-    t.integer  "icon_file_size"
-    t.datetime "icon_updated_at"
+    t.text     "symbol"
   end
 
   create_table "categories", force: true do |t|
@@ -88,6 +86,7 @@ ActiveRecord::Schema.define(version: 20141009191257) do
     t.integer  "giver_id"
     t.integer  "receiver_id"
     t.integer  "badge_id"
+    t.text     "statement"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -125,6 +124,8 @@ ActiveRecord::Schema.define(version: 20141009191257) do
     t.string   "cover_content_type"
     t.integer  "cover_file_size"
     t.datetime "cover_updated_at"
+    t.text     "surname"
+    t.text     "country"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

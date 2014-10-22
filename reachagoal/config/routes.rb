@@ -6,13 +6,11 @@ Reachagoal::Application.routes.draw do
 
   resources :friends
 
-  resources :badges
-
   resources :categories
 
   devise_for :users
   
-  resources :objectives
+  resources :objectives, except: :index
   
   
   unauthenticated :user do
@@ -23,8 +21,9 @@ Reachagoal::Application.routes.draw do
   	root :to => "private#user_dashboard" 
   end
   
+  get "objectives" => "private#user_dashboard"
   get "dashboard" => "private#user_dashboard"
-  post "/objectives/:objective_id/add_value" => "objectives#add_value"
+  post "/objectives/:objective_id/add_value" => "objectives#add_value", :as => "add_value"
   post "/objectives/:objective_id/add_comment" => "objectives#add_comment"
 
   get "remove_value/:id" => "objectives#remove_value", :as=>"remove_value"
@@ -34,9 +33,10 @@ Reachagoal::Application.routes.draw do
   
 
   get "publicprofile/:id" => "private#public_profile", :as=>"public_profile"
-  get "add_friend/:id" => "private#add_friend", :as=>"add_friend"
-  get "badge/new/:id" => "badge#create", :as=>"give_badge"
 
+  post "publicprofile/add_badge/:friend_id" => "private#add_badge", :as=>"add_badge"
+  
+  get "add_friend/:id" => "private#add_friend", :as=>"add_friend"
   get "remove_friend/:id" => "private#remove_friend", :as=>"remove_friend"
   
   get "ajax_challenges" => "private#ajax_challenges"

@@ -18,7 +18,7 @@ class BadgesControllerTest < ActionController::TestCase
 
   test "should create badge" do
     assert_difference('Badge.count') do
-      post :create, badge: { statement: @badge.statement }
+      post :create, badge: { icon: @badge.icon, type_badge: @badge.type_badge }
     end
 
     assert_redirected_to badge_path(assigns(:badge))
@@ -35,7 +35,7 @@ class BadgesControllerTest < ActionController::TestCase
   end
 
   test "should update badge" do
-    patch :update, id: @badge, badge: { statement: @badge.statement }
+    patch :update, id: @badge, badge: { icon: @badge.icon, type_badge: @badge.type_badge }
     assert_redirected_to badge_path(assigns(:badge))
   end
 

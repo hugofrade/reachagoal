@@ -5,17 +5,19 @@
       <article class='bigAddSavings'>
         
         <div class='background parallax-bg' data-speed='6' data-type='background-parallax' style="background-image: url(<%= @objective.photo.url(:wide) %>)" >
-  
           <div class='container'>
             <div class='row headerChallenge'>
-              <div class='col-md-6'>
+              <div class='col-md-7'>
                 <h1 class='h3 challengeTitle'><%= @objective.name %></h1>
                 <% if @objective.completed_percentage < 100 %>
-                <%= link_to "<i class='fa fa-lg fa-pencil-square-o'></i> #{t('edit')}".html_safe , edit_objective_path(@objective), :class => "challengeEdit" if user_signed_in? && @objective.user_id == current_user.id  %>
+	                <%= link_to "<i class='fa fa-lg fa-pencil-square-o'></i> #{t('edit')}".html_safe , edit_objective_path(@objective), :class => "challengeEdit" if user_signed_in? && @objective.user_id == current_user.id  %>
 				<%end%>
               </div>
-              <div class='col-md-6'>
-                <div class='progressWrap'>
+              
+              
+              
+              <div class='col-md-5'>
+                <div class='progressWrap push-right'>
                   <h1 class='h6 progressTitle'><%= t('progress')%></h1>
                   <div class='progress'>
                   	<%= bootstrap_progress_bar(@objective.completed_percentage, :color => "info", :class => "progress-bar", :tiny => true) %>
@@ -25,6 +27,7 @@
               </div>
             </div>
           </div>
+
 
           <div class='container'>
             <div class='row'>
@@ -93,7 +96,7 @@
 				                <div class='addSavings-body'>
 									<p><%= t('howmanysave').capitalize %></p>
 									<%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>
-										
+										<%= hidden_field_tag :previous_page, "objective" %>
 										<div class="savingInput">
 										  <input type="text" name="value">
 										  <span class='currencySymbol'><%= t('currencyicon_html')%></span>

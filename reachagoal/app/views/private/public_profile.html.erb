@@ -43,80 +43,84 @@
                     <li class='userAwards'>
                       <h2>
                         Medalhas
-                        <a data-target='#viewAwards-modal' data-toggle='modal' href='#'>(16)</a>
+                        <% if @user_badges.length != 0 %>
+                       		<a data-target='#viewAwards-modal' data-toggle='modal' href='#'>(<%= @user_badges.length%>)</a>
+					   	<%else%>
+					   		(0)
+					   	<%end%>
                       </h2>
+                      
+                      
                       <div class='userAward-wrapper'>
-                        <a class='award green' href='javascript:;'>
-                          <i class='fa fa-star fa-lg'></i>
-                        </a>
-                        <a class='award red' href='javascript:;'>
-                          <i class='fa fa-trophy fa-lg'></i>
-                        </a>
-                        <a class='award green' href='javascript:;'>
-                          <i class='fa fa-tree fa-lg'></i>
-                        </a>
-                        <a class='award green' href='javascript:;'>
-                          <i class='fa fa-plane fa-lg'></i>
-                        </a>
-                        <a class='award addOne' data-target='#newAward-modal' data-toggle='modal' href='javascript:;'>
+						<% @user_badges.reverse!.first(3).each do |badge| %>
+							
+							<a class='award green' href='javascript:;'>
+	                          <i class="fa <%= badge.badge.symbol %> "></i>
+	                        </a>
+	                         
+						<% end %>
+						
+                        <a class='award addOne' data-target='#newAward-modal' data-toggle='modal' href='#'>
                           <i class='fa fa-plus fa-lg'></i>
                         </a>
+                        
+                        
+                        
                         <!-- Modal -->
-                        <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='newAward-modal' role='dialog' tabindex='-1'>
-                          <div class='modal-dialog'>
-                            <div class='modal-content'>
-                              <div class='selectMedal-wrap'>
-                                <div class='modal-body clearfix'>
-                                  <h1 class='h6 title medals'>Escolhe a medalha que queres oferecer:</h1>
-                                  <form>
-                                    <div class='medal'>
-                                      <label>
-                                        <input name='radio' type='radio'>
-                                        <span class='lbl first'></span>
-                                      </label>
-                                      <p class='description'>Mudança</p>
-                                    </div>
-                                    <div class='medal'>
-                                      <label>
-                                        <input name='radio' type='radio'>
-                                        <span class='lbl second'></span>
-                                      </label>
-                                      <p class='description'>Surpresa</p>
-                                    </div>
-                                    <div class='medal'>
-                                      <label>
-                                        <input name='radio' type='radio'>
-                                        <span class='lbl third'></span>
-                                      </label>
-                                      <p class='description'>Superou</p>
-                                    </div>
-                                    <div class='medal'>
-                                      <label>
-                                        <input name='radio' type='radio'>
-                                        <span class='lbl fourth'></span>
-                                      </label>
-                                      <p class='description'>Companheiro</p>
-                                    </div>
-                                  </form>
-                                </div>
-                              </div>
-                              <div class='modal-body'>
-                                <h1 class='h6 title'>Porquê?</h1>
-                                <input class='form-control why' placeholder='Explica o porquê de merecer esta medalha…' type='text'>
-                              </div>
-                              <div class='modal-footer'>
-                                <div class='row'>
-                                  <div class='col-md-6' id='left'>
-                                    <button class='btn btn-default' data-dismiss='modal' type='button'>Cancelar</button>
-                                  </div>
-                                  <div class='col-md-6' id='right'>
-                                    <button class='btn btn-primary' type='button'>Oferecer</button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+
+						<div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='newAward-modal' role='dialog' tabindex='-1'>
+							<div class='modal-dialog'>
+								<div class='modal-content'>
+									<%= form_tag "add_badge/#{@user.id}" ,method: "post" do %>
+										<div class='selectMedal-wrap'>
+											<div class='modal-body clearfix'>
+											  <h1 class='h6 title medals'>Escolhe a medalha que queres oferecer:</h1>
+											    <% @badges.each do |b|%>
+											    	<div class='medal'>
+											          <label>
+											          
+											          	<%= radio_button_tag :badge_id, b.id, b.id == 1 %>
+											          	<span class="lbl <%= b.icon.to_s %>"></span>		                                        
+											          </label>
+											          <p class='description'><%= t("#{b.type_badge}").capitalize %></p>
+											        </div>
+											    <%end%>
+											</div>
+										</div>
+										
+										<div class='modal-body'>
+											<h1 class='h6 title'>Porquê?</h1>
+											<%= text_field_tag :statement, nil, class: 'form-control why', placeholder: 'Explica o porquê de merecer esta medalha…' %>
+										</div>
+										
+										<div class='modal-footer'>
+											<div class='row'>
+											  <div class='col-md-6' id='left'>
+											    
+											    <button class='btn btn-default' data-dismiss='modal' type='button'>Cancelar</button>
+											  </div>
+											  <div class='col-md-6' id='right'>
+											 	 <%= submit_tag "Oferecer", :class =>'btn btn-primary' %>
+											  </div>
+											</div>
+										</div>
+										
+									<% end %>
+								</div>
+							</div>
+						</div>
+
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
                         <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='viewAwards-modal' role='dialog' tabindex='-1'>
                           <div class='modal-dialog'>
                             <div class='modal-content'>
@@ -219,12 +223,7 @@
                           </div>
                         </div>
                       </div>
-                    </li>
-
-                  
-                  
-                  
-                  
+                    </li>                  
 				  <li class='configs'>
                       <a alt='Configurações' class='configBtn' data-toggle='dropdown' href='javascript:;'>
                         <i class='fa fa-cog fa-2x'></i>
@@ -248,11 +247,6 @@
                     </li>
                 </ul>
               </div>
-              
-              
-              
-              
-              
             </div>
           </div>
         </div>
@@ -298,23 +292,15 @@
                 <div class='modalBox'>
                   <div class='header'>
                     <div class='row'>
-                      <div class='col-md-6'>
+                      <div class='col-md-12'>
                         <h1 class='h5'>
                           Amigos
-                          <span>(<%= @user.number_of_friends()%>)</span>
+                          <small>
+                            <a class='viewAll' data-target='#viewFriends-modal' data-toggle='modal' href='#' title='Ver todos'>Ver todos (<%= @user.number_of_friends()%>)</a>
+                          </small>
                         </h1>
                       </div>
-                      
-                      
-                      <div class='col-md-6'>
-                        <div class='search'>
-                          <form action='#' class='form-search'>
-                            <label class='sr-only' for='searchFriends'>Consulta de busca</label>
-                            <input class='search-input' id='searchFriends' placeholder='Procurar...' type='text'>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
+					  </div>
                   </div>
                   
                   
@@ -363,77 +349,96 @@
             <div class='challengesTitle col-md-6'>
               <h1 class='h4'>Desafios</h1>
             </div>
-            <div class='challengesFilter col-md-6'>
-              <p>
-                <span>• TODOS</span>
-                <span>• A DECORRER</span>
-                <span>• CONCLUÍDO</span>
-              </p>
+			<div class='challengesFilter col-md-6'>
+            	<%unless current_user.user_objectives.blank?%>
+	              <ul class='filter nav nav-pills'>
+	<!--0 -> Todos  1-> A Decorrer  2-> Concluido -->
+					<li class="active"><%= link_to("TODOS", "javascript:;", { :class => "filtro_obj", :data => { :estado => 0 } }) %></li>
+				  	<li><%= link_to("A DECORRER", "javascript:;", { :class => "filtro_obj", :data => { :estado => 1 } }) %></li>
+				  	<li><%= link_to("CONCLUÍDO" , "javascript:;", { :class => "filtro_obj", :data => { :estado => 2 } }) %></li>
+				  	<% Category.all.each do |c, i|%>
+				  		<li><%= link_to("#{c.name.upcase}", "javascript:;", { :class => "filtro_obj", :data => { :catid => c.id } }) %></li>
+				  	<%end%>
+	              </ul>
+	            <%end%>
             </div>
+			
+
+
           </div>
           
           
 		<div class='row'>
+		
 			<% unless @user.user_objectives.blank?  %>
 			 
 				<% @user.user_objectives.reverse!.each do |userobj| %>
-				
-					<%if userobj.objective.privacy != 0 %>	
-						<div class='col-md-4'>
-							<%if (userobj.objective.completed_percentage<100) %>
-					          <div class='challenge'>
-					            <div class='challengeImage-wrapper'>
-				                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
-				                </div>
-					            <div class='black-wrapper'>
-				                  <div class='hiddenInfo'>
-				                    <div class='challengeFriends'>
-				                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-				                        <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
-				                      </a>
-				                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-				                        <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
-				                      </a>
-				                      <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-				                        <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
-				                      </a>
-				                      <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
-				                    </div>
-				                    <div class='challengeProgress' style="left: 20px; right: 20px;">
-				                    	Progresso:
-									  <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>  
-				                    </div>
-				                  </div>
-								</div>
-							<% else %>
-							  <div class='challenge completed'>
-							    <div class='challengeImage-wrapper'>
-							    	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
-							    </div>
-								<div class='black-wrapper'>
-							      <div class='completedBadge'>
-							        <i class='fa fa-check fa-3x'></i>
-							      </div>
-							    </div>
-							<%end%>
-					            <div class='challengeTitle'>
-				                  <h1 class='h3'>
-				                  	<%= link_to userobj.objective.name, userobj.objective %>
-				                  </h1>
-				                </div>
-					          </div>
-					    </div>
-					<%end%>
-				<% end %>
-			<% else %>
 					
-				Nenhum objectivo
-			
-			<% end %>
-			Badges
-			<%= link_to 'Oferecer Badge', "#" %>   
-		
+					<%if userobj.objective.privacy != 0 %>	
+
+						<div class='col-md-4'>
 						
+							<%if (userobj.objective.completed_percentage<100) %>
+								<div class='challenge'>
+									<div class='challengeImage-wrapper'>
+										<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
+									</div>
+									<div class='black-wrapper'>
+										<div class='hiddenInfo'>
+											<!--
+							                <div class='challengeFriends'>
+							                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+							                    <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
+							                  </a>
+							                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+							                    <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
+							                  </a>
+							                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+							                    <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
+							                  </a>
+							                  <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
+							                </div>
+											-->
+				                  			<div class='progressWrap'>
+					                  <h1 class='h6 progressTitle'>Progresso</h1>
+					                  <div class='progress'>
+									  	<%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>  
+					                  </div>
+								  </div>
+								  		</div>
+									</div>
+							<% else %>
+								<div class='challenge completed'>
+					                <div class='challengeImage-wrapper'>
+					                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
+					                </div>
+									<div class='black-wrapper'>
+					                  <div class='completedBadge'>
+					                    <i class='fa fa-check fa-3x'></i>
+					                  </div>
+					                </div>
+				            <%end%>
+				            
+				            <div class='challengeTitle'>
+				              <h1 class='h3'>
+				              	<%= link_to userobj.objective.name, userobj.objective %>
+				              </h1>
+				            </div>
+				          </div>
+				        </div>
+						
+					<% end %>
+										
+				<%end%>
+				
+			<% else %>
+				
+					<div class='col-md-12'>
+					  <div class='noChallenges'>
+					    <p>Este utilizador ainda não possui desafios!</p>
+					  </div>
+					</div>
+				<% end %>
 		</div>
 						
       </article>

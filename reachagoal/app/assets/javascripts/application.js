@@ -89,6 +89,8 @@ $(".filtro_obj").click(function() {
 	if (cat_id == undefined){
 		cat_id = "aaa";}
 	loadObjectives(estado,cat_id);
+	$(".active").removeClass("active");
+	$(this).parent().addClass("active");
 });
 
 function loadObjectives(estado,cat_id) {

@@ -46,10 +46,10 @@
             <div class='user-nav pull-right'>
               <ul class='nav navbar-nav'>
               	<% if user_signed_in? %>
-	                <li class='challenges'>						  
-	                <% unless current_user.user_objectives.blank?%>
-	                  <div class='title'>OS TEUS DESAFIOS</div>
-	                  <div class='selectbox-wrapper'>
+			  		<% unless current_user.user_objectives.blank?%>
+		                <li class='challenges'>						  
+		                  <div class='title'>OS TEUS DESAFIOS</div>
+		                  <div class='selectbox-wrapper'>
 		                    <a data-toggle='dropdown' href='javascript:;'><%= (controller_name == "objectives" && action_name == "show" && @objective != nil) ? @objective.name : "Seleccionar desafio" %> <i class='fa fa-angle-down'></i></a>
 	                    <div class='dropdown-menu dropdown-menu-right'>
 	                      
@@ -69,12 +69,14 @@
 	                    </div>
                     </div>
                   </div>
-	                <% else %>
-		                      
-					  <%= link_to '<i class="fa fa-plus"></i> Criar desafio'.html_safe, new_objective_path, :class => 'navbar-link'  %>
-	
+		                </li>
+					<% else %>
+		                <li class='newChallenge'>
+		                  <div class='button-wrapper'>
+		                     <%= link_to '<i class="fa fa-plus"></i> Começar desafio'.html_safe, new_objective_path %>
+		                  </div>
+		                </li>
 					<% end %>
-	                </li>
 	                <li class='mrPig'>
 	                  <div class='inner-wrapper'>
 	                    <a data-target='#mrPig-modal' data-toggle='modal' href='#'>
@@ -186,16 +188,19 @@
               Adicionar poupança
             </h1>
           </div>
-          <div class='modal-body'>
-			  	<%= form_tag "#", method: "post" do %>					
-					<div class='row'>
+			<% if user_signed_in? %>
+				<% id_obj = current_user.user_objectives.reverse!.reject{ |c| c.objective.missing_value == 0}.first().objective.id%>
+				<%= form_tag "/objectives/#{id_obj}/add_value/", method: "post" do %>
+				  	<div class='modal-body'>
+					  		<%= hidden_field_tag :previous_page, "previous" %>				
+							<div class='row'>
 						<div class='form-group col-md-12'>
 							<%= label_tag :obj, "Desafio a adicionar a poupança:" %>
 							<%= select_tag :obj, options_from_collection_for_select( current_user.user_objectives.reverse!.reject{ |c| c.objective.missing_value == 0}.collect{ |c| c.objective}, "id", "name"), 
-:class => 'form-control input-lg', :onchange => "this.up.('form').action = '/objective/' + this.value + '/add_value/'" %> 
+:class => 'form-control input-lg', :onchange => " $(this).closest('form').attr('action','/objectives/' + $(this).val() + '/add_value/')  "  %> 
 						</div>
 					</div>
-					<div class='row'>
+							<div class='row'>
 						<div class='form-group col-md-12'>
 							<%= label_tag :value, t('howmanysave').capitalize %>
 							<div class='wrapper'>
@@ -204,32 +209,19 @@
 							</div>
 						</div>
 					</div>
-					<div class='row'>
+							<div class='row'>
 						<div class='form-group col-md-12'>
 						  <div class='wrapper'>
 						  	<%= text_field_tag :description, "",class: 'form-control', placeholder: t('descriptionopt').capitalize %>
 						  </div>
 						</div>
-					</div>
+						</div>
 					</div>
 					<div class='modal-footer'>
-						<button class='btn btn-primary' 
-								data-dismiss='modal' 
-								data-keyboard='true' 
-								data-target='#newAward-modal' 
-								data-toggle='modal' 
-								type='button'>
-								<%= t('add')%>
-						</button>
+						<input class='btn btn-primary' type='submit' value="<%= t('add').capitalize %>"> </input>
 					</div>
-					
-					
-					
-					
-
-					
-					
-				<% end %>		          
+				<% end %>
+			<%end%>
         </div>
       </div>
     </div>
@@ -268,6 +260,7 @@
 	      </div>
 	    </div>
 	<% end %>
+	
 	<%= yield %>
 	
 	<footer>

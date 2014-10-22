@@ -1,9 +1,13 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Statement:</strong>
-  <%= @badge.statement %>
-  <%= image_tag @badge.icon.url(:icon) %>
+  <strong>Icon:</strong>
+  <%= @badge.icon %>
+</p>
+
+<p>
+  <strong>Type badge:</strong>
+  <%= @badge.type_badge %>
 </p>
 
 <%= link_to 'Edit', edit_badge_path(@badge) %> |

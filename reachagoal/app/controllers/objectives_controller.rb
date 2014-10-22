@@ -94,6 +94,7 @@ class ObjectivesController < ApplicationController
 
 
   def add_value
+  	session[:return_to] ||= request.referer
   	@objective_value = ObjectiveValue.new()
     @objective_value.value = params[:value]
     @objective_value.description = params[:description]
@@ -101,9 +102,20 @@ class ObjectivesController < ApplicationController
     @objective_value.user_id = current_user.id
 
     if @objective_value.save
-     	redirect_to @objective_value.objective, notice: t('addvaluesuc').capitalize
+    	if params[:previous_page].to_s == "objective"
+     		redirect_to @objective_value.objective, notice: t('addvaluesuc').capitalize
+     		session.delete(:return_to)
+     	else
+	 		redirect_to session.delete(:return_to), notice: t('addvaluesuc').capitalize
+	 	end
+
     else
-     	redirect_to @objective_value.objective, error: t('erroraddvalue').capitalize
+     	if params[:previous_page].to_s == "objective"
+     		redirect_to @objective_value.objective, notice: t('erroraddvalue').capitalize
+     		session.delete(:return_to)
+     	else
+	 		redirect_to session.delete(:return_to), notice: t('erroraddvalue').capitalize
+	 	end     	
     end
 
   end

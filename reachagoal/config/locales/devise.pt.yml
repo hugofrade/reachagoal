@@ -21,7 +21,7 @@ pt:
       invalid_token: 'O "token" de autenticação é inválido.'
       timeout: 'A sua sessão expirou, por favor autentique-se novamente para continuar.'
       inactive: 'A sua conta ainda não foi activada.'
-      not_found_in_database: "Invalid email or password."
+      not_found_in_database: "Email ou password inválida."
     sessions:
       signed_in: 'Autenticação efectuada com sucesso.'
       signed_out: 'Saíu da sessão com sucesso.'

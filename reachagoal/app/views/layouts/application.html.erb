@@ -77,13 +77,17 @@
 		                  </div>
 		                </li>
 					<% end %>
-	                <li class='mrPig'>
-	                  <div class='inner-wrapper'>
-	                    <a data-target='#mrPig-modal' data-toggle='modal' href='#'>
-	                      <i class='icon icon-mrpig'></i>
-	                    </a>
-	                  </div>
-	                </li>
+					<% if !current_user.user_objectives.blank? %>
+
+		                <li class='mrPig'>
+		                  <div class='inner-wrapper'>
+		                    <a data-target='#mrPig-modal' data-toggle='modal' href='#'>
+		                      <i class='icon icon-mrpig'></i>
+		                    </a>
+		                  </div>
+		                </li>
+		                
+					<% end %>
 	                <li class='notification'>
 	                  <a data-toggle='dropdown' href='javascript:;'>
 	                    <i class='fa fa-trophy'></i>
@@ -175,23 +179,24 @@
 	
 	
 	
-	
-	<div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='mrPig-modal' role='dialog' tabindex='-1'>
-      <div class='modal-dialog'>
-        <div class='modal-content'>
-          <div class='modal-header'>
-            <button class='close' data-dismiss='modal' type='button'>
-              <span aria-hidden='true'>&#215;</span>
-              <span class='sr-only'>Close</span>
-            </button>
-            <h1 class='h6 title'>
-              Adicionar poupança
-            </h1>
-          </div>
-			<% if user_signed_in? %>
-				<% id_obj = current_user.user_objectives.reverse!.reject{ |c| c.objective.missing_value == 0}.first().objective.id%>
-				<%= form_tag "/objectives/#{id_obj}/add_value/", method: "post" do %>
-				  	<div class='modal-body'>
+	<% if user_signed_in? %>
+		<% if !current_user.user_objectives.blank? %>
+
+			<div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='mrPig-modal' role='dialog' tabindex='-1'>
+		      <div class='modal-dialog'>
+		        <div class='modal-content'>
+		          <div class='modal-header'>
+		            <button class='close' data-dismiss='modal' type='button'>
+		              <span aria-hidden='true'>&#215;</span>
+		              <span class='sr-only'>Close</span>
+		            </button>
+		            <h1 class='h6 title'>
+		              Adicionar poupança
+		            </h1>
+		          </div>
+					<% id_obj = current_user.user_objectives.reverse!.reject{ |c| c.objective.missing_value == 0}.first().objective.id%>
+					<%= form_tag "/objectives/#{id_obj}/add_value/", method: "post" do %>
+					  	<div class='modal-body'>
 					  		<%= hidden_field_tag :previous_page, "previous" %>				
 							<div class='row'>
 						<div class='form-group col-md-12'>
@@ -217,14 +222,15 @@
 						</div>
 						</div>
 					</div>
-					<div class='modal-footer'>
-						<input class='btn btn-primary' type='submit' value="<%= t('add').capitalize %>"> </input>
-					</div>
-				<% end %>
-			<%end%>
-        </div>
-      </div>
-    </div>
+						<div class='modal-footer'>
+							<input class='btn btn-primary' type='submit' value="<%= t('add').capitalize %>"> </input>
+						</div>
+					<% end %>
+		        </div>
+		      </div>
+		    </div>
+		<%end%>
+	<%end%>
 
 
 	<% if notice %>

@@ -23,7 +23,7 @@
           <div class='container'>
             <div class='row'>
              <div class='userName col-md-5 col-md-offset-2'>
-                <h1 class='h3'><%= @user.nome %></h1>
+                <h1 class='h3'><%= @user.name %></h1>
 				<div class='actionFriendBtn'>
 
 					<% if Friend.is_friend?(current_user.id, @user.id)%>
@@ -263,10 +263,10 @@
         
               <div class='userBio col-md-2'>
                 <div class='userDetails'>
-                	<%unless @user.local.blank? %>
+                	<%unless @user.city.blank? %>
 	                  <div class='userDetails-location'>
 	                    <i class='fa fa-lg fa-map-marker'></i>
-	                    <span class='userDetails-text'><%= @user.local %></span>
+	                    <span class='userDetails-text'><%= @user.city %><% if !@user.country.blank?%>, <%= @user.country %><%end%></span>
 	                  </div>
 					<%end%>
 					 
@@ -315,13 +315,13 @@
 										public_profile_path(friendline.friend.id), :class => "withTooltip", 
 										'data-placement' => 'top', 
 										'data-toggle' => 'tooltip', 
-										'title' => friendline.friend.nome %>
+										'title' => friendline.friend.name %>
 							<% else %>
 								<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"friendPicture img-responsive"), 
 										dashboard_path, :class => "withTooltip", 
 										'data-placement' => 'top', 
 										'data-toggle' => 'tooltip', 
-										'title' => friendline.friend.nome %>
+										'title' => friendline.friend.name %>
 							<% end%>
 	                   </div>
 					<% end %>

@@ -69,8 +69,14 @@
 -->
               <div class='col-md-6 pull-right'>
                 <div class='challengeDate'>
-                  <i class='fa fa-calendar-o'></i>
-                  <%= @objective.start_day.to_date %> - <%= @objective.end_day.to_date %>
+					<% unless @objective.end_day.blank? %>
+
+						<i class='fa fa-calendar-o'></i>
+						<%= @objective.start_day.to_date %> - <%= @objective.end_day.to_date %>
+					<%else%>
+						<i class='fa fa-calendar-o'></i>
+						Início: <%= @objective.start_day.to_date %>
+                  	<%end%>
                 </div>
               </div>
             </div>

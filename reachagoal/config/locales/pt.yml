@@ -22,7 +22,8 @@ pt:
   enddate: até quando pretendes concluir o desafio?
   
   erroraddvalue: não foi possível adicionar valor
-  
+  errornewcomment: erro ao inserir comentário
+
   giveopinion: dá a tua opinião sobre o desafio
 
   
@@ -35,7 +36,6 @@ pt:
   
   nameexamples: ibiza espera-me!, rollex de sonho
   newobjtype: que tipo de desafio procuras?
-  newobj: objectivo criado com sucesso
   
   overcome: superou
   
@@ -53,6 +53,8 @@ pt:
   startnewchallenge: começar novo desafio
   submit: submeter
   sucnewchal: desafio criado com sucesso
+  sucnewcomment: comentário inserido com sucesso
+  suceditchal: desafio editado com sucesso
   sure: tem a certeza?
   surprise: surpresa
   

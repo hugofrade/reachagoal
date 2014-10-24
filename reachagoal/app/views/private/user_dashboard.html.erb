@@ -242,10 +242,12 @@
                     <div class='row'>
                       <div class='col-md-12'>
                         <h1 class='h5'>
-                          Amigos
+						Amigos
+						<% unless current_user.friends.blank? %>
 						  <small>
-                            <a class='viewAll' data-target='#viewFriends-modal' data-toggle='modal' href='#' title='Ver todos'>Ver todos (<%= current_user.number_of_friends()%>)</a>
-                          </small>
+						    <a class='viewAll' data-target='#viewFriends-modal' data-toggle='modal' href='#' title='Ver todos'>Ver todos (<%= current_user.number_of_friends()%>)</a>
+						  </small>
+						<%end%>
                         </h1>
                       </div>
                       
@@ -267,6 +269,11 @@
 												'title' => friendline.friend.name %>
 			                   </div>
 							<% end %>
+							<div class='col-md-3'>
+								<a alt='Adicionar amigo' class='addFriend' href='javascript:;'>
+									<i class='fa fa-plus fa-3x'></i>
+								</a>
+							</div>
 						<% else%>
 							<div class='row'>
 		                      <div class='col-md-12'>
@@ -279,11 +286,7 @@
 		                      </div>
 		                    </div>
 						<%end%>
-                      <div class='col-md-3'>
-                        <a alt='Adicionar amigo' class='addFriend' href='javascript:;'>
-                          <i class='fa fa-plus fa-3x'></i>
-                        </a>
-                      </div>
+
                       
                       
                     </div>

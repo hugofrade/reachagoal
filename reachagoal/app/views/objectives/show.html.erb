@@ -1,4 +1,4 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
 
 <section id='challenge'<%if @objective.missing_value == 0 %> class='completed' <%end%> >
         
@@ -17,7 +17,7 @@
               
               
               <div class='col-md-5'>
-                <div class='progressWrap push-right'>
+                <div class='progressWrap pull-right'>
                   <h1 class='h6 progressTitle'><%= t('progress')%></h1>
                   <div class='progress'>
                   	<%= bootstrap_progress_bar(@objective.completed_percentage, :color => "info", :class => "progress-bar", :tiny => true) %>

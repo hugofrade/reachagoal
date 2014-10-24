@@ -70,7 +70,7 @@ class ObjectivesController < ApplicationController
   def update
     respond_to do |format|
       if @objective.update(objective_params)
-        format.html { redirect_to @objective, notice: t('newobj').capitalize }
+        format.html { redirect_to @objective, notice: t('suceditchal').capitalize }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -139,9 +139,9 @@ class ObjectivesController < ApplicationController
     @new_comment.user_id = current_user.id
 
     if @new_comment.save
-     	redirect_to @new_comment.objective, notice: 'Objective Value was successfully created.'
+     	redirect_to @new_comment.objective, notice: t('sucnewcomment')
     else
-     	redirect_to @new_comment.objective, error: 'Error creating new Objective Value'
+     	redirect_to @new_comment.objective, error: t('errornewcomment')
     end
 
   end

@@ -18,10 +18,6 @@ ActiveRecord::Schema.define(version: 20141022184628) do
     t.text     "type_badge"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "icon_file_name"
-    t.string   "icon_content_type"
-    t.integer  "icon_file_size"
-    t.datetime "icon_updated_at"
     t.text     "symbol"
   end
 

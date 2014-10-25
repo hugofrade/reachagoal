@@ -164,10 +164,11 @@ class ObjectivesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
   
      def is_private?
-     	if (((!current_user.has_ownership?(@objective.id) if !@objective.blank?) || (!current_user.has_ownership?(params[:objective_id]) if !params[:objective_id].blank?)) && @objective.privacy == 0)
+     	if (((!current_user.has_ownership?(@objective.id) if !@objective.blank?) || (!current_user.has_ownership?(params[:objective_id]) if !params[:objective_id].blank?)) && ((@objective.privacy == 0 if !@objective.blank?) || (Objective.find(params[:objective_id]).privacy == 0 if !params[:objective_id].blank? )))
 		 	redirect_to :back
       	end
 	 end
+	 
     def set_objective
       @objective = Objective.find(params[:id])
     end

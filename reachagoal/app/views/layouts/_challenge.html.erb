@@ -4,16 +4,12 @@
 	<% @challenges.reverse!.each do |userobj| %>
 		<div class='col-md-4'>
 		
-		<%if (userobj.objective.completed_percentage<100) %>
-
-          <div class='challenge'>
-            
-            
-            <div class='challengeImage-wrapper'>
+			<%if (userobj.objective.completed_percentage<100) %>
+				<div class='challenge'>
+					<div class='challengeImage-wrapper'>
             	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
             </div>
-            
-            <div class='black-wrapper'>
+					<div class='black-wrapper'>
               <div class='hiddenInfo'>
               
 <!--
@@ -43,33 +39,22 @@
               
               
             </div>
-            
-            
-            
-                
-                
-          <% else %>
-              <div class='challenge completed'>
-                
-                
-                <div class='challengeImage-wrapper'>
-                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
-                </div>
-                
-				<div class='black-wrapper'>
-                  <div class='completedBadge'>
-                    <i class='fa fa-check fa-3x'></i>
-                  </div>
-                </div>
+			<% else %>
+				<div class='challenge completed'>
+	                <div class='challengeImage-wrapper'>
+	                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
+	                </div>
+					<div class='black-wrapper'>
+	                  <div class='completedBadge'>
+	                    <i class='fa fa-check fa-3x'></i>
+	                  </div>
+	                </div>
             <%end%>
-            
-            <div class='challengeTitle'>
-              <h1 class='h3'>
-              	<%= link_to userobj.objective.name, userobj.objective %>
-              </h1>
-            </div>
-            
-            
+	            <div class='challengeTitle'>
+	              <h1 class='h3'>
+	              	<%= link_to userobj.objective.name, userobj.objective %>
+	              </h1>
+	            </div>
           </div>
         </div>
 		
@@ -82,6 +67,7 @@
 
 	
 <% else %>
+	<% if current_user.user_objectives.blank? %>
 
 	<div class='col-md-12'>
 	  <div class='noChallenges'>
@@ -92,6 +78,18 @@
 	    </p>
 	  </div>
 	</div>
+	
+	<%else%>
+		<div class='col-md-12'>
+		  <div class='noChallenges'>
+		    <p>
+		      Ainda não tens nenhum desafio nesta categoria. 
+		    </p>
+		  </div>
+		</div>
+	
+	<% end %>
+
 <% end %>
 
 

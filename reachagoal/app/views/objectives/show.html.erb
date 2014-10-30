@@ -69,8 +69,14 @@
 -->
               <div class='col-md-6 pull-right'>
                 <div class='challengeDate'>
-                  <i class='fa fa-calendar-o'></i>
-                  <%= @objective.start_day.to_date %> - <%= @objective.end_day.to_date %>
+					<% unless @objective.end_day.blank? %>
+
+						<i class='fa fa-calendar-o'></i>
+						<%= @objective.start_day.to_date %> - <%= @objective.end_day.to_date %>
+					<%else%>
+						<i class='fa fa-calendar-o'></i>
+						Início: <%= @objective.start_day.to_date %>
+                  	<%end%>
                 </div>
               </div>
             </div>
@@ -92,26 +98,28 @@
 			                  			:delimiter => " ", 
 			                  			:precision => 2) %>
 			                  </h1>
-			                </div>   
-				                <div class='addSavings-body'>
-									<p><%= t('howmanysave').capitalize %></p>
-									<%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>
-										<%= hidden_field_tag :previous_page, "objective" %>
-										<div class="savingInput">
-										  <input type="text" name="value">
-										  <span class='currencySymbol'><%= t('currencyicon_html')%></span>
-										</div>
-										<div class="descriptionInput">
-										  <input type="text" name="description" placeholder='<%= t('descriptionopt').capitalize%>'>
-										</div>
-										<div class="actions">
-										  <input type="submit" class="sr-only">
-										</div>
-										<p class='helpText'>
-										  <%= t('addsaving').capitalize %>
-										</p>
-									<% end %>
-								</div>
+			                <% if @objective.user_id == current_user.id %>
+				                </div>   
+					                <div class='addSavings-body'>
+										<p><%= t('howmanysave').capitalize %></p>
+										<%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>
+											<%= hidden_field_tag :previous_page, "objective" %>
+											<div class="savingInput">
+											  <input type="text" name="value">
+											  <span class='currencySymbol'><%= t('currencyicon_html')%></span>
+											</div>
+											<div class="descriptionInput">
+											  <input type="text" name="description" placeholder='<%= t('descriptionopt').capitalize%>'>
+											</div>
+											<div class="actions">
+											  <input type="submit" class="sr-only">
+											</div>
+											<p class='helpText'>
+											  <%= t('addsaving').capitalize %>
+											</p>
+										<% end %>
+									</div>
+								<%end%>
 							</div>
 				        </div>
 				      </div>

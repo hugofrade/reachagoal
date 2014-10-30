@@ -21,7 +21,6 @@ Reachagoal::Application.routes.draw do
   	root :to => "private#user_dashboard" 
   end
   
-  get "objectives" => "private#user_dashboard"
   get "dashboard" => "private#user_dashboard"
   post "/objectives/:objective_id/add_value" => "objectives#add_value", :as => "add_value"
   post "/objectives/:objective_id/add_comment" => "objectives#add_comment"
@@ -41,7 +40,11 @@ Reachagoal::Application.routes.draw do
   
   get "ajax_challenges" => "private#ajax_challenges"
 
-
+  get "ajax_values/:id" => "objectives#ajax_values"
+  
+  get "ajax_badges/:id" => "private#ajax_badges"
+  
+  get "ajax_badges/" => "private#ajax_badges"
 end
 
 

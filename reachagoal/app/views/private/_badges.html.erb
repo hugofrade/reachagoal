@@ -1,0 +1,51 @@
+<div class='modal-header'>
+	<button class='close' data-dismiss='modal' type='button'>
+	  <span aria-hidden='true'>&#215;</span>
+	  <span class='sr-only'>Close</span>
+	</button>
+	<h1 class='h6 title'>
+	  Total de medalhas:
+	  <span>(<%= @user_badges.length%>)</a></span>
+	</h1>
+</div>
+
+<div class='modal-body'>
+  	<% @user_badges_paginate.each do |badge| %>
+        <div class='row'>
+          <div class='col-md-12'>
+            <div class='icon-wrap green'>
+              <i class="fa <%= badge.badge.symbol %>"></i>
+            </div>
+            <div class='awardInfo'>
+              <h1 class='h6 title'>
+                <%= badge.badge.type_badge.capitalize %>
+                <span>
+                  de
+                  <a href='#' title='Nome do user'><%= User.find(badge.giver_id).name%> <%= User.find(badge.giver_id).surname%></a>
+                </span>
+              </h1>
+              <p class='description'><%= badge.statement%></p>
+              <time>
+			  	<%= 	if ((((Time.now - badge.created_at) / 1.hour).round) <= 48 ) 
+		 					time_ago_in_words(badge.created_at)
+		 				else 
+		 					time_ago_in_words(badge.created_at.to_date) 
+		 				end
+		 		%>
+              </time>
+            </div>
+            <div class='separator'></div>
+          </div>
+        </div>
+	<%end%>
+</div>
+<div class='modal-footer'>
+	<div class='row'>
+	  <div class='col-md-6' id='left'>
+			<div class="pagination_badges pagination-wrapper"><%= will_paginate @user_badges_paginate,  :inner_window => 1, :outer_window => 2 %></div>
+	  </div>
+	  <div class='col-md-6' id='right'>
+	    <button class='btn btn-primary' data-dismiss='modal' data-keyboard='true' data-target='#newAward-modal' data-toggle='modal' type='button'>Oferecer</button>
+	  </div>
+	</div>
+</div>

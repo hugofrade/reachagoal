@@ -118,6 +118,57 @@ function completeBadge() {
 	});
 };
 
+
+function pagination_values() {
+	$("body").on("click", ".pagination_values .pagination a", function(evt) {
+		evt.preventDefault();
+		
+		var url = $(this).attr("href").replace("objectives/", "ajax_values/");
+
+		$.ajax({
+			url: url,
+			method: 'get',
+			success: function(data) {
+				$("#obj_value").html(data);
+				//console.debug(data);
+			},
+			error: function() {
+				alert("sorry");
+			}
+		});
+		
+	});
+}
+
+function pagination_badges() {
+	$("body").on("click", ".pagination_badges .pagination a", function(evt) {
+		evt.preventDefault();
+		
+		var publicprofile = /publicprofile/
+		var ajax = /ajax/;
+
+		var url = $(this).attr("href");
+		if (publicprofile.test(url)){
+			url = url.replace("publicprofile/", "ajax_badges/");}
+		else { if (!ajax.test(url)){
+				url = "ajax_badges/" + url.replace("/","");
+			}
+		}
+				
+		$.ajax({
+			url: url,
+			method: 'get',
+			success: function(data) {
+				$("#badges_list").html(data);
+				//console.debug(data);
+			},
+			error: function() {
+				alert("sorry");
+			}
+		});
+		
+	});
+}
 //Run function when window resizes
 $(window).resize(completeBadge);
 
@@ -126,6 +177,11 @@ $(document).ready(function() {
 	fullScreenContainer();
 	parallaxBg();
 	completeBadge();
+	
+	pagination_values();
+	
+	pagination_badges()
+	
 });
 
 

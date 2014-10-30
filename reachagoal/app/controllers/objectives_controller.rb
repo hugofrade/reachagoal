@@ -13,9 +13,6 @@ class ObjectivesController < ApplicationController
   # GET /objectives/1
   # GET /objectives/1.json
   def show
-  	
-  	
-
 	 labelsset = @objective.objective_values.map do |obj|  
 		 	if ((((Time.now - obj.created_at) / 1.hour).round) <= 72 ) 
 		 		obj.created_at
@@ -35,9 +32,15 @@ class ObjectivesController < ApplicationController
     @dataset = hash.values
     @labelsset = hash.keys
 
-	@values = ObjectiveValue.where("objective_id=?",@objective.id).paginate(:page => params[:page], :per_page => 5)
+	@values = ObjectiveValue.where("objective_id=?",@objective.id).order("id DESC").paginate(:page => params[:page], :per_page => 5)	
   end
-
+  
+  def ajax_values
+	@values = ObjectiveValue.where("objective_id=?",params[:id]).order("id DESC").paginate(:page => params[:page], :per_page => 5)
+	@objective = Objective.find(params[:id])
+	render template: "objectives/_values", layout: false
+  end
+  
   # GET /objectives/new
   def new
     @objective = Objective.new

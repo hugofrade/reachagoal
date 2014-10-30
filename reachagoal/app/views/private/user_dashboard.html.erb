@@ -41,7 +41,7 @@
 					   	<%end%>
                       </h2>
                       <div class='userAward-wrapper'>
-						<% @user_badges.reverse!.each do |badge| %>
+						<% @user_badges_paginate.each do |badge| %>
 							
 							<a class='award green' href='javascript:;'>
 	                          <i class="fa <%= badge.badge.symbol %> "></i>
@@ -52,100 +52,9 @@
                         <!-- Modal -->
                         <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='viewAwards-modal' role='dialog' tabindex='-1'>
                           <div class='modal-dialog'>
-                            <div class='modal-content'>
-                              <div class='modal-header'>
-                                <button class='close' data-dismiss='modal' type='button'>
-                                  <span aria-hidden='true'>&#215;</span>
-                                  <span class='sr-only'>Close</span>
-                                </button>
-                                <h1 class='h6 title'>
-                                  Total de medalhas:
-                                  <span>16</span>
-                                </h1>
-                              </div>
-                              <div class='modal-body'>
-                                <div class='row'>
-                                  <div class='col-md-12'>
-                                    <div class='icon-wrap green'>
-                                      <i class='fa fa-bicycle'></i>
-                                    </div>
-                                    <div class='awardInfo'>
-                                      <h1 class='h6 title'>
-                                        Mudança
-                                        <span>
-                                          de
-                                          <a href='#' title='Nome do user'>Hugo Frade</a>
-                                        </span>
-                                      </h1>
-                                      <p class='description'>Mauris non tempor quam, et lacinia sapien. Mauris accumsan eros eget libero posuere vulputate.</p>
-                                      <time>2 dias atrás</time>
-                                    </div>
-                                    <div class='separator'></div>
-                                  </div>
-                                </div>
-                                <div class='row'>
-                                  <div class='col-md-12'>
-                                    <div class='icon-wrap green'>
-                                      <i class='fa fa-dashboard'></i>
-                                    </div>
-                                    <div class='awardInfo'>
-                                      <h1 class='h6 title'>
-                                        Surpreendeu
-                                        <span>
-                                          de
-                                          <a href='#' title='Nome do user'>Rafael Viana</a>
-                                        </span>
-                                      </h1>
-                                      <p class='description'>Mauris non tempor quam, et lacinia sapien. Mauris accumsan.</p>
-                                      <time>2 dias atrás</time>
-                                    </div>
-                                    <div class='separator'></div>
-                                  </div>
-                                </div>
-                                <div class='row'>
-                                  <div class='col-md-12'>
-                                    <div class='icon-wrap red'>
-                                      <i class='fa fa-trophy'></i>
-                                    </div>
-                                    <div class='awardInfo completed'>
-                                      <h1 class='h6 title'>
-                                        1º Desafio completo!
-                                      </h1>
-                                      <p class='description'>
-                                        de 14/05/2014 a 14/09/2014
-                                        <span class='challengeName'>"Ibiza espera-me!"</span>
-                                      </p>
-                                      <time>2 dias atrás</time>
-                                    </div>
-                                    <div class='separator'></div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class='modal-footer'>
-                                <div class='row'>
-                                  <div class='col-md-6' id='left'>
-                                    <ul class='pagination'>
-                                      <li class='active'>
-                                        <a href='#'>
-                                          1
-                                          <span class='sr-only'>(current)</span>
-                                        </a>
-                                      </li>
-                                      <li>
-                                        <a href='#'>
-                                          2
-                                        </a>
-                                      </li>
-                                      <li>
-                                        <a href='#'>
-                                          3
-                                        </a>
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+							  <div class='modal-content' id="badges_list">
+	                              <%= render 'badges' %>
+							  </div>
                           </div>
                         </div>
                       </div>
@@ -266,7 +175,7 @@
 												public_profile_path(friendline.friend.id), :class => "withTooltip", 
 												'data-placement' => 'top', 
 												'data-toggle' => 'tooltip', 
-												'title' => friendline.friend.name %>
+												'title' => "#{friendline.friend.name} #{friendline.friend.surname}"   %>
 			                   </div>
 							<% end %>
 							<div class='col-md-3'>

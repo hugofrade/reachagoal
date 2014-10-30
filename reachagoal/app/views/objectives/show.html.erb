@@ -172,42 +172,7 @@
 							      </h1>
 							    </div>
 							    
-							    <div class='body' id="obj_value">
-									<% @objective.objective_values.reverse!.each do |value| %>
-									  <div class='newEntry'>
-									    <i class='fa fa-eur green'></i>
-									    <p <% unless value.description.blank? %> 
-									    		class='entryText withTooltip' data-placement='top' data-toggle='tooltip' title='<%=value.description%>'
-									    	<%else%> 
-									    		class="entryText" 
-									    	<%end%> >
-											<%= t('youadd').capitalize%>
-									      	<span class='bold'>
-									      		<%= number_to_currency(value.value, 
-									      				:unit => "#{t('currencyicon_html')}".html_safe, 
-									      				:format => "%n %u", 
-									      				:separator => ".", 
-									      				:delimiter => " ", 
-									      				:precision => 2) %>
-									      	</span>
-										  	<%= t('tochallenge')%>
-									    </p>
-									    <%= link_to '<i class="fa fa-times"></i>'.html_safe, 
-									    		remove_value_path(value), 
-									    		:class => "deleteEntry", 
-									    		data: { confirm: "#{t('sure').capitalize}" } if user_signed_in? && @objective.user_id == current_user.id %> 
-									    <time>
-									    	<%=
-										    	if ((((Time.now - value.created_at) / 1.hour).round) <= 48 ) 
-											 		time_ago_in_words(value.created_at)
-											 	else 
-											 		time_ago_in_words(value.created_at.to_date) 
-											 	end
-										 	%> <%= t('ago')%>
-									     </time>
-									  </div>
-									<% end %>
-							    </div>
+							    <div class='body' id="obj_value"><%= render 'values' %></div>
 							    
 							</div>
 						</div>
@@ -254,7 +219,7 @@
 									<div class='commentArea'>
 										<%= image_tag current_user.photo.url(:nav), :class => "avatar"%>
 										<div class='inputWrap'>
-											<%= text_field_tag :comment %>
+											<%= text_area_tag :comment %>
 										</div>
 										<%= submit_tag "#{t('submit').capitalize}", :class=>"sr-only"%>
 									</div>

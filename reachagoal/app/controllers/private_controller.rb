@@ -2,8 +2,9 @@ class PrivateController < ApplicationController
 	before_action :authenticate_user!
 	
 	def user_dashboard
-		@user_badges = UserBadges.where("receiver_id = ?", current_user.id)
-		@last_values_added = ObjectiveValue.where("user_id = ?", current_user.id).reverse.first(5)
+		@user_badges = UserBadges.where("receiver_id = ?", current_user.id).order("id DESC")
+		@user_badges_paginate = UserBadges.where("receiver_id = ?", current_user.id).order("id DESC").paginate(:page => params[:page], :per_page => 3)
+		@last_values_added = ObjectiveValue.where("user_id = ?", current_user.id).order("id DESC").first(5)
 
 	end
 	
@@ -34,10 +35,23 @@ class PrivateController < ApplicationController
 		render :template => "layouts/_challenge", :layout => false
 	end
 	
+	def ajax_badges
+		unless params[:id].blank?
+			@user_badges = UserBadges.where("receiver_id = ?", params[:id]).order("id DESC")
+			@user = User.find(params[:id])
+		else
+			@user_badges = UserBadges.where("receiver_id = ?", current_user.id).order("id DESC")
+		end
+		@user_badges_paginate = @user_badges.paginate(:page => params[:page], :per_page => 3)
+		render template: "private/_badges", layout: false
+
+	end
+	
 	def public_profile
 		@user = User.find(params[:id])
 		@badges = Badge.all
-		@user_badges = UserBadges.where("receiver_id = ?", @user.id)
+		@user_badges = UserBadges.where("receiver_id = ?", @user.id).order("id DESC")
+		@user_badges_paginate = UserBadges.where("receiver_id = ?", @user.id).order("id DESC").paginate(:page => params[:page], :per_page => 3)
 	end
 	
 	def add_badge

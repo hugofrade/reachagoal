@@ -64,6 +64,12 @@ pt:
   
   youadd: adicionaste
   
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Seguinte &#8594;"
+    page_gap: "&hellip;"
+  
+  
   date:
     abbr_day_names:
     - Dom
@@ -120,24 +126,24 @@ pt:
   datetime:
     distance_in_words:
       about_x_hours:
-        one: aprox. 1 hora
-        other: aprox. %{count} horas
+        one: '1 hora'
+        other: '%{count} horas'
       about_x_months:
-        one: aprox. 1 mês
-        other: aprox. %{count} meses
+        one: '1 mês'
+        other: '%{count} meses'
       about_x_years:
-        one: aprox. 1 ano
-        other: aprox. %{count} anos
+        one: '1 ano'
+        other: '%{count} anos'
       almost_x_years:
-        one: quase 1 ano
-        other: quase %{count} anos
+        one: '1 ano'
+        other: '%{count} anos'
       half_a_minute: meio minuto
       less_than_x_minutes:
-        one: menos de um minuto
+        one: menos de 1 minuto
         other: menos de %{count} minutos
       less_than_x_seconds:
-        one: menos de 1 segundo
-        other: menos de %{count} segundos
+        one: '1 segundo'
+        other: '%{count} segundos'
       over_x_years:
         one: mais de 1 ano
         other: mais de %{count} anos

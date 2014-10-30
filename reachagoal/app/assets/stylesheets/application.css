@@ -9823,6 +9823,60 @@ footer ul li a:hover {
   -webkit-justify-content: center;
   justify-content: center;
 }
+.pagination {
+  margin: 0;
+}
+.pagination > li > a {
+  color: #e0e0e0;
+  border: none;
+  font-size: 0.8em;
+  border-radius: 4px;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
+}
+.pagination > li > a:hover {
+  background-color: transparent;
+  color: #9b9b9b;
+}
+.pagination > .active > a {
+  color: #9b9b9b;
+  border: 1px solid #9b9b9b;
+  background-color: transparent;
+}
+.pagination > .active > a:hover {
+  border-color: #9b9b9b;
+  background-color: transparent;
+}
+.pagination .current,
+.pagination a {
+  color: #e0e0e0;
+  font-size: 0.8em;
+  width: 35px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  position: relative;
+  float: left;
+  font-style: normal;
+  border-radius: 4px;
+  text-decoration: none;
+}
+.pagination a:hover {
+  color: #9b9b9b;
+}
+.pagination .current {
+  color: #9b9b9b;
+  border: 1px solid #9b9b9b;
+  background-color: transparent;
+}
+.pagination .previous_page,
+.pagination .next_page {
+  display: none;
+  visibility: hidden;
+}
 /* MODALS */
 .modal-dialog {
   margin-top: 100px;
@@ -9861,48 +9915,6 @@ footer ul li a:hover {
 #viewFriends-modal .row:last-child .separator {
   display: none !important;
   visibility: hidden !important;
-}
-#newAward-modal ul.pagination,
-#viewAwards-modal ul.pagination,
-#mrPig-modal ul.pagination,
-#viewFriends-modal ul.pagination {
-  margin: 0;
-}
-#newAward-modal ul.pagination > li > a,
-#viewAwards-modal ul.pagination > li > a,
-#mrPig-modal ul.pagination > li > a,
-#viewFriends-modal ul.pagination > li > a {
-  color: #e0e0e0;
-  border: none;
-  font-size: 0.8em;
-  border-radius: 4px;
-  padding: 0;
-  width: 25px;
-  height: 25px;
-  line-height: 25px;
-  text-align: center;
-}
-#newAward-modal ul.pagination > li > a:hover,
-#viewAwards-modal ul.pagination > li > a:hover,
-#mrPig-modal ul.pagination > li > a:hover,
-#viewFriends-modal ul.pagination > li > a:hover {
-  background-color: transparent;
-  color: #9b9b9b;
-}
-#newAward-modal ul.pagination > .active > a,
-#viewAwards-modal ul.pagination > .active > a,
-#mrPig-modal ul.pagination > .active > a,
-#viewFriends-modal ul.pagination > .active > a {
-  color: #9b9b9b;
-  border: 1px solid #9b9b9b;
-  background-color: transparent;
-}
-#newAward-modal ul.pagination > .active > a:hover,
-#viewAwards-modal ul.pagination > .active > a:hover,
-#mrPig-modal ul.pagination > .active > a:hover,
-#viewFriends-modal ul.pagination > .active > a:hover {
-  border-color: #9b9b9b;
-  background-color: transparent;
 }
 #newAward-modal .modal-footer,
 #viewAwards-modal .modal-footer,
@@ -10084,15 +10096,6 @@ footer ul li a:hover {
   margin: 0;
   padding-top: 10px;
 }
-#viewFriends-modal .modal-body ul.pagination {
-  margin: 0;
-  text-align: center;
-  display: block;
-}
-#viewFriends-modal .modal-body ul.pagination > li > a {
-  float: none;
-  display: inline-block;
-}
 #viewAwards-modal .modal-body .icon-wrap {
   float: left;
   width: 40px;
@@ -10205,6 +10208,13 @@ footer ul li a:hover {
 .modalBox .newEntry .entryText a {
   color: #9b9b9b;
 }
+.modalBox .newEntry .entryText .legend {
+  margin-top: -8px;
+  color: #e0e0e0;
+}
+.modalBox .newEntry .entryText .legend:before {
+  content: '| ';
+}
 .modalBox .newEntry .deleteEntry {
   color: #d74a4a;
   opacity: 0.5;
@@ -10284,7 +10294,7 @@ footer ul li a:hover {
   line-height: 60px;
 }
 .logo img {
-  height: 35px;
+  height: 30px;
 }
 .user-nav > ul > li {
   display: table;
@@ -10727,6 +10737,10 @@ section#dashboard article.userInfo .userInfo-header ul.userInfo-header-right .us
   font-weight: 400;
   color: #4a4a4a;
 }
+section#dashboard article.userInfo .userInfo-header ul.userInfo-header-right .userAwards h2 span {
+  font-weight: 400;
+  color: #4a4a4a;
+}
 section#dashboard article.userInfo .userInfo-header ul.userInfo-header-right .userAwards .userAward-wrapper {
   display: inline-block;
   float: left;
@@ -11131,7 +11145,9 @@ section#editChallenge article.challengeForm form .footer .delete {
 section#newChallenge article.challengeForm form button,
 section#editChallenge article.challengeForm form button,
 section#newChallenge article.challengeForm form input[type="submit"],
-section#editChallenge article.challengeForm form input[type="submit"] {
+section#editChallenge article.challengeForm form input[type="submit"],
+section#newChallenge article.challengeForm form a.delete,
+section#editChallenge article.challengeForm form a.delete {
   width: 100%;
   text-transform: uppercase;
   padding-left: 0;
@@ -11470,6 +11486,21 @@ section#challenge .challengeActivity .userEntries .modalBox .btn-group .dropdown
 section#challenge .challengeActivity .userEntries .modalBox .btn-group .dropdown-menu > li > a:hover {
   background-color: #f4f4f4;
 }
+section#challenge .challengeActivity .userEntries .pagination-wrapper {
+  border-top: 1px solid #f4f4f4;
+}
+section#challenge .challengeActivity .userEntries .pagination {
+  display: block;
+  float: right;
+  margin-bottom: 15px;
+  padding-top: 10px;
+}
+section#challenge .challengeActivity .userEntries .pagination .current,
+section#challenge .challengeActivity .userEntries .pagination a {
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+}
 section#challenge .challengeActivity .comments .headerOut {
   padding: 15px 20px;
 }
@@ -11543,7 +11574,7 @@ section#challenge .challengeActivity .comments .modalBox .body .newComment .comm
   overflow: hidden;
   padding-left: 10px;
 }
-section#challenge .challengeActivity .comments .modalBox .body .newComment .commentArea .inputWrap input {
+section#challenge .challengeActivity .comments .modalBox .body .newComment .commentArea .inputWrap textarea {
   resize: none;
   height: 30px;
   overflow: hidden;

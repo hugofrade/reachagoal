@@ -174,11 +174,7 @@
       </div>
     </nav>
 	
-	
-	
-	
-	
-	
+		
 	<% if user_signed_in? %>
 		<% if !current_user.user_objectives.blank? && !current_user.user_objectives.reject{ |c| c.objective.missing_value == 0}.blank? %>
 

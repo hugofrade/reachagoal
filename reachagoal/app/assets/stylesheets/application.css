@@ -9784,45 +9784,18 @@ footer ul li a:hover {
 .italic {
   font-style: italic;
 }
-.vertical-center {
-  min-height: 100%;
-  /* Fallback for vh unit */
-  min-height: 100vh;
-  /* You might also want to use
-                        'height' property instead.
-                        
-                        Note that for percentage values of
-                        'height' or 'min-height' properties,
-                        the 'height' of the parent element
-                        should be specified explicitly.
-  
-                        In this case the parent of '.vertical-center'
-                        is the <body> element */
-  /* Make it a flex container */
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  /* Align the bootstrap's container vertically */
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-  -moz-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  /* In legacy web browsers such as Firefox 9
-     we need to specify the width of the flex container */
-  width: 100%;
-  /* Also 'margin: 0 auto' doesn't have any effect on flex items in such web browsers
-     hence the bootstrap's container won't be aligned to the center anymore.
-  
-     Therefore, we should use the following declarations to get it centered again */
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
+.verticalCenter-wrapper {
+  position: absolute;
+  display: table;
+  top: 0;
+  padding-top: 60px;
 }
+.verticalCenter-wrapper .verticalCenter {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100%;
+}
+/* PAGINATION */
 .pagination {
   margin: 0;
 }
@@ -10096,6 +10069,9 @@ footer ul li a:hover {
   margin: 0;
   padding-top: 10px;
 }
+#viewFriends-modal .modal-body .row:last-child {
+  text-align: center;
+}
 #viewAwards-modal .modal-body .icon-wrap {
   float: left;
   width: 40px;
@@ -10295,6 +10271,7 @@ footer ul li a:hover {
 }
 .logo img {
   height: 30px;
+  margin-top: -4px;
 }
 .user-nav > ul > li {
   display: table;
@@ -11080,17 +11057,6 @@ section#dashboard article.userChallenges .noChallenges p a {
 section#dashboard article.userChallenges .noChallenges p a:hover {
   background-color: #7692ae;
 }
-.verticalCenter-wrapper {
-  position: absolute;
-  display: table;
-  top: 0;
-  padding-top: 60px;
-}
-.verticalCenter-wrapper .verticalCenter {
-  display: table-cell;
-  vertical-align: middle;
-  height: 100%;
-}
 /* NEW CHALLENGE PAGE */
 section#newChallenge,
 section#editChallenge {
@@ -11189,6 +11155,216 @@ section#editProfile article.editForm .help-block {
 }
 section#editProfile article.editForm .cancelAccount {
   margin: 0;
+}
+/* LANDING PAGE */
+body#landing-page {
+  padding-top: 0;
+}
+body#landing-page section#landing-page article.header {
+  height: 600px;
+}
+body#landing-page section#landing-page article.header .background {
+  height: 100%;
+  background-image: url("/assets/landing-spotlight.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  background-color: #2d2d2d;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+body#landing-page section#landing-page article.header .container {
+  z-index: 1;
+  position: relative;
+}
+body#landing-page section#landing-page article.header .logonav {
+  height: 100px;
+  line-height: 100px;
+}
+body#landing-page section#landing-page article.header .logonav #logo img {
+  height: 30px;
+}
+body#landing-page section#landing-page article.header .logonav #navigation {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #FFF;
+}
+body#landing-page section#landing-page article.header .logonav #navigation li {
+  float: left;
+}
+body#landing-page section#landing-page article.header .logonav #navigation li a {
+  font-weight: 600;
+  color: #FFF;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px;
+}
+body#landing-page section#landing-page article.header .logonav #navigation li a.login {
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+body#landing-page section#landing-page article.header .logonav #navigation li a.login:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+body#landing-page section#landing-page article.header .headline {
+  margin-top: 60px;
+  color: #FFF;
+}
+body#landing-page section#landing-page article.header .headline #big,
+body#landing-page section#landing-page article.header .headline #slogan {
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+body#landing-page section#landing-page article.header .headline #big {
+  font-family: 'good_footregular', "brandom-grotesque", Arial, sans-serif;
+  text-transform: inherit;
+  font-size: 100px;
+  letter-spacing: -0.02em;
+  font-weight: normal;
+  margin: 0;
+}
+body#landing-page section#landing-page article.header .headline #slogan {
+  font-family: "brandom-grotesque";
+  text-transform: uppercase;
+  margin-bottom: 60px;
+  font-size: 20px;
+  letter-spacing: 0.1em;
+}
+body#landing-page section#landing-page article.features {
+  margin-bottom: 80px;
+}
+body#landing-page section#landing-page article.features p {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.6em;
+}
+body#landing-page section#landing-page article.features h1 {
+  font-family: "brandom-grotesque";
+  margin-bottom: 15px;
+  margin-top: 0;
+}
+body#landing-page section#landing-page article.features #white {
+  background-color: #FFF;
+  padding: 60px 0;
+}
+body#landing-page section#landing-page article.features #green {
+  background-color: #43b8b2;
+}
+body#landing-page section#landing-page article.features #red {
+  background-color: #ED6C68;
+}
+body#landing-page section#landing-page article.features #blue {
+  background-color: #475f77;
+}
+body#landing-page section#landing-page article.features #green,
+body#landing-page section#landing-page article.features #red,
+body#landing-page section#landing-page article.features #blue {
+  color: #FFF;
+  padding: 0 60px;
+  display: table;
+}
+body#landing-page section#landing-page article.features #green .wrapper,
+body#landing-page section#landing-page article.features #red .wrapper,
+body#landing-page section#landing-page article.features #blue .wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+body#landing-page section#landing-page article.features #green i,
+body#landing-page section#landing-page article.features #red i,
+body#landing-page section#landing-page article.features #blue i {
+  font-size: 80px;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+}
+body#landing-page section#landing-page article.features .l1 h1 {
+  margin-top: 40px;
+}
+body#landing-page section#landing-page article.features .l2 h1 {
+  margin-top: 40px;
+}
+body#landing-page section#landing-page article.features .l3 {
+  padding: 80px 0;
+}
+body#landing-page section#landing-page article.features .l3 p {
+  margin-bottom: 40px;
+}
+body#landing-page section#landing-page a.start {
+  color: #FFF;
+  border-radius: 4px;
+  background: rgba(67, 184, 178, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-family: "brandom-grotesque";
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px;
+  display: inline-block;
+}
+body#landing-page section#landing-page a.start:hover {
+  background-color: #43b8b2;
+}
+body#landing-page .modal {
+  -webkit-box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.1);
+}
+body#landing-page .modal .modal-body .title h1 {
+  margin-top: 0;
+  margin-bottom: 30px;
+  margin-top: 10px;
+  color: #e0e0e0;
+  text-transform: uppercase;
+  font-size: 2em;
+}
+body#landing-page .modal .modal-body .form-group {
+  margin: 0;
+}
+body#landing-page .modal .modal-body form .row:first-child input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+body#landing-page .modal .modal-body form .row:last-child input {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 0;
+}
+body#landing-page .modal .modal-body .wrapper {
+  position: relative;
+}
+body#landing-page .modal .modal-body .wrapper input {
+  padding-right: 60px;
+  height: 60px;
+}
+body#landing-page .modal .modal-body .wrapper input:focus {
+  border-color: rgba(0, 0, 0, 0.1);
+}
+body#landing-page .modal .modal-body .wrapper .fa {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  line-height: 60px;
+  right: 0;
+  top: 0;
+  text-align: center;
+  display: block;
+  color: #e0e0e0;
+}
+body#landing-page .modal .modal-body #forgot {
+  font-size: 11px;
+  margin-top: 5px;
+}
+body#landing-page .modal .modal-footer {
+  border: 0;
+  margin-top: 10px;
+  padding-top: 0;
+}
+body#landing-page .modal .modal-footer input {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
 }
 /* CHALLENGE PAGE */
 section#challenge {

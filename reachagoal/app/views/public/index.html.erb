@@ -1,6 +1,206 @@
-<section id="welcome">
-	<div>
-
-	
-	</div>
-</section>
+  <body id='landing-page'>
+    <!-- ### LANDING PAGE ### -->
+    <section id='landing-page'>
+      <!-- ### Add savings ### -->
+      <article class='header'>
+        <div class='background parallax-bg' data-speed='6' data-type='background-parallax'>
+          <div class='container'>
+            <div class='row logonav'>
+              <div class='col-md-6' id='logo'>
+                <img alt='Reachagoal' src='/assets/logo.png'>
+              </div>
+              <div class='col-md-6 buttons'>
+                <ul class='pull-right' id='navigation'>
+                  <li>
+                    <a class='login' data-target='#login-modal' data-toggle='modal' href='#' title='Entrar'>Entrar</a>
+                  </li>
+                  <li>
+                    ou
+                  </li>
+                  <li>
+                    <a data-target='#signup-modal' data-toggle='modal' href='#' title='Registrar'>Registrar</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class='row headline'>
+              <div class='col-md-8 col-md-offset-2 text-center'>
+                <h1 id='big'>Achieve your goals!</h1>
+                <h2 id='slogan'>Reaching the goal is not in question</h2>
+                <a class='start' data-target='#signup-modal' data-toggle='modal' href='#' title='Começar agora'>Começar agora</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- ### End Add savings ### -->
+      <!-- ### Challenge Activity ### -->
+      <article class='features text-center'>
+        <div class='container-fluid l1' id='white'>
+          <div class='container'>
+            <div class='row'>
+              <div class='col-md-6 col-md-offset-3'>
+                <img alt='' class='icon' src='/assets/logo-icon.png'>
+                <h1 class='h3'>Define o teu desafio</h1>
+                <p>Usa o Reachagoal para atingires os teus desafios e partilhares essa experiência com os teus amigos. Assim que começares um desafio, o Reachagoal irá coordenar-te na poupança para o concretizares mais rapidamente possível.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='container-fluid l2'>
+          <div class='row'>
+            <div class='col-md-4 square' id='green'>
+              <div class='wrapper'>
+                <i class='fa fa-users'></i>
+                <h1 class='h3'>Junta os teus amigos</h1>
+                <p>Podes juntar os teus amigos aos teus desafios e começarem todos a poupar para as férias que há tanto tempo esperam.</p>
+              </div>
+            </div>
+            <div class='col-md-4 square' id='red'>
+              <div class='wrapper'>
+                <img alt='' src='/assets/mrPig.png'>
+                <h1 class='h3'>Adiciona poupanças</h1>
+                <p>Agora podes registar as tuas poupanças, ficando sempre actualizado do valor que já poupaste e de quanto de falta poupar.</p>
+              </div>
+            </div>
+            <div class='col-md-4 square' id='blue'>
+              <div class='wrapper'>
+                <i class='fa fa-line-chart'></i>
+                <h1 class='h3'>Assume o controlo</h1>
+                <p>O Reachagoal ajuda-te a manter o controlo do teu progresso para atingires o teu desafio, podendo partilhar o sucesso com os teus amigos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class='container-fluid l3'>
+          <div class='container'>
+            <div class='row'>
+              <div class='col-md-6 col-md-offset-3'>
+                <h1 class='h3'>Começa o teu desafio</h1>
+                <p>Entra no Reachagoal e desafia-te a ti próprio a poupar para atingires os teus desafios mais fácil e divertido do que nunca.</p>
+                <a class='start' data-target='#signup-modal' data-toggle='modal' href='#' title='Começar agora'>Começar agora</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+      <!-- ### end of Features ### -->
+    </section>
+    
+    <!-- ### FOOTER ### -->
+    <footer>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-6'>
+            <p>
+              Copyright
+              <span class='bold'>Reachagoal</span>
+              © 2014 All rights reserved.
+            </p>
+          </div>
+          <div class='col-md-6'>
+            <ul>
+              <li>
+                <a alt='Sobre nós' href='javascript:;'>Sobre nós</a>
+              </li>
+              <li>
+                <a alt='Ajuda' href='javascript:;'>Ajuda</a>
+              </li>
+              <li>
+                <a alt='Contacto' href='javascript:;'>Contacto</a>
+              </li>
+              <li>
+                <a alt='Termos' href='javascript:;'>Termos</a>
+              </li>
+              <li>
+                <a alt='Privacidade' href='javascript:;'>Privacidade</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- LOGIN/REGISTER -->
+    <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='login-modal' role='dialog' tabindex='-1'>
+      <div class='modal-dialog modal-sm'>
+        <div class='modal-content'>
+          <div class='modal-body'>
+            <div class='row'>
+              <div class='title text-center'>
+                <h1>Iniciar sessão</h1>
+              </div>
+            </div>
+            <form role='form'>
+              <div class='row'>
+                <div class='form-group col-md-12'>
+                  <div class='wrapper'>
+                    <input class='form-control input-lg' name='email' placeholder='email' type='email'>
+                    <i class='fa fa-2x fa-at'></i>
+                  </div>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='form-group col-md-12'>
+                  <div class='wrapper'>
+                    <input class='form-control input-lg' name='password' placeholder='palavra-passe' type='password'>
+                    <i class='fa fa-2x fa-lock'></i>
+                  </div>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='form-group col-md-12'>
+                  <a class='pull-right' href='#' id='forgot'>Esqueceu a palavra-passe?</a>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class='modal-footer'>
+            <input class='btn btn-primary input-lg' type='submit' value='Entrar'>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='signup-modal' role='dialog' tabindex='-1'>
+      <div class='modal-dialog modal-md'>
+        <div class='modal-content'>
+          <div class='modal-body'>
+            <div class='row'>
+              <div class='title text-center'>
+                <h1>Criar conta</h1>
+              </div>
+            </div>
+            <form role='form'>
+              <div class='row'>
+                <div class='form-group col-md-6' style='padding-right:0;'>
+                  <div class='wrapper'>
+                    <input class='form-control input-lg' name='name' placeholder='nome' style='border-top-right-radius:0;' type='text'>
+                  </div>
+                </div>
+                <div class='form-group col-md-6' style='padding-left:0'>
+                  <div class='wrapper'>
+                    <input class='form-control input-lg' name='surname' placeholder='apelido' style='border-top-left-radius:0; border-left:0' type='text'>
+                  </div>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='form-group col-md-6' style='padding-right:0'>
+                  <div class='wrapper'>
+                    <input class='form-control input-lg' name='email' placeholder='email' style='border-bottom-right-radius:0;' type='email'>
+                    <i class='fa fa-2x fa-at'></i>
+                  </div>
+                </div>
+                <div class='form-group col-md-6' style='padding-left:0'>
+                  <div class='wrapper'>
+                    <input class='form-control input-lg' name='password' placeholder='palavra-passe' style='border-bottom-left-radius:0; border-left:0' type='password'>
+                    <i class='fa fa-2x fa-lock'></i>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class='modal-footer'>
+            <input class='btn btn-primary input-lg' type='submit' value='Registrar'>
+          </div>
+        </div>
+      </div>
+    </div>

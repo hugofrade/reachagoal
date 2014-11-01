@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8'>
+  <meta content='IE=edge' http-equiv='X-UA-Compatible'>
+  <meta content='width=device-width, initial-scale=1' name='viewport'>
+  <title>Reachagoal</title>
+  
+  
+  <%= stylesheet_link_tag    "typekit", media: "all" %>
+  <%= stylesheet_link_tag    "fonts/reachagoal-custom.css", media: "all" %>
+  <%= stylesheet_link_tag    "fonts/fontfacekit/facekit.css", media: "all" %>
+
+  <%= stylesheet_link_tag    "public", media: "all" %>
+  <%= stylesheet_link_tag    "application", media: "all" %>
+  
+  <%= javascript_include_tag 'https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js' %>
+  <%= javascript_include_tag 'https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js' %>
+  <%= csrf_meta_tags %>
+
+  
+</head>
+<body>
+
+	<% if notice %>
+		<div class='alertWrapper'>
+	      <div class='container'>
+	        <div class='row'>
+	          <div class='col-md-4 col-md-offset-4'>
+	            <div class='alert alert-success alert-dismissible' role='alert'>
+	              <button class='close' data-dismiss='alert' type='button'>
+	                <span aria-hidden='true'>&#215;</span>
+	              </button>
+	              <%= notice.capitalize %>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	<% end %>
+	<% if alert %>
+		<div class='alertWrapper'>
+	      <div class='container'>
+	        <div class='row'>
+	          <div class='col-md-4 col-md-offset-4'>
+				 <div class='alert alert-warning alert-dismissible' role='alert'>
+	              <button class='close' data-dismiss='alert' type='button'>
+	                <span aria-hidden='true'>&#215;</span>
+	              </button>
+	              <strong>Ocorreu um erro.</strong>
+				  <%= alert.capitalize %>
+	            </div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	<% end %>
+	
+	<%= yield %>
+	
+	<footer>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-6'>
+            <p>
+              Copyright
+              <span class='bold'>Reachagoal</span>
+              © 2014 All rights reserved.
+            </p>
+          </div>
+          <div class='col-md-6'>
+            <ul>
+              <li>
+                <a alt='Sobre nós' href='javascript:;'>Sobre nós</a>
+              </li>
+              <li>
+                <a alt='Ajuda' href='javascript:;'>Ajuda</a>
+              </li>
+              <li>
+                <a alt='Contacto' href='javascript:;'>Contacto</a>
+              </li>
+              <li>
+                <a alt='Termos' href='javascript:;'>Termos</a>
+              </li>
+              <li>
+                <a alt='Privacidade' href='javascript:;'>Privacidade</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+    
+	<%= javascript_include_tag "application" %>
+	<%= yield :js %>
+	
+</body>
+</html>

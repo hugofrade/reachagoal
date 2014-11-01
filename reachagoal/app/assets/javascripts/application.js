@@ -58,6 +58,25 @@ setTimeout(function(){
   }
 }, 5000)
 
+
+
+var featureBoxWidth = $('article.features .square').width()+30 + "px";
+
+$('article.features .square').css({
+	height: featureBoxWidth
+});
+
+$(window).resize( function(){
+
+	var featureBoxWidth = $('article.features .square').width()+30 + "px";
+
+	$('article.features .square').css({
+		height: featureBoxWidth
+	});
+
+});
+
+
 // PARALLAX
 function parallaxBg(){
    // cache the window object

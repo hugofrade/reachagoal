@@ -5,7 +5,15 @@ class PrivateController < ApplicationController
 		@user_badges = UserBadges.where("receiver_id = ?", current_user.id).order("id DESC")
 		@user_badges_paginate = UserBadges.where("receiver_id = ?", current_user.id).order("id DESC").paginate(:page => params[:page], :per_page => 3)
 		@last_values_added = ObjectiveValue.where("user_id = ?", current_user.id).order("id DESC").first(5)
-
+		@user_friends=current_user.friends.paginate(:page => params[:page], :per_page => 5)
+	end
+	
+	def public_profile
+		@user = User.find(params[:id])
+		@badges = Badge.all
+		@user_badges = UserBadges.where("receiver_id = ?", @user.id).order("id DESC")
+		@user_badges_paginate = UserBadges.where("receiver_id = ?", @user.id).order("id DESC").paginate(:page => params[:page], :per_page => 3)
+		@user_friends=@user.friends.paginate(:page => params[:page], :per_page => 1)
 	end
 	
 	def ajax_challenges
@@ -47,12 +55,18 @@ class PrivateController < ApplicationController
 
 	end
 	
-	def public_profile
-		@user = User.find(params[:id])
-		@badges = Badge.all
-		@user_badges = UserBadges.where("receiver_id = ?", @user.id).order("id DESC")
-		@user_badges_paginate = UserBadges.where("receiver_id = ?", @user.id).order("id DESC").paginate(:page => params[:page], :per_page => 3)
+	def ajax_friends
+		unless params[:id].blank?
+			@user = User.find(params[:id])
+			@user_friends=@user.friends.paginate(:page => params[:page], :per_page => 1)
+		else
+			@user_friends=current_user.friends.paginate(:page => params[:page], :per_page => 5)
+		end
+		render template: "private/_friends", layout: false
+
 	end
+	
+
 	
 	def add_badge
 		@badge = UserBadges.new()
@@ -65,12 +79,24 @@ class PrivateController < ApplicationController
 	end
 	
 	def add_friend
-		@friend1 = Friend.new(user_id: current_user.id, friend_id: params[:id])
-		@friend2 = Friend.new(user_id: params[:id], friend_id: current_user.id)
+		if params[:email].blank?
+			id = params[:id]
+		else
+			id = User.where("email = ?", params[:email]).first.id
+		end
+		
+		@friend1 = Friend.new(user_id: current_user.id, friend_id: id)
+		@friend2 = Friend.new(user_id: id, friend_id: current_user.id)
 		@friend1.state = @friend2.state = 1
 		@friend1.save
 		@friend2.save
-		redirect_to public_profile_path(params[:id])
+		
+		if params[:email].blank?
+			redirect_to public_profile_path(params[:id])		
+		else
+			redirect_to dashboard_path
+		end
+		
 	end
 	
 	def remove_friend

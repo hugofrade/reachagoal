@@ -1,0 +1,30 @@
+<% unless @user_friends.blank? %>
+	<% @user_friends.each do |friendline| %>
+		<div class='row'>
+			<div class='col-md-12'>
+			  <div class='userWrap clearfix'>
+			    <%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"user-avatar"), public_profile_path(friendline.friend.id) %>
+			    <h1 class='h6 userName'>
+			      <%= link_to "#{friendline.friend.name} #{friendline.friend.surname}", public_profile_path(friendline.friend.id) %>
+			    </h1>
+			  </div>
+			  <div class='separator'></div>
+			</div>
+		</div>
+	<% end %>
+<% else%>
+	<div class='row'>
+	  <div class='col-md-12'>
+	    <div class='noEntryToShow'>
+	      <p class='entryText'>
+	        Ainda não possuí amigos
+	      </p>
+	    </div>
+	  </div>
+	</div>
+<%end%> 
+<div class='row'>
+	<div class="pagination_friends pagination-wrapper">
+		<%= will_paginate @user_friends,  :inner_window => 1, :outer_window => 2 %>
+	</div>
+</div>

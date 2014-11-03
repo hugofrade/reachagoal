@@ -195,7 +195,7 @@
                           Amigos
                           <% unless @user.friends.blank? %>
 	                          <small>
-	                            <a class='viewAll' data-target='#viewFriends-modal' data-toggle='modal' href='#' title='Ver todos'>Ver todos (<%= @user.number_of_friends()%>)</a>
+	                           <a class='viewAll' data-target='#viewFriends-modal' data-toggle='modal' href='#' title='Ver todos'>Ver todos (<%= @user.number_of_friends()%>)</a>
 	                          </small>
 	                          <%end%>
                         </h1>
@@ -245,6 +245,27 @@
                   </div>
                 </div>
               </div>
+              
+			  <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='viewFriends-modal' role='dialog' tabindex='-1'>
+                <div class='modal-dialog'>
+                  <div class='modal-content'>
+                    <div class='modal-header'>
+                      <button class='close' data-dismiss='modal' type='button'>
+                        <span aria-hidden='true'>&#215;</span>
+                        <span class='sr-only'>Close</span>
+                      </button>
+                      <h1 class='h6 title'>
+                        Amigos:
+                        <span><%= @user.number_of_friends()%></span>
+                      </h1>
+                    </div>
+                    <div class='modal-body' id="friends_list">
+                    	<%= render "friends" %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               
             </div>
           </div>

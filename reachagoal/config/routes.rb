@@ -34,17 +34,20 @@ Reachagoal::Application.routes.draw do
   get "publicprofile/:id" => "private#public_profile", :as=>"public_profile"
 
   post "publicprofile/add_badge/:friend_id" => "private#add_badge", :as=>"add_badge"
-  
+
+  post "add_friend/" => "private#add_friend", :as=>"add_friend_email"
   get "add_friend/:id" => "private#add_friend", :as=>"add_friend"
   get "remove_friend/:id" => "private#remove_friend", :as=>"remove_friend"
   
   get "ajax_challenges" => "private#ajax_challenges"
 
   get "ajax_values/:id" => "objectives#ajax_values"
-  
   get "ajax_badges/:id" => "private#ajax_badges"
-  
   get "ajax_badges/" => "private#ajax_badges"
+  get "ajax_friends/" => "private#ajax_friends"
+  
+  
+  
 end
 
 

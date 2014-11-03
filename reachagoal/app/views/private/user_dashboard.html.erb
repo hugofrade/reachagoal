@@ -19,8 +19,8 @@
         
       </article>
 
-  <article class='userInfo'>
-        <div class='userInfo-header'>
+	<article class='userInfo'>
+		<div class='userInfo-header'>
           <div class='container'>
             <div class='row'>
             
@@ -65,14 +65,7 @@
             </div>
           </div>
         </div>
-        
-        
-        
-        
-        
-        
-        
-        <div class='container'>
+		<div class='container'>
           <div class='userInfo-body'>
             <div class='row'>
         
@@ -112,9 +105,9 @@
                     </h1>
                   </div>
                   <div class='body'>
-                  	<% @last_values_added.each do |value| %>
-                  
-						<div class='newEntry'>
+					<% unless @last_values_added.blank? %>
+					  	<% @last_values_added.each do |value| %>
+							<div class='newEntry'>
 							<i class='fa fa-eur green'></i>
 							<p class='entryText'>
 								Adicionaste
@@ -133,8 +126,18 @@
 								%>
 							</time>
 						</div>
-                    <%end%>
-                    
+					    <%end%>
+					<%else%>
+						<div class='row'>
+				          <div class='col-md-12'>
+				            <div class='noEntryToShow'>
+				              <p class='entryText'>
+				                Ainda não fizeste nenhuma poupança
+				              </p>
+				            </div>
+				          </div>
+				        </div>
+					<%end%>
                   </div>
                   <!--
 <div class='footer'>
@@ -151,21 +154,16 @@
                     <div class='row'>
                       <div class='col-md-12'>
                         <h1 class='h5'>
-						Amigos
-						<% unless current_user.friends.blank? %>
-						  <small>
-						    <a class='viewAll' data-target='#viewFriends-modal' data-toggle='modal' href='#' title='Ver todos'>Ver todos (<%= current_user.number_of_friends()%>)</a>
-						  </small>
+                          Amigos
+                          <% unless current_user.friends.blank? %>
+							  <small>
+							  	<a class='viewAll' data-target='#viewFriends-modal' data-toggle='modal' href='#' title='Ver todos'>Ver todos (<%= current_user.number_of_friends()%>)</a>
+							  </small>
 						<%end%>
                         </h1>
                       </div>
-                      
-                     
                     </div>
                   </div>
-                  
-                  
-                  
                   <div class='body'>
                     <div class='row'>
                     	<% unless current_user.friends.blank? %>
@@ -179,8 +177,8 @@
 			                   </div>
 							<% end %>
 							<div class='col-md-3'>
-								<a alt='Adicionar amigo' class='addFriend' href='javascript:;'>
-									<i class='fa fa-plus fa-3x'></i>
+								<a class='addFriend' data-target='#viewFriends-modal' data-toggle='modal' href='#' title='Adicionar amigo'>
+								  <i class='fa fa-plus fa-3x'></i>
 								</a>
 							</div>
 						<% else%>
@@ -196,27 +194,71 @@
 		                    </div>
 						<%end%>
 
-                      
-                      
+                                       
+
+                     
                     </div>
-                    
                   </div>
                 </div>
               </div>
               
+              
+              <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='viewFriends-modal' role='dialog' tabindex='-1'>
+                <div class='modal-dialog'>
+                  <div class='modal-content'>
+                    <div class='modal-header'>
+                      <button class='close' data-dismiss='modal' type='button'>
+                        <span aria-hidden='true'>&#215;</span>
+                        <span class='sr-only'>Close</span>
+                      </button>
+                      <h1 class='h6 title'>
+                        Amigos:
+                        <span><%= current_user.number_of_friends()%></span>
+                      </h1>
+                    </div>
+                    <div class='modal-body' id="friends_list">
+                    	<%= render "friends" %>
+                    </div>
+                    <div class='modal-footer'>
+                      <div class='row'>
+                        <div class='col-md-12'>
+                            <%= form_tag add_friend_email_path, method: "post", :class =>'input-group' do %>
+								<%= text_field_tag :email, nil, class: 'form-control', placeholder: 'Email do amigo' %>
+								<span class='input-group-btn'>
+									<%= submit_tag "Adicionar", :class =>'btn btn-primary' %>	
+								</span>	
+							<% end %>
+                     
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              
+              
+              
             </div>
           </div>
         </div>
-      </article>
+	</article>
 
-  <article class='userChallenges'>
-        <div class='container'>
-          <div class='row'>
-            <div class='challengesTitle col-md-6'>
-              <h1 class='h4'>Desafios</h1>
-            </div>            
-            <div class='challengesFilter col-md-6'>
-            	<%unless current_user.user_objectives.blank?%>
+	<article class='userChallenges'>
+	    <div class='container'>
+	      <div class='row'>
+	        <div class='challengesTitle col-md-6'>
+	          <h1 class='h4'>Desafios</h1>
+	        </div>            
+	        <div class='challengesFilter col-md-6'>
+	        	<%unless current_user.user_objectives.blank?%>
 	              <ul class='filter nav nav-pills'>
 	<!--0 -> Todos  1-> A Decorrer  2-> Concluido -->
 					<li class="active"><%= link_to("TODOS", "javascript:;", { :class => "filtro_obj", :data => { :estado => 0 } }) %></li>
@@ -227,11 +269,11 @@
 				  	<%end%>
 	              </ul>
 	            <%end%>
-            </div>
-          </div>
-          <div class='row' id="challenges"></div>
-        </div>
-  </article>
+	        </div>
+	      </div>
+	      <div class='row' id="challenges"></div>
+	    </div>
+	</article>
 
 </section>
 

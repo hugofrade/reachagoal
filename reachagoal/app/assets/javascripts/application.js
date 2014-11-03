@@ -188,6 +188,38 @@ function pagination_badges() {
 		
 	});
 }
+
+function pagination_friends() {
+	$("body").on("click", ".pagination_friends .pagination a", function(evt) {
+		evt.preventDefault();
+		
+		var publicprofile = /publicprofile/
+		var ajax = /ajax/;
+
+		var url = $(this).attr("href");
+		if (publicprofile.test(url)){
+			url = url.replace("publicprofile/", "ajax_friends/");}
+		else { if (!ajax.test(url)){
+				url = "ajax_friends/" + url.replace("/","");
+			}
+		}
+				
+		$.ajax({
+			url: url,
+			method: 'get',
+			success: function(data) {
+				$("#friends_list").html(data);
+				//console.debug(data);
+			},
+			error: function() {
+				alert("sorry");
+			}
+		});
+		
+	});
+}
+
+
 //Run function when window resizes
 $(window).resize(completeBadge);
 
@@ -199,7 +231,9 @@ $(document).ready(function() {
 	
 	pagination_values();
 	
-	pagination_badges()
+	pagination_badges();
+	pagination_friends();
+
 	
 });
 

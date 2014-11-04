@@ -28,10 +28,8 @@
 	
 	                  <div class='progressWrap'>
 		                  <h1 class='h6 progressTitle'>Progresso</h1>
-		                  <div class='progress'>
 		                    <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>
-		                  </div>
-						  <div class='challengeTotal'> <%= userobj.objective.price %> </div>
+						  <div class='challengeTotal'> <%= userobj.objective.price %> <%= t("currencyicon_html")%>  </div>
 					  </div>
 	              </div>
 	              

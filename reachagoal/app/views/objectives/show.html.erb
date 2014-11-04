@@ -19,9 +19,7 @@
               <div class='col-md-5'>
                 <div class='progressWrap pull-right'>
                   <h1 class='h6 progressTitle'><%= t('progress')%></h1>
-                  <div class='progress'>
                   	<%= bootstrap_progress_bar(@objective.completed_percentage, :color => "info", :class => "progress-bar", :tiny => true) %>
-                  </div>
                   <div class='challengeTotal'><%= number_to_currency(@objective.price, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %></div>
                 </div>
               </div>

@@ -10458,6 +10458,7 @@ footer ul li a:hover {
   font-size: 0.9em;
   font-weight: 500;
   color: #354b5e;
+  border-bottom: 1px solid #f4f4f4;
 }
 .user-nav > ul > li.notification .dropdown-menu .list-group {
   max-height: 300px;
@@ -10525,6 +10526,14 @@ footer ul li a:hover {
 .user-nav > ul > li.notification .dropdown-menu .list-group .list-group-item a p .icon-wrap .icon {
   display: table-cell;
   vertical-align: middle;
+}
+.user-nav > ul > li.notification .dropdown-menu .list-group .list-group-item a.unavailable {
+  cursor: default;
+  background-color: #f2f2f2;
+}
+.user-nav > ul > li.notification .dropdown-menu .list-group .list-group-item a.unavailable p {
+  padding-left: 1em;
+  text-align: center;
 }
 .user-nav > ul > li.user-picture {
   background-color: #354b5e;
@@ -11157,13 +11166,184 @@ section#editProfile article.editForm .cancelAccount {
   margin: 0;
 }
 /* LANDING PAGE */
-body#landing-page {
+body#landing-page,
+body#login-page,
+body#signup-page {
   padding-top: 0;
 }
-body#landing-page section#landing-page article.header {
+body#landing-page .logonav,
+body#login-page .logonav,
+body#signup-page .logonav {
+  height: 100px;
+  line-height: 100px;
+}
+body#landing-page .logonav #logo img,
+body#login-page .logonav #logo img,
+body#signup-page .logonav #logo img {
+  height: 30px;
+}
+body#landing-page .logonav #navigation,
+body#login-page .logonav #navigation,
+body#signup-page .logonav #navigation {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: #FFF;
+}
+body#landing-page .logonav #navigation li,
+body#login-page .logonav #navigation li,
+body#signup-page .logonav #navigation li {
+  float: left;
+}
+body#landing-page .logonav #navigation li a,
+body#login-page .logonav #navigation li a,
+body#signup-page .logonav #navigation li a {
+  font-weight: 600;
+  color: #FFF;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 10px;
+}
+body#landing-page .logonav #navigation li a.login,
+body#login-page .logonav #navigation li a.login,
+body#signup-page .logonav #navigation li a.login {
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+body#landing-page .logonav #navigation li a.login:hover,
+body#login-page .logonav #navigation li a.login:hover,
+body#signup-page .logonav #navigation li a.login:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+body#landing-page section#login-page,
+body#login-page section#login-page,
+body#signup-page section#login-page {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+}
+body#landing-page section#login-page .background,
+body#login-page section#login-page .background,
+body#signup-page section#login-page .background {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  background-image: url("/assets/landing-spotlight-blured.jpg");
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+body#landing-page section#login-page .loginForm .formWrapper,
+body#login-page section#login-page .loginForm .formWrapper,
+body#signup-page section#login-page .loginForm .formWrapper,
+body#landing-page section#login-page .signupForm .formWrapper,
+body#login-page section#login-page .signupForm .formWrapper,
+body#signup-page section#login-page .signupForm .formWrapper {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.1);
+}
+body#landing-page section#login-page .loginForm h1.formTitle,
+body#login-page section#login-page .loginForm h1.formTitle,
+body#signup-page section#login-page .loginForm h1.formTitle,
+body#landing-page section#login-page .signupForm h1.formTitle,
+body#login-page section#login-page .signupForm h1.formTitle,
+body#signup-page section#login-page .signupForm h1.formTitle {
+  color: #FFF;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+body#landing-page section#login-page .loginForm .footer .form-group,
+body#login-page section#login-page .loginForm .footer .form-group,
+body#signup-page section#login-page .loginForm .footer .form-group,
+body#landing-page section#login-page .signupForm .footer .form-group,
+body#login-page section#login-page .signupForm .footer .form-group,
+body#signup-page section#login-page .signupForm .footer .form-group {
+  padding: 0;
+  margin-top: 1em;
+}
+body#landing-page section#login-page .loginForm .formWrapper .row:first-child .form-group input,
+body#login-page section#login-page .loginForm .formWrapper .row:first-child .form-group input,
+body#signup-page section#login-page .loginForm .formWrapper .row:first-child .form-group input {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+body#landing-page section#login-page .loginForm .formWrapper .row:nth-child(2) .form-group input,
+body#login-page section#login-page .loginForm .formWrapper .row:nth-child(2) .form-group input,
+body#signup-page section#login-page .loginForm .formWrapper .row:nth-child(2) .form-group input {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 0;
+}
+body#landing-page section#login-page .loginForm #remeberForgot,
+body#login-page section#login-page .loginForm #remeberForgot,
+body#signup-page section#login-page .loginForm #remeberForgot {
+  margin-bottom: 1em;
+}
+body#landing-page section#login-page .loginForm #remeberForgot #remeberUser label,
+body#login-page section#login-page .loginForm #remeberForgot #remeberUser label,
+body#signup-page section#login-page .loginForm #remeberForgot #remeberUser label {
+  color: #4a4a4a;
+}
+body#landing-page section#login-page .loginForm #remeberForgot #forgot,
+body#login-page section#login-page .loginForm #remeberForgot #forgot,
+body#signup-page section#login-page .loginForm #remeberForgot #forgot {
+  color: #4a4a4a;
+}
+body#landing-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1),
+body#login-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1),
+body#signup-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1) {
+  padding-right: 0;
+}
+body#landing-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1) input,
+body#login-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1) input,
+body#signup-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1) input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+body#landing-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2),
+body#login-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2),
+body#signup-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2) {
+  padding-left: 0;
+}
+body#landing-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2) input,
+body#login-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2) input,
+body#signup-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2) input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-left: 0;
+}
+body#landing-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group input,
+body#login-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group input,
+body#signup-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group input {
+  border-radius: 0;
+  border-top: 0;
+}
+body#landing-page section#login-page .signupForm .formWrapper .row:last-child .form-group input,
+body#login-page section#login-page .signupForm .formWrapper .row:last-child .form-group input,
+body#signup-page section#login-page .signupForm .formWrapper .row:last-child .form-group input {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 0;
+  margin-bottom: 1em;
+}
+body#landing-page section#landing-page article.header,
+body#login-page section#landing-page article.header,
+body#signup-page section#landing-page article.header {
   height: 600px;
 }
-body#landing-page section#landing-page article.header .background {
+body#landing-page section#landing-page article.header .background,
+body#login-page section#landing-page article.header .background,
+body#signup-page section#landing-page article.header .background {
   height: 100%;
   background-image: url("/assets/landing-spotlight.jpg");
   background-attachment: fixed;
@@ -11175,51 +11355,35 @@ body#landing-page section#landing-page article.header .background {
   padding: 0;
   position: relative;
 }
-body#landing-page section#landing-page article.header .container {
+body#landing-page section#landing-page article.header .container,
+body#login-page section#landing-page article.header .container,
+body#signup-page section#landing-page article.header .container {
   z-index: 1;
   position: relative;
 }
-body#landing-page section#landing-page article.header .logonav {
-  height: 100px;
-  line-height: 100px;
-}
-body#landing-page section#landing-page article.header .logonav #logo img {
-  height: 30px;
-}
-body#landing-page section#landing-page article.header .logonav #navigation {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  color: #FFF;
-}
-body#landing-page section#landing-page article.header .logonav #navigation li {
-  float: left;
-}
-body#landing-page section#landing-page article.header .logonav #navigation li a {
-  font-weight: 600;
-  color: #FFF;
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 10px;
-}
-body#landing-page section#landing-page article.header .logonav #navigation li a.login {
-  margin-right: 10px;
-  border-radius: 4px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  background-color: rgba(0, 0, 0, 0.15);
-}
-body#landing-page section#landing-page article.header .logonav #navigation li a.login:hover {
-  background-color: rgba(0, 0, 0, 0.25);
-}
-body#landing-page section#landing-page article.header .headline {
+body#landing-page section#landing-page article.header .headline,
+body#login-page section#landing-page article.header .headline,
+body#signup-page section#landing-page article.header .headline {
   margin-top: 60px;
   color: #FFF;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
 }
 body#landing-page section#landing-page article.header .headline #big,
-body#landing-page section#landing-page article.header .headline #slogan {
+body#login-page section#landing-page article.header .headline #big,
+body#signup-page section#landing-page article.header .headline #big,
+body#landing-page section#landing-page article.header .headline #slogan,
+body#login-page section#landing-page article.header .headline #slogan,
+body#signup-page section#landing-page article.header .headline #slogan {
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
-body#landing-page section#landing-page article.header .headline #big {
+body#landing-page section#landing-page article.header .headline #big,
+body#login-page section#landing-page article.header .headline #big,
+body#signup-page section#landing-page article.header .headline #big {
   font-family: 'good_footregular', "brandom-grotesque", Arial, sans-serif;
   text-transform: inherit;
   font-size: 100px;
@@ -11227,72 +11391,116 @@ body#landing-page section#landing-page article.header .headline #big {
   font-weight: normal;
   margin: 0;
 }
-body#landing-page section#landing-page article.header .headline #slogan {
+body#landing-page section#landing-page article.header .headline #slogan,
+body#login-page section#landing-page article.header .headline #slogan,
+body#signup-page section#landing-page article.header .headline #slogan {
   font-family: "brandom-grotesque";
   text-transform: uppercase;
   margin-bottom: 60px;
   font-size: 20px;
   letter-spacing: 0.1em;
 }
-body#landing-page section#landing-page article.features {
+body#landing-page section#landing-page article.features,
+body#login-page section#landing-page article.features,
+body#signup-page section#landing-page article.features {
   margin-bottom: 80px;
 }
-body#landing-page section#landing-page article.features p {
+body#landing-page section#landing-page article.features p,
+body#login-page section#landing-page article.features p,
+body#signup-page section#landing-page article.features p {
   font-size: 16px;
   font-weight: 300;
   line-height: 1.6em;
 }
-body#landing-page section#landing-page article.features h1 {
+body#landing-page section#landing-page article.features h1,
+body#login-page section#landing-page article.features h1,
+body#signup-page section#landing-page article.features h1 {
   font-family: "brandom-grotesque";
   margin-bottom: 15px;
   margin-top: 0;
 }
-body#landing-page section#landing-page article.features #white {
+body#landing-page section#landing-page article.features #white,
+body#login-page section#landing-page article.features #white,
+body#signup-page section#landing-page article.features #white {
   background-color: #FFF;
   padding: 60px 0;
 }
-body#landing-page section#landing-page article.features #green {
+body#landing-page section#landing-page article.features #green,
+body#login-page section#landing-page article.features #green,
+body#signup-page section#landing-page article.features #green {
   background-color: #43b8b2;
 }
-body#landing-page section#landing-page article.features #red {
+body#landing-page section#landing-page article.features #red,
+body#login-page section#landing-page article.features #red,
+body#signup-page section#landing-page article.features #red {
   background-color: #ED6C68;
 }
-body#landing-page section#landing-page article.features #blue {
+body#landing-page section#landing-page article.features #blue,
+body#login-page section#landing-page article.features #blue,
+body#signup-page section#landing-page article.features #blue {
   background-color: #475f77;
 }
 body#landing-page section#landing-page article.features #green,
+body#login-page section#landing-page article.features #green,
+body#signup-page section#landing-page article.features #green,
 body#landing-page section#landing-page article.features #red,
-body#landing-page section#landing-page article.features #blue {
+body#login-page section#landing-page article.features #red,
+body#signup-page section#landing-page article.features #red,
+body#landing-page section#landing-page article.features #blue,
+body#login-page section#landing-page article.features #blue,
+body#signup-page section#landing-page article.features #blue {
   color: #FFF;
   padding: 0 60px;
   display: table;
 }
 body#landing-page section#landing-page article.features #green .wrapper,
+body#login-page section#landing-page article.features #green .wrapper,
+body#signup-page section#landing-page article.features #green .wrapper,
 body#landing-page section#landing-page article.features #red .wrapper,
-body#landing-page section#landing-page article.features #blue .wrapper {
+body#login-page section#landing-page article.features #red .wrapper,
+body#signup-page section#landing-page article.features #red .wrapper,
+body#landing-page section#landing-page article.features #blue .wrapper,
+body#login-page section#landing-page article.features #blue .wrapper,
+body#signup-page section#landing-page article.features #blue .wrapper {
   display: table-cell;
   vertical-align: middle;
 }
 body#landing-page section#landing-page article.features #green i,
+body#login-page section#landing-page article.features #green i,
+body#signup-page section#landing-page article.features #green i,
 body#landing-page section#landing-page article.features #red i,
-body#landing-page section#landing-page article.features #blue i {
+body#login-page section#landing-page article.features #red i,
+body#signup-page section#landing-page article.features #red i,
+body#landing-page section#landing-page article.features #blue i,
+body#login-page section#landing-page article.features #blue i,
+body#signup-page section#landing-page article.features #blue i {
   font-size: 80px;
   opacity: 0.8;
   filter: alpha(opacity=80);
 }
-body#landing-page section#landing-page article.features .l1 h1 {
+body#landing-page section#landing-page article.features .l1 h1,
+body#login-page section#landing-page article.features .l1 h1,
+body#signup-page section#landing-page article.features .l1 h1 {
   margin-top: 40px;
 }
-body#landing-page section#landing-page article.features .l2 h1 {
+body#landing-page section#landing-page article.features .l2 h1,
+body#login-page section#landing-page article.features .l2 h1,
+body#signup-page section#landing-page article.features .l2 h1 {
   margin-top: 40px;
 }
-body#landing-page section#landing-page article.features .l3 {
+body#landing-page section#landing-page article.features .l3,
+body#login-page section#landing-page article.features .l3,
+body#signup-page section#landing-page article.features .l3 {
   padding: 80px 0;
 }
-body#landing-page section#landing-page article.features .l3 p {
+body#landing-page section#landing-page article.features .l3 p,
+body#login-page section#landing-page article.features .l3 p,
+body#signup-page section#landing-page article.features .l3 p {
   margin-bottom: 40px;
 }
-body#landing-page section#landing-page a.start {
+body#landing-page section#landing-page a.start,
+body#login-page section#landing-page a.start,
+body#signup-page section#landing-page a.start {
   color: #FFF;
   border-radius: 4px;
   background: rgba(67, 184, 178, 0.9);
@@ -11304,14 +11512,20 @@ body#landing-page section#landing-page a.start {
   padding: 10px;
   display: inline-block;
 }
-body#landing-page section#landing-page a.start:hover {
+body#landing-page section#landing-page a.start:hover,
+body#login-page section#landing-page a.start:hover,
+body#signup-page section#landing-page a.start:hover {
   background-color: #43b8b2;
 }
-body#landing-page .modal {
+body#landing-page .modal,
+body#login-page .modal,
+body#signup-page .modal {
   -webkit-box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 30px 30px rgba(0, 0, 0, 0.1);
 }
-body#landing-page .modal .modal-body .title h1 {
+body#landing-page .modal .modal-body .title h1,
+body#login-page .modal .modal-body .title h1,
+body#signup-page .modal .modal-body .title h1 {
   margin-top: 0;
   margin-bottom: 30px;
   margin-top: 10px;
@@ -11319,29 +11533,92 @@ body#landing-page .modal .modal-body .title h1 {
   text-transform: uppercase;
   font-size: 2em;
 }
-body#landing-page .modal .modal-body .form-group {
-  margin: 0;
+body#landing-page .modal .modal-footer,
+body#login-page .modal .modal-footer,
+body#signup-page .modal .modal-footer {
+  border: 0;
+  margin-top: 10px;
+  padding-top: 0;
 }
-body#landing-page .modal .modal-body form .row:first-child input {
+body#landing-page form#login input.top,
+body#login-page form#login input.top,
+body#signup-page form#login input.top {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-body#landing-page .modal .modal-body form .row:last-child input {
+body#landing-page form#login input.bottom,
+body#login-page form#login input.bottom,
+body#signup-page form#login input.bottom {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top: 0;
 }
-body#landing-page .modal .modal-body .wrapper {
+body#landing-page form#signup .row .form-group:nth-child(1),
+body#login-page form#signup .row .form-group:nth-child(1),
+body#signup-page form#signup .row .form-group:nth-child(1) {
+  padding-right: 0;
+}
+body#landing-page form#signup .row .form-group:nth-child(2),
+body#login-page form#signup .row .form-group:nth-child(2),
+body#signup-page form#signup .row .form-group:nth-child(2) {
+  padding-left: 0;
+}
+body#landing-page form#signup input.left-top,
+body#login-page form#signup input.left-top,
+body#signup-page form#signup input.left-top {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+body#landing-page form#signup input.right-top,
+body#login-page form#signup input.right-top,
+body#signup-page form#signup input.right-top {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-left: 0;
+}
+body#landing-page form#signup input.left-bottom,
+body#login-page form#signup input.left-bottom,
+body#signup-page form#signup input.left-bottom {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top: 0;
+}
+body#landing-page form#signup input.right-bottom,
+body#login-page form#signup input.right-bottom,
+body#signup-page form#signup input.right-bottom {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-top: 0;
+  border-left: 0;
+}
+body#landing-page .form-group,
+body#login-page .form-group,
+body#signup-page .form-group {
+  margin: 0;
+}
+body#landing-page form .wrapper,
+body#login-page form .wrapper,
+body#signup-page form .wrapper {
   position: relative;
 }
-body#landing-page .modal .modal-body .wrapper input {
+body#landing-page form .wrapper input,
+body#login-page form .wrapper input,
+body#signup-page form .wrapper input {
   padding-right: 60px;
   height: 60px;
 }
-body#landing-page .modal .modal-body .wrapper input:focus {
+body#landing-page form .wrapper input:focus,
+body#login-page form .wrapper input:focus,
+body#signup-page form .wrapper input:focus {
   border-color: rgba(0, 0, 0, 0.1);
 }
-body#landing-page .modal .modal-body .wrapper .fa {
+body#landing-page form .wrapper > .fa,
+body#login-page form .wrapper > .fa,
+body#signup-page form .wrapper > .fa {
   position: absolute;
   height: 60px;
   width: 60px;
@@ -11352,19 +11629,49 @@ body#landing-page .modal .modal-body .wrapper .fa {
   display: block;
   color: #e0e0e0;
 }
-body#landing-page .modal .modal-body #forgot {
-  font-size: 11px;
-  margin-top: 5px;
-}
-body#landing-page .modal .modal-footer {
-  border: 0;
+body#landing-page form .row#remeberForgot,
+body#login-page form .row#remeberForgot,
+body#signup-page form .row#remeberForgot {
   margin-top: 10px;
-  padding-top: 0;
 }
-body#landing-page .modal .modal-footer input {
+body#landing-page #remeberUser,
+body#login-page #remeberUser,
+body#signup-page #remeberUser {
+  font-size: 11px;
+  color: #9b9b9b;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+body#landing-page #remeberUser input,
+body#login-page #remeberUser input,
+body#signup-page #remeberUser input {
+  margin: 0;
+}
+body#landing-page #remeberUser label,
+body#login-page #remeberUser label,
+body#signup-page #remeberUser label {
+  font-weight: 400;
+  cursor: pointer;
+}
+body#landing-page #forgot,
+body#login-page #forgot,
+body#signup-page #forgot {
+  font-size: 11px;
+}
+body#landing-page input.btn,
+body#login-page input.btn,
+body#signup-page input.btn {
   width: 100%;
   text-align: center;
   text-transform: uppercase;
+}
+body#login-page footer a,
+body#signup-page footer a,
+body#login-page footer p,
+body#signup-page footer p {
+  color: rgba(255, 255, 255, 0.7);
 }
 /* CHALLENGE PAGE */
 section#challenge {
@@ -11376,7 +11683,7 @@ section#challenge .bigAddSavings {
   overflow: hidden;
 }
 section#challenge .bigAddSavings .background {
-  background-image: url("../images/challenge01-blur.png");
+  background-image: url("/assets/challenge01-blur.png");
   background-attachment: fixed;
   background-size: cover;
   background-position: 50% 0;
@@ -11593,9 +11900,7 @@ section#challenge .bigAddSavings .completedBadge .textWrapper .text .completed {
   text-shadow: 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 section#challenge .bigAddSavings .completedBadge .textWrapper .text .newChallenge {
-  position: absolute;
-  bottom: 4em;
-  left: 0;
+  margin-top: 2em;
   width: 100%;
   text-align: center;
   color: #FFF;
@@ -11619,9 +11924,36 @@ section#challenge .challengeActivity {
 }
 section#challenge .challengeActivity #chartContainer {
   height: 270px;
-}
-section#challenge .challengeActivity #canvas {
   position: relative;
+}
+section#challenge .challengeActivity #chart,
+section#challenge .challengeActivity #chartRandom {
+  position: relative;
+}
+section#challenge .challengeActivity #chartOff {
+  height: 270px;
+  position: absolute;
+  z-index: 1;
+  display: table;
+  background-color: rgba(255, 255, 255, 0.6);
+  border: 1px solid #f4f4f4;
+  border-radius: 6px;
+  -webkit-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+section#challenge .challengeActivity #chartOff:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+section#challenge .challengeActivity #chartOff > .wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+}
+section#challenge .challengeActivity #chartOff > .wrapper h1 {
+  margin-top: 0;
+}
+section#challenge .challengeActivity #chartRandom {
+  padding: 2em;
 }
 section#challenge .challengeActivity .userEntries {
   margin-top: 46px;

@@ -1,4 +1,3 @@
-  <body id='landing-page'>
     <!-- ### LANDING PAGE ### -->
     <section id='landing-page'>
       <!-- ### Add savings ### -->
@@ -86,7 +85,6 @@
       </article>
       <!-- ### end of Features ### -->
     </section>
-    
     <!-- ### FOOTER ### -->
     <footer>
       <div class='container'>
@@ -121,105 +119,100 @@
       </div>
     </footer>
     <!-- LOGIN/REGISTER -->
-    <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='login-modal' role='dialog' tabindex='-1'>
-      <div class='modal-dialog modal-sm'>
-        <div class='modal-content'>
-			<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+	<div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='login-modal' role='dialog' tabindex='-1'>
+	  <div class='modal-dialog modal-sm'>
+	    <div class='modal-content'>
+			<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "login"}) do |f| %>
 				<div class='modal-body'>
+			    	<div class='title text-center'>
+	            <h1>Iniciar sessão</h1>
+	          </div>
 					<div class='row'>
-					<div class='title text-center'>
-						<h1>Iniciar sessão</h1>
-					</div>
-				</div>            
+			            <div class='form-group col-md-12'>
+			              <div class='wrapper'>
+							  <%= f.email_field :email, :class => 'form-control input-lg top', :placeholder => "email" %>
+							  <i class='fa fa-2x fa-at'></i>
+			              </div>
+			            </div>
+			          </div>
 					<div class='row'>
-					<div class='form-group col-md-12'>
-						<div class='wrapper'>
-							<%= f.email_field :email, :class => 'form-control input-lg', :placeholder => "email" %>
-						    <i class='fa fa-2x fa-at'></i>
-						</div>
-				  </div>
-				</div>
-					<div class='row'>
-					<div class='form-group col-md-12'>
-					    <div class='wrapper'>
-					    	<%= f.password_field :password, autocomplete: "off", :class => 'form-control input-lg', :placeholder => "palavra passe" %>
-					        <i class='fa fa-2x fa-asterisk'></i>
-					    </div>
-					</div>
-				</div>
-					<% if devise_mapping.rememberable? -%>
-						<div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-					<% end -%>
-					<div class='row'>
-						<div class='form-group col-md-12'>
-						
+			            <div class='form-group col-md-12'>
+			              <div class='wrapper'>
+					    	<%= f.password_field :password, autocomplete: "off", :class => 'form-control input-lg bottom', :placeholder => "palavra passe" %>
+			                <i class='fa fa-2x fa-lock'></i>
+			              </div>
+			            </div>
+			          </div>
+					<div class='row' id='remeberForgot'>
+			            <div class='form-group col-md-12'>
+				            <% if devise_mapping.rememberable? -%>
+								<div class='pull-left' id='remeberUser'>
+									<%= f.check_box :remember_me, :id =>'user_remember_me'%> 
+									<%= f.label :remember_me %>
+								</div>
+							<% end -%>
 							<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
 							  <%= link_to "Esqueceu a palavra-passe?", new_password_path(resource_name), :id => "forgot", :class => "pull-right"%>
-							<% end -%>						
-						</div>
-					</div>
-				</div>
+							<% end -%>	
+			            </div>
+			          </div>
+			    </div>
 				<div class='modal-footer'>
-	          		<%= f.submit "Iniciar Sessão", :class => 'btn btn-lg btn-primary' %>
-			  	</div>
-			<% end %>
-        </div>        		 
-      </div>
-    </div>
-    
+					<%= f.submit "Iniciar Sessão", :class => 'btn btn-lg btn-primary' %>
+				</div>
+		    <%end%>
+	    </div>
+	  </div>
+	</div>
 
-    
-    
-    
-    
-    
-	<div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='signup-modal' role='dialog' tabindex='-1'>
-		<div class='modal-dialog modal-md'>
-	        <div class='modal-content'>
-        
-
+      
+  
+    <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='signup-modal' role='dialog' tabindex='-1'>
+      <div class='modal-dialog modal-md'>
+        <div class='modal-content'>
+			<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {id: "signup"}) do |f| %>
+			<%= devise_error_messages! %>
 				<div class='modal-body'>
-					<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-					<%= devise_error_messages! %>
-						<div class='row'>
-							<div class='title text-center'>
-								<h1>Criar conta</h1>
-							</div>
-						</div>
-					
-					
-						<div class='row'>
-			                <div class='form-group col-md-6' style='padding-right:0;'>
-			                  <div class='wrapper'>
-								  <%= f.text_field :name, :class =>'form-control input-lg', :placeholder => 'nome', :style => 'border-top-right-radius:0;' %>
-			                  </div>
-			                </div>
-			                <div class='form-group col-md-6' style='padding-left:0'>
-			                  <div class='wrapper'>
-								  <%= f.text_field :surname, :class =>'form-control input-lg', :placeholder => 'apelido', :style => 'border-top-left-radius:0; border-left:0' %>
-			                  </div>
-			                </div>
-			              </div>
-						<div class='row'>
-			                <div class='form-group col-md-6' style='padding-right:0'>
-			                  <div class='wrapper'>
-								  <%= f.email_field :email, :class =>'form-control input-lg', :placeholder => 'email', :style => 'border-bottom-right-radius:0;' %>
-								  <i class='fa fa-2x fa-at'></i>
-			                  </div>
-			                </div>
-			                <div class='form-group col-md-6' style='padding-left:0'>
-			                  <div class='wrapper'>
-								  <%= f.password_field :password, :class =>'form-control input-lg', :placeholder => 'palavra-passe', :style => 'border-bottom-left-radius:0; border-left:0' %>
-								  <i class='fa fa-2x fa-lock'></i>
-			                  </div>
-			                </div>
-			              </div>
+					<div class='title text-center'>
+		                <h1>Criar conta</h1>
+		              </div>
+					<div class='row'>
+					    <div class='form-group col-md-6'>
+					      <div class='wrapper'>
+							  <%= f.text_field :name, :class =>'form-control input-lg left-top', :placeholder => 'nome', :style => 'border-top-right-radius:0;' %>
+					      </div>
+					    </div>
+					    <div class='form-group col-md-6'>
+					      <div class='wrapper'>
+							  <%= f.text_field :surname, :class =>'form-control input-lg right-top', :placeholder => 'apelido', :style => 'border-top-left-radius:0; border-left:0' %>
+					      </div>
+					    </div>
+					  </div>
+					<div class='row'>
+					    <div class='form-group col-md-6'>
+					      <div class='wrapper'>
+							  <%= f.email_field :email, :class =>'form-control input-lg left-bottom', :placeholder => 'email', :style => 'border-bottom-right-radius:0;' %>
+							  <i class='fa fa-2x fa-at'></i>
+					      </div>
+					    </div>
+					    <div class='form-group col-md-6'>
+					      <div class='wrapper'>
+							  <%= f.password_field :password, :class =>'form-control input-lg right-bottom', :placeholder => 'palavra-passe', :style => 'border-bottom-left-radius:0; border-left:0' %>
+					        <i class='fa fa-2x fa-lock'></i>
+					      </div>
+					    </div>
+					  </div>
+
+				
+				
+				
+				
+				
 				</div>
 				<div class='modal-footer'>
 					<%= f.submit "Registar", :class => 'btn btn-primary input-lg' %>
 				</div>
-					
-					<% end %>
-			</div>
-		</div>
-	</div>
+			<%end%>
+        </div>
+      </div>
+    </div>

@@ -14,10 +14,40 @@ class PrivateController < ApplicationController
 		@user_badges = UserBadges.where("receiver_id = ?", @user.id).order("id DESC")
 		@user_badges_paginate = UserBadges.where("receiver_id = ?", @user.id).order("id DESC").paginate(:page => params[:page], :per_page => 3)
 		@user_friends=@user.friends.paginate(:page => params[:page], :per_page => 1)
+		@last_values_added = ObjectiveValue.where("user_id = ?", @user.id).order("id DESC").first(5)
+
 	end
 	
 	def ajax_challenges
-		user_objectives = UserObjective.where("user_id=?", current_user)
+		user_objectives = UserObjective.where("user_id=?", current_user.id)
+		@challenges = []
+		if params["estado"] != "aaa"
+			if params["estado"] == "1"
+				user_objectives.each do |user_objective|
+				  @challenges << user_objective if user_objective.objective.completed_percentage < 100
+				end
+			elsif params["estado"] == "2"
+				
+				user_objectives.each do |user_objective|
+				  @challenges << user_objective if user_objective.objective.completed_percentage == 100
+				end
+			else
+				@challenges = user_objectives
+			end
+		elsif params["catid"] != "aaa"
+			user_objectives.each do |user_objective|
+			  @challenges << user_objective if (user_objective.objective.category_id.to_i == params["catid"].to_i)
+			end
+		else
+			@challenges = user_objectives
+		end
+		
+		render :template => "layouts/_challenge", :layout => false
+	end
+	
+	
+	def ajax_challenges_pp
+		user_objectives = UserObjective.where("user_id=?", params[:id])
 		@challenges = []
 		if params["estado"] != "aaa"
 			if params["estado"] == "1"
@@ -85,18 +115,25 @@ class PrivateController < ApplicationController
 			id = User.where("email = ?", params[:email]).first.id
 		end
 		
-		@friend1 = Friend.new(user_id: current_user.id, friend_id: id)
-		@friend2 = Friend.new(user_id: id, friend_id: current_user.id)
-		@friend1.state = @friend2.state = 1
-		@friend1.save
-		@friend2.save
-		
-		if params[:email].blank?
-			redirect_to public_profile_path(params[:id])		
-		else
-			redirect_to dashboard_path
+		if id == current_user.id
+			if params[:email].blank?
+				redirect_to public_profile_path(params[:id]), notice: "Impossível adicionar-se a si mesmo como amigo"
+			else
+				redirect_to dashboard_path, notice: "Impossível adicionar-se a si mesmo como amigo"
+			end
+		else			
+			@friend1 = Friend.new(user_id: current_user.id, friend_id: id)
+			@friend2 = Friend.new(user_id: id, friend_id: current_user.id)
+			@friend1.state = @friend2.state = 1
+			@friend1.save
+			@friend2.save
+			
+			if params[:email].blank?
+				redirect_to public_profile_path(params[:id])		
+			else
+				redirect_to dashboard_path
+			end
 		end
-		
 	end
 	
 	def remove_friend

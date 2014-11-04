@@ -1,105 +1,94 @@
-   <div class='row' id="challenges">
-
-<% unless @challenges.blank?  %> 
-	<% @challenges.reverse!.each do |userobj| %>
-		<div class='col-md-4'>
-		
-			<%if (userobj.objective.completed_percentage<100) %>
-				<div class='challenge'>
-					<div class='challengeImage-wrapper'>
-            	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
-            </div>
-					<div class='black-wrapper'>
-              <div class='hiddenInfo'>
-              
-<!--
-                <div class='challengeFriends'>
-                  <a alt='  do amigo' class='friendPicture' href='javascript:;'>
-                    <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
-                  </a>
-                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-                    <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
-                  </a>
-                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-                    <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
-                  </a>
-                  <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
-                </div>
--->
-
-                  <div class='progressWrap'>
-	                  <h1 class='h6 progressTitle'>Progresso</h1>
-	                  <div class='progress'>
-	                    <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>
-	                  </div>
-					  <div class='challengeTotal'> <%= userobj.objective.price %> </div>
-				  </div>
-              </div>
-              
-              
-              
-            </div>
-			<% else %>
-				<div class='challenge completed'>
-	                <div class='challengeImage-wrapper'>
-	                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
-	                </div>
-					<div class='black-wrapper'>
-	                  <div class='completedBadge'>
-	                    <i class='fa fa-check fa-3x'></i>
-	                  </div>
-	                </div>
-            <%end%>
-	            <div class='challengeTitle'>
-	              <h1 class='h3'>
-	              	<%= link_to userobj.objective.name, userobj.objective %>
-	              </h1>
+<div class='row' id="challenges">
+	<% unless @challenges.blank?  %> 
+		<% @challenges.reverse!.each do |userobj| %>
+			<div class='col-md-4'>
+			
+				<%if (userobj.objective.completed_percentage<100) %>
+					<div class='challenge'>
+						<div class='challengeImage-wrapper'>
+	            	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
 	            </div>
-          </div>
-        </div>
-		
-	<% end %>
-	<div class='col-md-4'>
-		<div class='challenge addNew'>
-		  <%= link_to '<i class="fa fa-plus fa-4x"></i>'.html_safe, new_objective_path %>
+						<div class='black-wrapper'>
+	              <div class='hiddenInfo'>
+	              
+	<!--
+	                <div class='challengeFriends'>
+	                  <a alt='  do amigo' class='friendPicture' href='javascript:;'>
+	                    <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
+	                  </a>
+	                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+	                    <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
+	                  </a>
+	                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
+	                    <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
+	                  </a>
+	                  <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
+	                </div>
+	-->
+	
+	                  <div class='progressWrap'>
+		                  <h1 class='h6 progressTitle'>Progresso</h1>
+		                  <div class='progress'>
+		                    <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>
+		                  </div>
+						  <div class='challengeTotal'> <%= userobj.objective.price %> </div>
+					  </div>
+	              </div>
+	              
+	              
+	              
+	            </div>
+				<% else %>
+					<div class='challenge completed'>
+		                <div class='challengeImage-wrapper'>
+		                	<%= image_tag( userobj.objective.photo.url(:dashboard), :class => "challengeImage")%>
+		                </div>
+						<div class='black-wrapper'>
+		                  <div class='completedBadge'>
+		                    <i class='fa fa-check fa-3x'></i>
+		                  </div>
+		                </div>
+	            <%end%>
+		            <div class='challengeTitle'>
+		              <h1 class='h3'>
+		              	<%= link_to userobj.objective.name, userobj.objective %>
+		              </h1>
+		            </div>
+	          </div>
+	        </div>
+			
+		<% end %>
+		<div class='col-md-4'>
+			<div class='challenge addNew'>
+			  <%= link_to '<i class="fa fa-plus fa-4x"></i>'.html_safe, new_objective_path %>
+			</div>
 		</div>
-	</div>
-
 	
-<% else %>
-	<% if current_user.user_objectives.blank? %>
-
-	<div class='col-md-12'>
-	  <div class='noChallenges'>
-	    <p>
-	      Ainda não tens nenhum desafio. Porque não te aventuras e começas por
-	      <%= link_to 'criar um novo desafio', new_objective_path %>
-	      ?
-	    </p>
-	  </div>
-	</div>
+		
+	<% else %>
+		<% if current_user.user_objectives.blank? %>
 	
-	<%else%>
 		<div class='col-md-12'>
 		  <div class='noChallenges'>
 		    <p>
-		      Ainda não tens nenhum desafio nesta categoria. 
+		      Ainda não tens nenhum desafio. Porque não te aventuras e começas por
+		      <%= link_to 'criar um novo desafio', new_objective_path %>
+		      ?
 		    </p>
 		  </div>
 		</div>
+		
+		<%else%>
+			<div class='col-md-12'>
+			  <div class='noChallenges'>
+			    <p>
+			      Ainda não tens nenhum desafio nesta categoria. 
+			    </p>
+			  </div>
+			</div>
+		
+		<% end %>
 	
 	<% end %>
-
-<% end %>
-
-
-
-
-
-
-
-
-
+	</div>
 </div>
-
-   </div>

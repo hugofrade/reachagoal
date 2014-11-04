@@ -3,15 +3,29 @@
 		<div class='row'>
 			<div class='col-md-12'>
 			  <div class='userWrap clearfix'>
-			    <%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"user-avatar"), public_profile_path(friendline.friend.id) %>
+			  	<%if friendline.friend.id != current_user.id%>
+					<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"user-avatar"), public_profile_path(friendline.friend.id)%>
+				<% else %>
+					<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"user-avatar"), dashboard_path %>
+				<% end%>
 			    <h1 class='h6 userName'>
-			      <%= link_to "#{friendline.friend.name} #{friendline.friend.surname}", public_profile_path(friendline.friend.id) %>
+			    
+				<%if friendline.friend.id != current_user.id%>
+					<%= link_to "#{friendline.friend.name} #{friendline.friend.surname}", public_profile_path(friendline.friend.id)%>
+				<% else %>
+					<%= link_to "#{friendline.friend.name} #{friendline.friend.surname}", dashboard_path %>
+				<% end%>
 			    </h1>
 			  </div>
 			  <div class='separator'></div>
 			</div>
 		</div>
 	<% end %>
+
+	
+	
+	
+	
 <% else%>
 	<div class='row'>
 	  <div class='col-md-12'>

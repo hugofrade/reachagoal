@@ -39,6 +39,7 @@ Reachagoal::Application.routes.draw do
   get "add_friend/:id" => "private#add_friend", :as=>"add_friend"
   get "remove_friend/:id" => "private#remove_friend", :as=>"remove_friend"
   
+  get "ajax_challenges/:id" => "private#ajax_challenges"
   get "ajax_challenges" => "private#ajax_challenges"
 
   get "ajax_values/:id" => "objectives#ajax_values"

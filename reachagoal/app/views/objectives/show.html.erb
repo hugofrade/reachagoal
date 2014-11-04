@@ -153,7 +153,7 @@
 			<%if @labelsset.length>10%>
 			  <div class='row'>
 				  	<div class='col-md-12' id='chartContainer' style="height: 400px;">
-					  	<canvas id='lineChart'></canvas>
+					  	<canvas id='chart'></canvas>
 					  </div>
 				  </div>
 			<%end%>
@@ -163,9 +163,20 @@
             	<div class='col-md-6'>
             	
 					<div class='row'>
-					  	<%if @labelsset.length > 1 && @labelsset.length<=10%>
-		               		<div class='col-md-12' id='chartContainer' style="height: 400px">
-						   		<canvas id='lineChart'></canvas>
+					  	<%if @labelsset.length<=10%>
+		               			<%if @labelsset.length < 2 %>
+					   				<div class='col-md-12' id='chartContainer'>
+										<div id='chartOff'>
+											<div class='wrapper'>
+											  <h1 class='h3'>Ritmo de poupança</h1>
+											  <p>Tens de progredir mais no teu desafio para teres acesso ao gráfico.</p>
+											</div>
+										</div>
+								<%else %>
+									<div class='col-md-12' id='chartContainer' style="height: 400px">
+								<%end%>
+								<canvas id='chart'></canvas>
+
 						   	</div>
 						<%end%>
 					
@@ -188,16 +199,17 @@
 
 				</div>
             
-				<div class='col-md-6 comments'>
-				
-					<div class='headerOut'>
+				<div class='col-md-6'>
+					<div class="row">
+						<div class="col-md-12 comments">
+							<div class='headerOut'>
 						<h1 class='h5'>
 						  <%= t('activity') %>
 						  <small><%= t('giveopinion').capitalize %></small>
 						</h1>
 					</div>
-					
-					<div class='modalBox'>
+						
+							<div class='modalBox'>
 						<div class='body'>
 						
 							<% @objective.objective_comments.each do |comment| %>
@@ -235,28 +247,28 @@
 							</div>
 						</div>
 					</div>
-				</div>
-			
-			</div>
-			
-			<div class='row'>
-				<div class='col-md-6 pull-right'>
-					<div class='share-report'>
-						<p class='share'><%= t('share').capitalize%></p>
-						<a href='#'>
-						  <i class='fa fa-2x fa-facebook-square'></i>
-						</a>
-						<a href='#'>
-						  <i class='fa fa-2x fa-twitter-square'></i>
-						</a>
-						<a href='#'>
-						  <i class='fa fa-2x fa-google-plus-square'></i>
-						</a>
-						<a class='report' href='#'><%= t('reportuserobj').capitalize%></a>
+						</div>
+						<div class="col-md-12 comments">
+							<div class='share-report'>
+								<p class='share'><%= t('share').capitalize%></p>
+								<a href='#'>
+								  <i class='fa fa-2x fa-facebook-square'></i>
+								</a>
+								<a href='#'>
+								  <i class='fa fa-2x fa-twitter-square'></i>
+								</a>
+								<a href='#'>
+								  <i class='fa fa-2x fa-google-plus-square'></i>
+								</a>
+								<a class='report' href='#'><%= t('reportuserobj').capitalize%></a>
+							</div>
+						
+						
+						</div>
 					</div>
 				</div>
-			</div>
 			
+			</div>			
 		</div>
       </article>
       
@@ -266,46 +278,90 @@
 	<%= javascript_include_tag "Chart.min.js" %>
 	
 	<script>
+		<%if @labelsset.length > 2 %>
 
-	var lineChartData = {
-		labels : ["<%= @labelsset.map{ |date| "#{time_ago_in_words(date)} #{t('ago')}" }.join('", "').html_safe %>"],    
-		datasets: [{
-			label: "Savings Graph",
+			var lineChartData = {
+				labels : ["<%= @labelsset.map{ |date| "#{time_ago_in_words(date)} #{t('ago')}" }.join('", "').html_safe %>"],    
+				datasets: [{
+					label: "Savings Graph",
+					fillColor : "rgba(220,220,220,0.2)",
+					strokeColor : "rgba(220,220,220,1)",
+					pointColor : "rgba(220,220,220,1)",
+					pointStrokeColor : "#fff",
+					pointHighlightFill : "#fff",
+					pointHighlightStroke : "rgba(220,220,220,1)",
+					data : [<%= @dataset.join(", ") %>]
+			
+					}]
+			};
+			
+			
+			
+		<%else%>
+			var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+	
+			var lineChartData = {
+	    labels: ["7 dias atás", "5 dias atás", "4 dias atás", "3 dias atás", "2 dias atás", "1 dias atás", "4 horas atrás"],
+	    datasets: [{
+			label: "My First dataset",
 			fillColor : "rgba(220,220,220,0.2)",
 			strokeColor : "rgba(220,220,220,1)",
 			pointColor : "rgba(220,220,220,1)",
 			pointStrokeColor : "#fff",
 			pointHighlightFill : "#fff",
 			pointHighlightStroke : "rgba(220,220,220,1)",
-			data : [<%= @dataset.join(", ") %>]
-	
-			}]
+	        data:[randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
+	    }]
 	};
 	
-	var options = {
-	    tooltipTemplate: " Guardaste <%%= value %> €",
-		animation : true
-	};
-	
-	//Get the context of the canvas element we want to select
-	var c = $('#lineChart');
-	var ct = c.get(0).getContext('2d');
-	var ctx = document.getElementById("lineChart").getContext("2d");
-	
-	//Run function when window resizes
-	$(window).resize(respondCanvas);
-	
-	function respondCanvas() {
-	    c.attr('width', $("#chartContainer").width());
-	    c.attr('height', $("#chartContainer").height());
-	    //Call a function to redraw other content (texts, images etc)
-	    myNewChart = new Chart(ct).Line(lineChartData, options);
-	}
-	
-	//Initial call
-	window.onload = function(){
-		respondCanvas();
-	};
+		function resizeChartOff() {
+			var canvasWidth = $('#chartContainer').width() + "px";
+			var canvasHeight = $('#chartContainer').height() + "px";
+		
+			$('#chartOff').css({
+				width: canvasWidth,
+				height: canvasHeight
+			});	
+		};
+		
+		//Run function when window resizes
+		$(window).resize(resizeChartOff);
+		
+		$(document).ready(function() {
+			resizeChartOff();
+		});
+
+		
+		<%end%>
+		
+		
+			var options = {
+			    tooltipTemplate: " Guardaste <%%= value %> €",
+				animation : true
+			};
+			
+			//Get the context of the canvas element we want to select
+			var c = $('#chart');
+			var ct = c.get(0).getContext('2d');
+			var ctx = document.getElementById("chart").getContext("2d");
+			
+			//Run function when window resizes
+			$(window).resize(respondCanvas);
+			
+			function respondCanvas() {
+			    c.attr('width', $("#chartContainer").width());
+			    c.attr('height', $("#chartContainer").height());
+			    //Call a function to redraw other content (texts, images etc)
+			    myNewChart = new Chart(ct).Line(lineChartData, options);
+			}
+			
+			//Initial call
+			window.onload = function(){
+				respondCanvas();
+			};
+
+
+
 
 
 

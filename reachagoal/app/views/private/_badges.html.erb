@@ -21,8 +21,13 @@
                 <%= badge.badge.type_badge.capitalize %>
                 <span>
                   de
-                  <a href='#' title='Nome do user'><%= User.find(badge.giver_id).name%> <%= User.find(badge.giver_id).surname%></a>
-                </span>
+                  	
+					<%if badge.giver_id != current_user.id%>
+						<%= link_to "#{User.find(badge.giver_id).name} #{User.find(badge.giver_id).surname}", public_profile_path(badge.giver_id)%>
+					<% else %>
+						<%= link_to "#{User.find(badge.giver_id).name} #{User.find(badge.giver_id).surname}", dashboard_path %>
+					<% end%>
+                                  </span>
               </h1>
               <p class='description'><%= badge.statement%></p>
               <time>

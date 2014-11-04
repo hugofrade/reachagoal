@@ -184,6 +184,62 @@
 
                 </div>
               </div>
+              
+              
+              
+			  <div class='userEntries col-md-6'>
+                <div class='modalBox'>
+                  <div class='header'>
+                    <h1 class='h5'>
+                      Diário de bordo
+                      <small>Últimas entradas</small>
+                    </h1>
+                  </div>
+                  <div class='body'>
+					<% unless @last_values_added.blank? %>
+					  	<% @last_values_added.each do |value| %>
+							<div class='newEntry'>
+							<i class='fa fa-eur green'></i>
+							<p class='entryText'>
+								Adicionou
+								<span class='bold'><%=value.value%> <%= t('currencyicon_html')%></span>
+								ao desafio
+								<span class='italic'>
+								  <%= link_to value.objective.name, value.objective %>
+								</span>
+							</p>
+							<time>
+								<%= 	if ((((Time.now - value.created_at) / 1.hour).round) <= 48 ) 
+									 		time_ago_in_words(value.created_at)
+									 	else 
+									 		time_ago_in_words(value.created_at.to_date) 
+									 	end
+								%>
+							</time>
+						</div>
+					    <%end%>
+					<%else%>
+						<div class='newEntry noEntryToShow'>
+	                      <div class='col-md-12'>
+	                        <p class='entryText'>
+	                          Não existem entradas no diário de bordo
+	                        </p>
+	                      </div>
+	                    </div>
+					<%end%>
+                  </div>
+                  <!--
+<div class='footer'>
+                    <a alt='Ver mais' class='viewAll' href='javascript:;'>Ver mais</a>
+                  </div>
+-->
+                </div>
+              </div>
+
+              
+              
+              
+              
                      
               <!--User Friends-->
               <div class='userFriends col-md-4'>
@@ -278,27 +334,14 @@
             <div class='challengesTitle col-md-6'>
               <h1 class='h4'>Desafios</h1>
             </div>
-			<div class='challengesFilter col-md-6'>
-            	<%unless current_user.user_objectives.blank?%>
-	              <ul class='filter nav nav-pills'>
-	<!--0 -> Todos  1-> A Decorrer  2-> Concluido -->
-					<li class="active"><%= link_to("TODOS", "javascript:;", { :class => "filtro_obj", :data => { :estado => 0 } }) %></li>
-				  	<li><%= link_to("A DECORRER", "javascript:;", { :class => "filtro_obj", :data => { :estado => 1 } }) %></li>
-				  	<li><%= link_to("CONCLUÍDO" , "javascript:;", { :class => "filtro_obj", :data => { :estado => 2 } }) %></li>
-				  	<% Category.all.each do |c, i|%>
-				  		<li><%= link_to("#{c.name.upcase}", "javascript:;", { :class => "filtro_obj", :data => { :catid => c.id } }) %></li>
-				  	<%end%>
-	              </ul>
-	            <%end%>
-            </div>
-			
+						
 
 
           </div>
           
           
-		<div class='row'>
-		
+	      <div class='row' id="challenges_pp">
+		  
 			<% unless @user.user_objectives.blank?  %>
 			 
 				<% @user.user_objectives.reverse!.each do |userobj| %>
@@ -362,12 +405,12 @@
 				
 			<% else %>
 				
-					<div class='col-md-12'>
-					  <div class='noChallenges'>
-					    <p>Este utilizador ainda não possui desafios!</p>
-					  </div>
-					</div>
-				<% end %>
+				<div class='col-md-12'>
+				  <div class='noChallenges'>
+				    <p>Este utilizador ainda não possui desafios!</p>
+				  </div>
+				</div>
+			<% end %>
 		</div>
 						
       </article>

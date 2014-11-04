@@ -59,6 +59,16 @@ setTimeout(function(){
 }, 5000)
 
 
+function landingBoxes() {
+	var featureBoxWidth = $('article.features .square').width()+30 + "px";
+	$('article.features .square').css({
+		height: featureBoxWidth
+	});
+};
+
+$(window).resize(landingBoxes);
+
+
 
 var featureBoxWidth = $('article.features .square').width()+30 + "px";
 
@@ -115,7 +125,7 @@ $(".filtro_obj").click(function() {
 function loadObjectives(estado,cat_id) {
 	
 	$.ajax({
-		url: "ajax_challenges",
+		url: "/ajax_challenges",
 		data: "estado="+estado+"&catid="+cat_id,
 		contentType: 'application/json; charset=utf-8',
 		success: function (result) {
@@ -127,6 +137,39 @@ function loadObjectives(estado,cat_id) {
 	});
 	
 }
+
+
+
+/*
+$(".filtro_obj_pp").on("click", function(evt) { 
+	var estado = $(this).data('estado');
+	var cat_id = $(this).data('catid');
+	if (estado ==undefined){
+		estado = "aaa";}
+	if (cat_id == undefined){
+		cat_id = "aaa";}
+	loadObjectivespp(estado,cat_id);
+	$(".active").removeClass("active");
+	$(this).parent().addClass("active");
+});
+
+function loadObjectivespp(estado,cat_id) {
+
+	$.ajax({
+		url: "ajax_challenges/",
+		data: "estado="+estado+"&catid="+cat_id,
+		contentType: 'application/json; charset=utf-8',
+		success: function (result) {
+            $("#challenges").html(result);
+        },
+        error: function (err) {
+            console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
+        }
+	});
+	
+}
+*/
+
 
 
 var completeBadgeWidth = $('.completedBadge .textWrapper').width();
@@ -220,6 +263,8 @@ function pagination_friends() {
 }
 
 
+
+
 //Run function when window resizes
 $(window).resize(completeBadge);
 
@@ -234,7 +279,15 @@ $(document).ready(function() {
 	pagination_badges();
 	pagination_friends();
 
+
+	$("textarea#comment").keydown(function(event) {
 	
+	    if (event.which == 13) {
+	        event.preventDefault();
+	        $("form").submit();
+	    }
+	}); 
+
 });
 
 

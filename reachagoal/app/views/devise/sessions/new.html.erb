@@ -1,50 +1,70 @@
-
-
-    <section id='newChallenge'>
-      <!-- ### New challenge form ### -->
-      <article class='challengeForm'>
+  <body id='login-page'>
+    <section id='login-page'>
+      <!-- ### Header ### -->
+      <div class='background'></div>
+      <article class='header'>
         <div class='container'>
-          <div class='row'>
-            <div class='col-md-4 col-md-offset-4'>
-              <h1 class='formTitle'>Iniciar Sessão</h1>
-              
-              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-			
-			  	<div class='row'>
-	              <div class='form-group col-md-12'>
-	                <%= f.label :email, "Insira o seu email" %>
-	                <div class='wrapper'>
-	                	<%= f.email_field :email, :class => 'form-control input-lg' %>
-	                    <i class='fa fa-2x fa-envelope'></i>
-	                </div>
-	              </div>
-	            </div>
-				<div class='row'>
-	              <div class='form-group col-md-12'>
-	                <%= f.label :password, "Insira a sua password" %>
-	                <div class='wrapper'>
-	                	<%= f.password_field :password, autocomplete: "off", :class => 'form-control input-lg' %>
-	                    <i class='fa fa-2x fa-asterisk'></i>
-	                </div>
-	              </div>
-	            </div>
-			
-				  <% if devise_mapping.rememberable? -%>
-				    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-				  <% end -%>
-			
-			
-				<div class='row'>
-				  <div class='form-group col-md-6 pull-right'>
-				  	<%= f.submit "Iniciar Sessão", :class => 'btn btn-lg btn-success' %>
-				  </div>
-				</div>
-			<% end %>
-			<%= render "devise/shared/links" %>
-
-                           
+          <div class='row logonav'>
+            <div class='col-md-6' id='logo'>
+            	<a href='<%=root_path%>'>
+					<img alt='Reachagoal' src='/assets/logo.png'>
+				</a>
+            </div>
+            <div class='col-md-6 buttons'>
+              <ul class='pull-right' id='navigation'>
+                <li>
+                	<%= link_to "Registar", new_user_registration_path, :class => 'login'  %>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </article>
+	  <article class='loginForm'>
+			<div class='container'>
+				<div class='col-md-4 col-md-offset-4 formWrapper'>
+			  		<h1 class='formTitle text-center'>Iniciar sessão</h1>
+			  			<%= form_for(resource, as: resource_name, url: session_path(resource_name), html: {id: "login"}) do |f| %>
+							<div class='row'>
+					            <div class='form-group col-md-12'>
+					              <div class='wrapper'>
+									  <%= f.email_field :email, :class => 'form-control input-lg top', :placeholder => "email" %>
+									  <i class='fa fa-2x fa-at'></i>
+					              </div>
+					            </div>
+				          </div>
+							<div class='row'>
+			            <div class='form-group col-md-12'>
+			              <div class='wrapper'>
+					    	<%= f.password_field :password, autocomplete: "off", :class => 'form-control input-lg bottom', :placeholder => "palavra passe" %>
+			                <i class='fa fa-2x fa-lock'></i>
+			              </div>
+			            </div>
+			          </div>
+							<div class='row' id='remeberForgot'>
+			            <div class='form-group col-md-12'>
+				            <% if devise_mapping.rememberable? -%>
+								<div class='pull-left' id='remeberUser'>
+									<%= f.check_box :remember_me, :id =>'user_remember_me'%> 
+									<%= f.label :remember_me %>
+								</div>
+							<% end -%>
+							<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+							  <%= link_to "Esqueceu a palavra-passe?", new_password_path(resource_name), :id => "forgot", :class => "pull-right"%>
+							<% end -%>	
+			            </div>
+			          </div>
+					    </div>
+						<div class='col-md-4 col-md-offset-4'>
+		              <div class='row footer'>
+		                <div class='form-group col-md-12'>
+							<%= f.submit "Iniciar Sessão", :class => 'btn btn-lg btn-primary' %>
+		                </div>
+		              </div>
+		            </div>
+					<%end%>
+				</div>
+			</div>
+		</article>
+      
     </section>

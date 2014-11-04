@@ -164,20 +164,23 @@
             	
 					<div class='row'>
 					  	<%if @labelsset.length<=10%>
-		               			<%if @labelsset.length < 2 %>
-					   				<div class='col-md-12' id='chartContainer'>
-										<div id='chartOff'>
-											<div class='wrapper'>
-											  <h1 class='h3'>Ritmo de poupança</h1>
-											  <p>Tens de progredir mais no teu desafio para teres acesso ao gráfico.</p>
-											</div>
+	               			<%if @labelsset.length < 2 %>
+				   				<div class='col-md-12' id='chartContainer'>
+									<div id='chartOff'>
+										<div class='wrapper'>
+										  <h1 class='h3'>Ritmo de poupança</h1>
+										  <p>Tens de progredir mais no teu desafio para teres acesso ao gráfico.</p>
 										</div>
-								<%else %>
-									<div class='col-md-12' id='chartContainer' style="height: 400px">
-								<%end%>
-								<canvas id='chart'></canvas>
+									</div>
+									<canvas id='chartRandom'></canvas>
+								</div>
 
-						   	</div>
+							<%else %>
+								<div class='col-md-12' id='chartContainer' style="height: 400px">
+									<canvas id='chart'></canvas>
+								</div>
+							<%end%>
+
 						<%end%>
 					
 						<div class='col-md-12 userEntries'>
@@ -295,6 +298,30 @@
 					}]
 			};
 			
+			var options = {
+			    tooltipTemplate: " Guardaste <%%= value %> €",
+				animation : true
+			};
+			
+			//Get the context of the canvas element we want to select
+			var c = $('#chart');
+			var ct = c.get(0).getContext('2d');
+			var ctx = document.getElementById("chart").getContext("2d");
+			
+			//Run function when window resizes
+			$(window).resize(respondCanvas);
+			
+			function respondCanvas() {
+			    c.attr('width', $("#chartContainer").width());
+			    c.attr('height', $("#chartContainer").height());
+			    //Call a function to redraw other content (texts, images etc)
+			    myNewChart = new Chart(ct).Line(lineChartData, options);
+			}
+			
+			//Initial call
+			window.onload = function(){
+				respondCanvas();
+			};
 			
 			
 		<%else%>
@@ -331,19 +358,15 @@
 			resizeChartOff();
 		});
 
-		
-		<%end%>
-		
-		
 			var options = {
 			    tooltipTemplate: " Guardaste <%%= value %> €",
 				animation : true
 			};
 			
 			//Get the context of the canvas element we want to select
-			var c = $('#chart');
+			var c = $('#chartRandom');
 			var ct = c.get(0).getContext('2d');
-			var ctx = document.getElementById("chart").getContext("2d");
+			var ctx = document.getElementById("chartRandom").getContext("2d");
 			
 			//Run function when window resizes
 			$(window).resize(respondCanvas);
@@ -359,6 +382,11 @@
 			window.onload = function(){
 				respondCanvas();
 			};
+		
+		<%end%>
+		
+		
+
 
 
 

@@ -1,36 +1,47 @@
-<% @values.each do |value| %>
-  <div class='newEntry'>
-    <i class='fa fa-eur green'></i>
-    <p <% unless value.description.blank? %> 
-    		class='entryText withTooltip' data-placement='top' data-toggle='tooltip' title='<%=value.description%>'
-    	<%else%> 
-    		class="entryText" 
-    	<%end%> >
-		<%= t('youadd').capitalize%>
-      	<span class='bold'>
-      		<%= number_to_currency(value.value, 
-      				:unit => "#{t('currencyicon_html')}".html_safe, 
-      				:format => "%n %u", 
-      				:separator => ".", 
-      				:delimiter => " ", 
-      				:precision => 2) %>
-      	</span>
-	  	<%= t('tochallenge')%>
-    </p>
-    <%= link_to '<i class="fa fa-times"></i>'.html_safe, 
-    		remove_value_path(value), 
-    		:class => "deleteEntry", 
-    		data: { confirm: "#{t('sure').capitalize}" } if user_signed_in? && @objective.user_id == current_user.id %> 
-    <time>
-    	<%=
-	    	if ((((Time.now - value.created_at) / 1.hour).round) <= 48 ) 
-		 		time_ago_in_words(value.created_at)
-		 	else 
-		 		time_ago_in_words(value.created_at.to_date) 
-		 	end
-	 	%> <%= t('ago')%>
-     </time>
-  </div>
-<% end %>
+<%unless @values.blank? %>
+	<% @values.each do |value| %>
+	  <div class='newEntry'>
+	    <i class='fa fa-eur green'></i>
+	    <p <% unless value.description.blank? %> 
+	    		class='entryText withTooltip' data-placement='top' data-toggle='tooltip' title='<%=value.description%>'
+	    	<%else%> 
+	    		class="entryText" 
+	    	<%end%> >
+			<%= t('youadd').capitalize%>
+	      	<span class='bold'>
+	      		<%= number_to_currency(value.value, 
+	      				:unit => "#{t('currencyicon_html')}".html_safe, 
+	      				:format => "%n %u", 
+	      				:separator => ".", 
+	      				:delimiter => " ", 
+	      				:precision => 2) %>
+	      	</span>
+		  	<%= t('tochallenge')%>
+	    </p>
+	    <%= link_to '<i class="fa fa-times"></i>'.html_safe, 
+	    		remove_value_path(value), 
+	    		:class => "deleteEntry", 
+	    		data: { confirm: "#{t('sure').capitalize}" } if user_signed_in? && @objective.user_id == current_user.id %> 
+	    <time>
+	    	<%=
+		    	if ((((Time.now - value.created_at) / 1.hour).round) <= 48 ) 
+			 		time_ago_in_words(value.created_at)
+			 	else 
+			 		time_ago_in_words(value.created_at.to_date) 
+			 	end
+		 	%> <%= t('ago')%>
+	     </time>
+	  </div>
+	<% end %>
+	
+	<div class="pagination_values pagination-wrapper"><%= will_paginate @values,  :inner_window => 1, :outer_window => 2 %></div>
+<%else%>
+	<div class='newEntry noEntryToShow'>
+      <div class='col-md-12'>
+        <p class='entryText'>
+          Não existem entradas no diário de bordo
+        </p>
+      </div>
+    </div>
 
-<div class="pagination_values pagination-wrapper"><%= will_paginate @values,  :inner_window => 1, :outer_window => 2 %></div>
+<%end%>	

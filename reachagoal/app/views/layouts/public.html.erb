@@ -20,8 +20,7 @@
 
   
 </head>
-<body id='landing-page'>
-
+	<%= yield %>
 	<% if notice %>
 		<div class='alertWrapper'>
 	      <div class='container'>
@@ -56,7 +55,7 @@
 	    </div>
 	<% end %>
 	
-	<%= yield %>
+
 	
 	<footer>
       <div class='container'>

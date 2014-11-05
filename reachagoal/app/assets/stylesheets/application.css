@@ -11269,15 +11269,15 @@ body#signup-page section#login-page .signupForm .footer .form-group {
   padding: 0;
   margin-top: 1em;
 }
-body#landing-page section#login-page .loginForm .formWrapper .row:first-child .form-group input,
-body#login-page section#login-page .loginForm .formWrapper .row:first-child .form-group input,
-body#signup-page section#login-page .loginForm .formWrapper .row:first-child .form-group input {
+body#landing-page section#login-page .loginForm .formWrapper input.top,
+body#login-page section#login-page .loginForm .formWrapper input.top,
+body#signup-page section#login-page .loginForm .formWrapper input.top {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
-body#landing-page section#login-page .loginForm .formWrapper .row:nth-child(2) .form-group input,
-body#login-page section#login-page .loginForm .formWrapper .row:nth-child(2) .form-group input,
-body#signup-page section#login-page .loginForm .formWrapper .row:nth-child(2) .form-group input {
+body#landing-page section#login-page .loginForm .formWrapper input.bottom,
+body#login-page section#login-page .loginForm .formWrapper input.bottom,
+body#signup-page section#login-page .loginForm .formWrapper input.bottom {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-top: 0;
@@ -11297,44 +11297,57 @@ body#login-page section#login-page .loginForm #remeberForgot #forgot,
 body#signup-page section#login-page .loginForm #remeberForgot #forgot {
   color: #4a4a4a;
 }
-body#landing-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1),
-body#login-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1),
-body#signup-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1) {
+body#landing-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group:nth-child(1),
+body#login-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group:nth-child(1),
+body#signup-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group:nth-child(1) {
   padding-right: 0;
 }
-body#landing-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1) input,
-body#login-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1) input,
-body#signup-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(1) input {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-body#landing-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2),
-body#login-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2),
-body#signup-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2) {
+body#landing-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group:nth-child(2),
+body#login-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group:nth-child(2),
+body#signup-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group:nth-child(2) {
   padding-left: 0;
 }
-body#landing-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2) input,
-body#login-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2) input,
-body#signup-page section#login-page .signupForm .formWrapper .row:first-child .form-group:nth-child(2) input {
+body#landing-page section#login-page .signupForm .formWrapper input.top-left,
+body#login-page section#login-page .signupForm .formWrapper input.top-left,
+body#signup-page section#login-page .signupForm .formWrapper input.top-left {
+  border-top-right-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+body#landing-page section#login-page .signupForm .formWrapper input.top-right,
+body#login-page section#login-page .signupForm .formWrapper input.top-right,
+body#signup-page section#login-page .signupForm .formWrapper input.top-right {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-left: 0;
 }
-body#landing-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group input,
-body#login-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group input,
-body#signup-page section#login-page .signupForm .formWrapper .row:nth-child(2) .form-group input {
+body#landing-page section#login-page .signupForm .formWrapper input.middle,
+body#login-page section#login-page .signupForm .formWrapper input.middle,
+body#signup-page section#login-page .signupForm .formWrapper input.middle {
   border-radius: 0;
   border-top: 0;
+  border-bottom: 0;
 }
-body#landing-page section#login-page .signupForm .formWrapper .row:last-child .form-group input,
-body#login-page section#login-page .signupForm .formWrapper .row:last-child .form-group input,
-body#signup-page section#login-page .signupForm .formWrapper .row:last-child .form-group input {
+body#landing-page section#login-page .signupForm .formWrapper input.bottom,
+body#login-page section#login-page .signupForm .formWrapper input.bottom,
+body#signup-page section#login-page .signupForm .formWrapper input.bottom {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  border-top: 0;
   margin-bottom: 1em;
+}
+body#landing-page section#login-page .signupForm #error_explanation,
+body#login-page section#login-page .signupForm #error_explanation,
+body#signup-page section#login-page .signupForm #error_explanation {
+  background-color: #fcf1f1;
+  color: #d74a4a;
+  border-radius: 4px;
+  margin-top: 1em;
+}
+body#landing-page section#login-page .signupForm #error_explanation h1,
+body#login-page section#login-page .signupForm #error_explanation h1,
+body#signup-page section#login-page .signupForm #error_explanation h1 {
+  text-transform: inherit;
 }
 body#landing-page section#landing-page article.header,
 body#login-page section#landing-page article.header,

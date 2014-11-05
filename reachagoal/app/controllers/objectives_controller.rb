@@ -114,10 +114,10 @@ class ObjectivesController < ApplicationController
 
     else
      	if params[:previous_page].to_s == "objective"
-     		redirect_to @objective_value.objective, notice: t('erroraddvalue').capitalize
+     		redirect_to @objective_value.objective, alert: t('erroraddvalue').capitalize
      		session.delete(:return_to)
      	else
-	 		redirect_to session.delete(:return_to), notice: t('erroraddvalue').capitalize
+	 		redirect_to session.delete(:return_to), alert: t('erroraddvalue').capitalize
 	 	end     	
     end
 
@@ -144,7 +144,7 @@ class ObjectivesController < ApplicationController
     if @new_comment.save
      	redirect_to @new_comment.objective, notice: t('sucnewcomment')
     else
-     	redirect_to @new_comment.objective, error: t('errornewcomment')
+     	redirect_to @new_comment.objective, alert: t('errornewcomment')
     end
 
   end

@@ -34,6 +34,7 @@ pt:
 
   missing: faltam
   
+  name: nome
   nameexamples: ibiza espera-me!, rollex de sonho
   newobjtype: que tipo de desafio procuras?
   
@@ -56,6 +57,7 @@ pt:
   sucnewcomment: comentário inserido com sucesso
   suceditchal: desafio editado com sucesso
   sure: tem a certeza?
+  surname: apelido
   surprise: surpresa
   
   

@@ -27,7 +27,12 @@ class User < ActiveRecord::Base
   has_many :friends
   has_many :user_badges
   has_many :objective_comments
+  
+  
+  validates_presence_of :name
+  validates_presence_of :surname
 
+  validates_uniqueness_of :email
   
   	def number_of_friends()
 	  	return self.friends.length

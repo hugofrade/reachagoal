@@ -279,7 +279,7 @@
 	<%= javascript_include_tag "Chart.min.js" %>
 	
 	<script>
-		<%if @labelsset.length > 2 %>
+		<%if @labelsset.length >= 2 %>
 
 			var lineChartData = {
 				labels : ["<%= @labelsset.map{ |date| "#{time_ago_in_words(date)} #{t('ago')}" }.join('", "').html_safe %>"],    

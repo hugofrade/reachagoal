@@ -112,26 +112,34 @@ class PrivateController < ApplicationController
 		if params[:email].blank?
 			id = params[:id]
 		else
-			id = User.where("email = ?", params[:email]).first.id
+			if User.where("email = ?", params[:email]).blank?
+				id = nil
+			else
+				id = User.where("email = ?", params[:email]).first.id
+			end
 		end
 		
-		if id == current_user.id
-			if params[:email].blank?
-				redirect_to public_profile_path(params[:id]), notice: "Impossível adicionar-se a si mesmo como amigo"
-			else
-				redirect_to dashboard_path, notice: "Impossível adicionar-se a si mesmo como amigo"
-			end
-		else			
-			@friend1 = Friend.new(user_id: current_user.id, friend_id: id)
-			@friend2 = Friend.new(user_id: id, friend_id: current_user.id)
-			@friend1.state = @friend2.state = 1
-			@friend1.save
-			@friend2.save
-			
-			if params[:email].blank?
-				redirect_to public_profile_path(params[:id])		
-			else
-				redirect_to dashboard_path
+		if id == nil
+			redirect_to dashboard_path, alert: "Não existe utilizador com este endereço de email"
+		else
+			if id == current_user.id
+				if params[:email].blank?
+					redirect_to public_profile_path(params[:id]), alert: "Impossível adicionar-se a si mesmo como amigo"
+				else
+					redirect_to dashboard_path, alert: "Impossível adicionar-se a si mesmo como amigo"
+				end
+			else			
+				@friend1 = Friend.new(user_id: current_user.id, friend_id: id)
+				@friend2 = Friend.new(user_id: id, friend_id: current_user.id)
+				@friend1.state = @friend2.state = 1
+				@friend1.save
+				@friend2.save
+				
+				if params[:email].blank?
+					redirect_to public_profile_path(params[:id]), notice: "Amigo adicionado com sucesso"	
+				else
+					redirect_to dashboard_path, notice: "Amigo adicionado com sucesso"	
+				end
 			end
 		end
 	end
@@ -139,7 +147,7 @@ class PrivateController < ApplicationController
 	def remove_friend
 		@friend1=Friend.where("user_id=? and friend_id=?", current_user, params[:id]).first.destroy
 		@friend2=Friend.where("user_id=? and friend_id=?", params[:id], current_user).first.destroy
-		redirect_to public_profile_path(params[:id])
+		redirect_to public_profile_path(params[:id]), notice: "Amigo removido com sucesso"	
 	end
 	
 	

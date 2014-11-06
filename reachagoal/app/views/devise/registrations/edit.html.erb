@@ -13,7 +13,6 @@
 		                <span aria-hidden='true'>&#215;</span>
 		              </button>
 		              <strong>Ocorreu um erro.</strong>
-					  <%= devise_error_messages! %>
 		            </div>
 		          </div>
 		        </div>
@@ -103,9 +102,9 @@
 							</div>
 		                </div>
 		                <div class='form-group'>
-		                	<%= f.label  :biography,"Sobre" ,:class =>'col-md-2 control-label' %>
+		                	<%= f.label  :biography, "Sobre" ,:class =>'col-md-2 control-label' %>
 							<div class='col-md-4'>
-							 	<%= f.text_area :biography, :name => "about", :rows => "3", :class => 'form-control' %>
+							 	<%= f.text_area :biography, :rows => "3", :class => 'form-control' %>
 							</div>
 		                </div>
 		                <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

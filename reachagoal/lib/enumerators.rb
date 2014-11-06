@@ -8,9 +8,9 @@ class Enumerators
 	}
 	
 	ObjectiveType={
-		(OBJ_TYPE_ACCUMULATIVE = 2) => "Acumulativo",
-		(OBJ_TYPE_COLABORATIVE = 1) => "Colaborativo",
-		(OBJ_TYPE_INDIVIDUAL = 0) => "Individual"
+		(OBJ_TYPE_INDIVIDUAL = 0) => "Individual",
+		(OBJ_TYPE_COLABORATIVE = 1) => "Partilhado",
+		(OBJ_TYPE_ACCUMULATIVE = 2) => "Acumulativo"
 	}
 
 end

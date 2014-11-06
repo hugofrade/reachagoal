@@ -1,6 +1,7 @@
 pt:
   activity: actividade
   add: adicionar
+  added: adicionou
   addvaluesuc: o valor foi adicionado com sucesso ao desafio
   addsaving: pressione enter para adicionar a poupança
   ago: atrás
@@ -8,6 +9,7 @@ pt:
   
   challengename: que nome queres atribuir ao desafio?
   challengecompleted: desafio concluÍdo
+  challengephoto: fotografia do desafio
   change: mudança
   congratzendchallenge: parabéns, concluíste o teu desafio!
   createchallenge: criar desafio
@@ -38,12 +40,15 @@ pt:
   nameexamples: ibiza espera-me!, rollex de sonho
   newobjtype: que tipo de desafio procuras?
   
+  objectivetype: tipo do objectivo
   overcome: superou
   
   partner: companheiro
+  podio: pódio
+  privacy: privacidade
   progress: progresso
   
-  
+  ranking: ranking
   remove: remover
   reportuserobj: denunciar utilizador/desafio
   

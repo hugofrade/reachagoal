@@ -20,11 +20,25 @@ class Objective < ActiveRecord::Base
 	   price
 	  end
 	end
-	
+
 	def completed_percentage 
 		return (((self.price-self.missing_value)/self.price)*100)
 	end
 	
-
-		
+	def missing_value_shared(user_id)
+		if objective_values.length>0
+			users= objective_values.map{|obj| obj.user_id}
+			values = objective_values.map{|obj| obj.value}	
+			hash = Hash[users.uniq.map{|v| [v,0]}]
+			users.each_with_index{|v,i| hash[v] = hash[v] + values[i] }
+			values_user = Hash[hash.sort_by{|k,v| v}.reverse]
+			return price-values_user[user_id]
+		else
+			price
+		end
+	end
+	
+	def completed_percentage_shared(user_id)
+		return (((self.price-self.missing_value_shared(user_id))/self.price)*100)
+	end
 end

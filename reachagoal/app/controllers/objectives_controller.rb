@@ -12,27 +12,40 @@ class ObjectivesController < ApplicationController
 
   # GET /objectives/1
   # GET /objectives/1.json
-  def show
-	 labelsset = @objective.objective_values.map do |obj|  
-		 	if ((((Time.now - obj.created_at) / 1.hour).round) <= 72 ) 
-		 		obj.created_at
-		 	else 
-		 		obj.created_at.to_date 
-		 	end
-	 	end 
+	def show
+		labelsset = @objective.objective_values.map do |obj|  
+			if ((((Time.now - obj.created_at) / 1.hour).round) <= 72 ) 
+				obj.created_at
+			else 
+				obj.created_at.to_date 
+			end
+		end 
 	 		    
-     dataset = @objective.objective_values.map{ |obj| obj.value }
-     
-# 	zip = labelsset.map{|obj| obj.to_date}.zip(dataset).group_by{|k,v| k}
-# 	hash= Hash[zip.collect {|k,v| [k, v.map{|v| v.last}.inject(0, :+)]}]
+		dataset = @objective.objective_values.map{ |obj| obj.value }
+	     
+	# 	zip = labelsset.map{|obj| obj.to_date}.zip(dataset).group_by{|k,v| k}
+	# 	hash= Hash[zip.collect {|k,v| [k, v.map{|v| v.last}.inject(0, :+)]}]
+		
+		hash = Hash[labelsset.uniq.map{|v| [v,0]}]
+		labelsset.each_with_index{|v,i| hash[v] = hash[v] + dataset[i] }
 	
-	hash = Hash[labelsset.uniq.map{|v| [v,0]}]
-	labelsset.each_with_index{|v,i| hash[v] = hash[v] + dataset[i] }
-
-    @dataset = hash.values
-    @labelsset = hash.keys
-
-	@values = ObjectiveValue.where("objective_id=?",@objective.id).order("id DESC").paginate(:page => params[:page], :per_page => 5)	
+		@hash = hash
+	    @dataset = hash.values
+	    @labelsset = hash.keys
+	    
+	    
+		#Podio -> ordena os utilizadores#
+		users= @objective.objective_values.map{|obj| obj.user_id}
+		values_user = @objective.objective_values.map{|obj| obj.value}	
+		hash1 = Hash[users.uniq.map{|v| [v,0]}]
+		users.each_with_index{|v,i| hash1[v] = hash1[v] + values_user[i] }
+		@values_per_user = Hash[hash1.sort_by{|k, v| v}.reverse]
+		
+		
+		@user_friends=current_user.friends.paginate(:page => params[:page], :per_page => 5)
+		@values = ObjectiveValue.where("objective_id=?",@objective.id).order("id DESC").paginate(:page => params[:page], :per_page => 5)	
+	
+	
   end
   
   def ajax_values
@@ -158,7 +171,12 @@ class ObjectivesController < ApplicationController
     end
   end
 
+  def add_friend
+    @user_objective=UserObjective.new(user_id: params[:friend_id], objective_id: params[:objective_id] )
+  	@user_objective.save
+	redirect_to Objective.find(params[:objective_id]), notice: "Amigo adicionado com sucesso"	
 
+  end
 
 
 

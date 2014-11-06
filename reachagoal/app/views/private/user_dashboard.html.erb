@@ -167,7 +167,7 @@
                     	<% unless current_user.friends.blank? %>
 		                    <% current_user.friends.each do |friendline| %>
 		                    	<div class='col-md-3'>
-		                    		<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"friendPicture img-responsive"), 
+		                    		<%= link_to image_tag(friendline.friend.photo.url(:thumb), :class=>"friendPicture img-responsive"), 
 												public_profile_path(friendline.friend.id), :class => "withTooltip", 
 												'data-placement' => 'top', 
 												'data-toggle' => 'tooltip', 

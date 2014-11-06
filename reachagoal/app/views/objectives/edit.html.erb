@@ -68,8 +68,16 @@
 				
 				<div class='row'>
 				  <div class='col-md-12 form-group'>
-					<%= f.label :privacy %><br>
+					<%= f.label :privacy, t('privacy').capitalize %><br>
 				    <%= f.select :privacy, Enumerators::Privacy.map{ |t| [t[1],t[0]] }, :class =>'form-control input-lg' %>
+				  </div>
+				</div>
+				
+				
+				<div class='row'>
+				  <div class='col-md-12 form-group'>
+					<%= f.label :objective_type, t('objectivetype').capitalize %><br>
+					<%= f.select :objective_type, Enumerators::ObjectiveType.map{ |t| [t[1],t[0]] }, :class =>'form-control input-lg' %>
 				  </div>
 				</div>
 				
@@ -80,22 +88,11 @@
 				  <div class='col-md-12 form-group'>
 					<%= f.label :photo, t('challengephoto') %><br>
 					<%= image_tag @objective.photo.url(:dashboard), :class => "cover img-responsive img-rounded" %><br>
+					<p class='help-block'>Selecciona uma foto para o teu desafio</p>
 					<%= f.file_field :photo, :class => 'btn btn-default', :id => 'exampleInputFile1'%>
-				    <p class='help-block'>Selecciona uma foto para o teu desafio</p>
 				  </div>
 				</div>
 				
-
-				
-					
-				<!--
-				  <div class="field">
-				    <%= f.label :objective_type %><br>
-				    <%= f.select :objective_type, Enumerators::ObjectiveType.map{ |t| [t[1],t[0]] } %>
-				  </div>
-				-->
-				
-
 				
 				<div class='row footer'>
 				  <div class='form-group col-md-6'>

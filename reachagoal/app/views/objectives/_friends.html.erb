@@ -1,0 +1,52 @@
+<% unless @user_friends.length ==  (@objective.user_objectives.length-1) %>	
+	
+	<% unless @user_friends.blank? %>
+		<% @user_friends.each do |friendline| %>
+			
+			<% if @objective.user_objectives.detect{|c| c.user_id == friendline.friend.id }.blank? %>
+			
+				<div class='row'>
+					<div class='col-md-12'>
+					  <div class='userWrap clearfix'>
+						<%= link_to image_tag(friendline.friend.photo.url(:nav), :class=>"user-avatar"), add_friend_objective_path(@objective.id,friendline.friend.id), method: "post"%>
+					    <h1 class='h6 userName'>
+					<%= link_to "#{friendline.friend.name} #{friendline.friend.surname}", add_friend_objective_path(@objective.id, friendline.friend.id), method: "post"%>
+
+			    </h1>
+					  </div>
+					  
+					  <div class='separator'></div>
+					</div>
+				</div>
+				
+			<%end%>
+		<% end %>	
+	<% else%>
+		<div class='row'>
+		  <div class='col-md-12'>
+		    <div class='noEntryToShow'>
+		      <p class='entryText'>
+		        Ainda não possuí amigos
+		      </p>
+		    </div>
+		  </div>
+		</div>
+	<%end%> 
+<%else%>
+		<div class='row'>
+		  <div class='col-md-12'>
+		    <div class='noEntryToShow'>
+		      <p class='entryText'>
+		        Não possuí mais amigos para adicionar
+		      </p>
+		    </div>
+		  </div>
+		</div>
+
+<%end%>
+	
+<div class='row'>
+	<div class="pagination_friends pagination-wrapper">
+		<%= will_paginate @user_friends,  :inner_window => 1, :outer_window => 2 %>
+	</div>
+</div>

@@ -19,7 +19,13 @@
               <div class='col-md-5'>
                 <div class='progressWrap pull-right'>
                   <h1 class='h6 progressTitle'><%= t('progress')%></h1>
-                  	<%= bootstrap_progress_bar(@objective.completed_percentage, :color => "info", :class => "progress-bar", :tiny => true) %>
+                  	<% unless @objective.objective_type == 1%>
+                  		<%= bootstrap_progress_bar(@objective.completed_percentage, :color => "info", :class => "progress-bar", :tiny => true) %>
+                  	<%else%>
+				  		<%= bootstrap_progress_bar(@objective.completed_percentage_shared(current_user.id), :color => "info", :class => "progress-bar", :tiny => true) %>
+
+                  	
+                  	<%end%>
                   <div class='challengeTotal'><%= number_to_currency(@objective.price, :unit => "&euro;".html_safe, :format => "%n %u", :separator => ".", :delimiter => " ", :precision => 2) %></div>
                 </div>
               </div>
@@ -29,42 +35,30 @@
 
           <div class='container'>
             <div class='row'>
-				<!--
+			<% if @objective.objective_type != 0 %>
               <div class='col-md-6'>
                 <ul class='challengeFriends'>
+					<% @objective.user_objectives.each do |line|%>
+	                  <%unless line.user.id == current_user.id %>
+		                  <li>
+		                 	 <%= link_to image_tag(line.user.photo.url(:nav), :class=>"friendPicture"), 
+													public_profile_path(line.user.id), :class => "withTooltip", 
+													'data-placement' => 'bottom', 
+													'data-toggle' => 'tooltip', 
+													'title' => "#{line.user.name} #{line.user.surname}"   %>
+		                  </li>
+	                  <%end%>
+					<%end%>
                   <li>
-                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
-                      <img alt='João Tigre' class='img-responsive' src='images/f04.jpg'>
-                    </a>
-                  </li>
-                  <li>
-                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
-                      <img alt='João Tigre' class='img-responsive' src='images/f03.jpg'>
-                    </a>
-                  </li>
-                  <li>
-                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
-                      <img alt='João Tigre' class='img-responsive' src='images/f01.jpg'>
-                    </a>
-                  </li>
-                  <li>
-                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
-                      <img alt='João Tigre' class='img-responsive' src='images/f06.jpg'>
-                    </a>
-                  </li>
-                  <li>
-                    <a class='friendPicture withTooltip' data-placement='bottom' data-toggle='tooltip' href='javascript:;' title='João Tigre'>
-                      <img alt='João Tigre' class='img-responsive' src='images/f07.jpg'>
-                    </a>
-                  </li>
-                  <li>
-                    <a class='friendPicture addMore' href='#' title='Adicionar amigo'>
-                      <i class='fa fa-plus'></i>
-                    </a>
+                  	<%if @objective.user_id == current_user.id %>
+	                  	<a class='friendPicture addMore' data-target='#viewFriends-modal' data-toggle='modal' href='#' title='Adicionar amigo'>
+					  		<i class='fa fa-plus'></i>
+						</a>
+					<% end %>
                   </li>
                 </ul>
               </div>
--->
+			<% end %>
               <div class='col-md-6 pull-right'>
                 <div class='challengeDate'>
 					<% unless @objective.end_day.blank? %>
@@ -80,25 +74,56 @@
             </div>
           </div>
           
+          
+		  <div aria-hidden='true' aria-labelledby='myModalLabel' class='modal fade' id='viewFriends-modal' role='dialog' tabindex='-1'>
+                <div class='modal-dialog'>
+                  <div class='modal-content'>
+                    <div class='modal-header'>
+                      <button class='close' data-dismiss='modal' type='button'>
+                        <span aria-hidden='true'>&#215;</span>
+                        <span class='sr-only'>Close</span>
+                      </button>
+                      <h1 class='h6 title'>
+                        Amigos
+                      </h1>
+                    </div>
+                    <div class='modal-body' id="friends_list">
+                    	<%= render "friends"%>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+          
 		  <div class='verticalCenter-wrapper fullscreen'>
             <div class='verticalCenter'>
 				<%if @objective.missing_value != 0 %>
-				      <div class='container addSavings'>
+				    <div class='container addSavings'>
 				        <div class='row'>
 				          <div class='col-md-4 col-md-offset-4'>
-								<div class='addSavings-header'>
-			                  <h1 class='secondary'><%= t('missing')%></h1>
-			                  <h1 class='main'>
-			                  		<%= number_to_currency(@objective.missing_value, 
-			                  			:unit => "#{t('currencyicon_html')}".html_safe, 
-			                  			:format => "%n %u", 
-			                  			:separator => ".", 
-			                  			:delimiter => " ", 
-			                  			:precision => 2) %>
-			                  </h1>
-			                <% if @objective.user_id == current_user.id %>
-				                </div>   
-					                <div class='addSavings-body'>
+							<div class='addSavings-header'>
+								<h1 class='secondary'><%= t('missing')%></h1>
+								<h1 class='main'>
+									<% unless @objective.objective_type == 1%>
+										<%= number_to_currency(@objective.missing_value, 
+											:unit => "#{t('currencyicon_html')}".html_safe, 
+											:format => "%n %u", 
+											:separator => ".", 
+											:delimiter => " ", 
+											:precision => 2) %>
+									<%else%>
+										<%= number_to_currency(@objective.missing_value_shared(current_user.id), 
+											:unit => "#{t('currencyicon_html')}".html_safe, 
+											:format => "%n %u", 
+											:separator => ".", 
+											:delimiter => " ", 
+											:precision => 2) %>
+									
+									<%end%>
+				                  </h1>
+							</div>   
+							<% if (@objective.objective_type > 0 && @objective.user_objectives.collect{|c| c.user_id}.include?(current_user.id) ) || ( @objective.objective_type == 0 && @objective.user_id == current_user.id) %>
+								<div class='addSavings-body'>
 										<p><%= t('howmanysave').capitalize %></p>
 										<%= form_tag "/objectives/#{ @objective.id }/add_value/", method: "post" do %>
 											<%= hidden_field_tag :previous_page, "objective" %>
@@ -117,10 +142,10 @@
 											</p>
 										<% end %>
 									</div>
-								<%end%>
+							<%end%>
 							</div>
 				        </div>
-				      </div>
+				    </div>
 				<% else %>
 			          <div class='container completedBadge'>
 			            <div class='row'>
@@ -201,6 +226,53 @@
 				</div>
             
 				<div class='col-md-6'>
+					<% if @objective.objective_type == 1%>
+						<div class="row">
+							<div class="col-md-12 comments">
+								<div class='modalBox'>
+									<div class='header'>
+										<h1 class='h5'>
+											<%= t('podio')%>
+											<small><%= t('ranking')%></small>
+										</h1>
+									</div>
+									<div class='body' id="obj_value">
+									    <%unless @values_per_user.blank? %>
+											<% @values_per_user.each do |value| %>
+												<div class='newEntry'>
+												    <p class="entryText">
+														<%= link_to "#{User.find(value[0]).name} #{User.find(value[0]).surname}", public_profile_path(value[0])%>
+													  		já juntou
+													      	<span class='bold'>
+													      		<%= number_to_currency(value[1], 
+													      				:unit => "#{t('currencyicon_html')}".html_safe, 
+													      				:format => "%n %u", 
+													      				:separator => ".", 
+													      				:delimiter => " ", 
+													      				:precision => 2) %>
+													      	</span>
+												    </p>
+												  </div>
+											<% end %>
+											
+											
+											
+										<%else%>
+											<div class='newEntry noEntryToShow'>
+												  <div class='col-md-12'>
+												    <p class='entryText'>
+												      Não existem dados para construir o pódio
+												    </p>
+												  </div>
+												</div>
+										<%end%>	
+										    
+									</div>
+								</div>
+							</div>
+						</div>
+					<%end%>
+
 					<div class="row">
 						<div class="col-md-12 comments">
 							<div class='headerOut'>
@@ -283,6 +355,7 @@
 
 			var lineChartData = {
 				labels : ["<%= @labelsset.map{ |date| "#{time_ago_in_words(date)} #{t('ago')}" }.join('", "').html_safe %>"],    
+				<% unless @objective.objective_type == 1%>
 				datasets: [{
 					label: "Savings Graph",
 					fillColor : "rgba(220,220,220,0.2)",
@@ -294,6 +367,9 @@
 					data : [<%= @dataset.join(", ") %>]
 			
 					}]
+				<%else%>
+	
+				<%end%>
 			};
 			
 			var options = {

@@ -10,27 +10,28 @@
 	            </div>
 						<div class='black-wrapper'>
 	              <div class='hiddenInfo'>
-	              
-	<!--
-	                <div class='challengeFriends'>
-	                  <a alt='  do amigo' class='friendPicture' href='javascript:;'>
-	                    <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
-	                  </a>
-	                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-	                    <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
-	                  </a>
-	                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-	                    <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
-	                  </a>
-	                  <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
-	                </div>
-	-->
-	
-	                  <div class='progressWrap'>
-		                  <h1 class='h6 progressTitle'>Progresso</h1>
-		                    <%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>
-						  <div class='challengeTotal'> <%= userobj.objective.price %> <%= t("currencyicon_html")%>  </div>
-					  </div>
+				  	<% if userobj.objective.objective_type != 0 %>
+
+		                <div class='challengeFriends'>
+		                	<% userobj.objective.user_objectives.each do |line|%>
+								<%unless line.user.id == current_user.id %>
+									<%= link_to image_tag(line.user.photo.url(:nav), :class=>"img-responsive"), public_profile_path(line.user.id), :class => "friendPicture" %>
+								<%end%>
+							<%end%>
+							<% if userobj.objective.user_objectives.length > 3 %>
+								<a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'><%= userobj.objective.user_objectives.length %></a>
+							<% end %>
+		                </div>
+					<% end %>
+					<div class='progressWrap'>
+					  <h1 class='h6 progressTitle'>Progresso</h1>
+					  	<% unless userobj.objective.objective_type == 1 %>
+					    	<%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>
+					    <%else%>
+					    	<%= bootstrap_progress_bar(userobj.objective.completed_percentage_shared(current_user.id), :color => 'info', :tiny => true)%>
+					    <%end%>
+					  <div class='challengeTotal'> <%= userobj.objective.price %> <%= t("currencyicon_html")%>  </div>
+					</div>
 	              </div>
 	              
 	              

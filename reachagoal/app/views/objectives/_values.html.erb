@@ -7,21 +7,36 @@
 	    	<%else%> 
 	    		class="entryText" 
 	    	<%end%> >
-			<%= t('youadd').capitalize%>
-	      	<span class='bold'>
-	      		<%= number_to_currency(value.value, 
-	      				:unit => "#{t('currencyicon_html')}".html_safe, 
-	      				:format => "%n %u", 
-	      				:separator => ".", 
-	      				:delimiter => " ", 
-	      				:precision => 2) %>
-	      	</span>
-		  	<%= t('tochallenge')%>
+			<%if value.user_id == current_user.id%>
+				<%= t('youadd').capitalize%>
+		      	<span class='bold'>
+		      		<%= number_to_currency(value.value, 
+		      				:unit => "#{t('currencyicon_html')}".html_safe, 
+		      				:format => "%n %u", 
+		      				:separator => ".", 
+		      				:delimiter => " ", 
+		      				:precision => 2) %>
+		      	</span>
+			  	<%= t('tochallenge')%>
+		  	<% else %>
+			  	<%= link_to "#{User.find(value.user_id).name} #{User.find(value.user_id).surname}", public_profile_path(value.user_id)%>
+		  		<%= t('added')%>
+		      	<span class='bold'>
+		      		<%= number_to_currency(value.value, 
+		      				:unit => "#{t('currencyicon_html')}".html_safe, 
+		      				:format => "%n %u", 
+		      				:separator => ".", 
+		      				:delimiter => " ", 
+		      				:precision => 2) %>
+		      	</span>
+			  	<%= t('tochallenge')%>
+			<%end%>
+		  	
 	    </p>
 	    <%= link_to '<i class="fa fa-times"></i>'.html_safe, 
 	    		remove_value_path(value), 
 	    		:class => "deleteEntry", 
-	    		data: { confirm: "#{t('sure').capitalize}" } if user_signed_in? && @objective.user_id == current_user.id %> 
+	    		data: { confirm: "#{t('sure').capitalize}" } if user_signed_in? && value.user_id == current_user.id %> 
 	    <time>
 	    	<%=
 		    	if ((((Time.now - value.created_at) / 1.hour).round) <= 48 ) 

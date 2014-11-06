@@ -23,7 +23,9 @@ Reachagoal::Application.routes.draw do
   
   get "dashboard" => "private#user_dashboard"
   post "/objectives/:objective_id/add_value" => "objectives#add_value", :as => "add_value"
-  post "/objectives/:objective_id/add_comment" => "objectives#add_comment"
+  post "/objectives/:objective_id/add_comment" => "objectives#add_comment", :as => "add_comment"
+  post "/objectives/:objective_id/add_friend/:friend_id" => "objectives#add_friend", :as=>"add_friend_objective"
+
 
   get "remove_value/:id" => "objectives#remove_value", :as=>"remove_value"
   get "remove_comment/:id" => "objectives#remove_comment", :as=>"remove_comment"

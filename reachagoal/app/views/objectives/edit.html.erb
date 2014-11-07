@@ -28,10 +28,11 @@
 
 				<div class='row'>
 					<div class='form-group col-md-12'>
-						<%= f.label 	:category_id, t('newobjtype').capitalize %>
-						<%= f.select 	:category_id, Category.all.map{ |c| [c.name, c.id] }, 
-										:class =>'form-control input-lg', 
-										:prompt => t('selectcategory').capitalize %>							
+						<%= f.label 	:category_id, t('newobjtype').capitalize %><br>
+						<%= f.select 	:category_id, Category.all.map{ |c| [c.name, c.id] },  
+										{:prompt => t('selectcategory').capitalize},
+										{:class =>'form-control input-lg'} %>		
+										
 					</div>
 				</div>
 	
@@ -69,7 +70,7 @@
 				<div class='row'>
 				  <div class='col-md-12 form-group'>
 					<%= f.label :privacy, t('privacy').capitalize %><br>
-				    <%= f.select :privacy, Enumerators::Privacy.map{ |t| [t[1],t[0]] }, :class =>'form-control input-lg' %>
+				    <%= f.select :privacy, Enumerators::Privacy.map{ |t| [t[1],t[0]] },{}, {:class =>'form-control input-lg'} %>
 				  </div>
 				</div>
 				
@@ -77,7 +78,7 @@
 				<div class='row'>
 				  <div class='col-md-12 form-group'>
 					<%= f.label :objective_type, t('objectivetype').capitalize %><br>
-					<%= f.select :objective_type, Enumerators::ObjectiveType.map{ |t| [t[1],t[0]] }, :class =>'form-control input-lg' %>
+					<%= f.select :objective_type, Enumerators::ObjectiveType.map{ |t| [t[1],t[0]] },{}, {:class =>'form-control input-lg'} %>
 				  </div>
 				</div>
 				

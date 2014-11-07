@@ -21,7 +21,7 @@
 					<div class='row'>
 						<div class='form-group col-md-12'>
 							<%= f.label 	:category_id, t('newobjtype').capitalize %>
-							<%= f.select 	:category_id, Category.all.map{ |c| [c.name, c.id] }, :prompt => t('selectcategory').capitalize, :class =>'form-control input-lg' %>							
+							<%= f.select 	:category_id, Category.all.map{ |c| [c.name, c.id] },{:prompt => t('selectcategory').capitalize}, {:class =>'form-control input-lg', } %>							
 						</div>
 					</div>
 	

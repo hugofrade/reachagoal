@@ -54,9 +54,9 @@
                       <div class='userAward-wrapper'>
 						<% @user_badges_paginate.first(3).each do |badge| %>
 							
-							<a class='award green' href='javascript:;'>
+							<span class='award green' href='javascript:;'>
 	                          <i class="fa <%= badge.badge.symbol %> "></i>
-	                        </a>
+	                        </span>
 	                         
 						<% end %>
 						
@@ -351,25 +351,22 @@
 									</div>
 									<div class='black-wrapper'>
 										<div class='hiddenInfo'>
-											<!--
+										<% if userobj.objective.objective_type != 0 %>
+
 							                <div class='challengeFriends'>
-							                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-							                    <img alt='Nome do amigo' class='img-responsive' src='images/f04.jpg'>
-							                  </a>
-							                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-							                    <img alt='Nome do amigo' class='img-responsive' src='images/f03.jpg'>
-							                  </a>
-							                  <a alt='Nome do amigo' class='friendPicture' href='javascript:;'>
-							                    <img alt='Nome do amigo' class='img-responsive' src='images/f01.jpg'>
-							                  </a>
-							                  <a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'>2</a>
+							                	<% userobj.objective.user_objectives.reject{|c| c.user_id == current_user.id }.first(3).each do |line|%>
+													<%unless line.user.id == current_user.id %>
+														<%= link_to image_tag(line.user.photo.url(:nav), :class=>"img-responsive"), public_profile_path(line.user.id), :class => "friendPicture" %>
+													<%end%>
+												<%end%>
+												<% if userobj.objective.user_objectives.length > 3 %>
+													<a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'><%= userobj.objective.user_objectives.length - 4 %></a>
+												<% end %>
 							                </div>
-											-->
+										<% end %>
 				                  			<div class='progressWrap'>
 					                  <h1 class='h6 progressTitle'>Progresso</h1>
-					                  <div class='progress'>
 									  	<%= bootstrap_progress_bar(userobj.objective.completed_percentage, :color => 'info', :tiny => true) %>  
-					                  </div>
 								  </div>
 								  		</div>
 									</div>

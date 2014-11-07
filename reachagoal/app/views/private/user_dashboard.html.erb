@@ -43,9 +43,9 @@
                       <div class='userAward-wrapper'>
 						<% @user_badges_paginate.each do |badge| %>
 							
-							<a class='award green' href='javascript:;'>
+							<span class='award green' href='javascript:;'>
 	                          <i class="fa <%= badge.badge.symbol %> "></i>
-	                        </a>
+	                        </span>
 	                         
 						<% end %>
 						

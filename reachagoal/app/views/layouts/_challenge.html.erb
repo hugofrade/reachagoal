@@ -2,7 +2,6 @@
 	<% unless @challenges.blank?  %> 
 		<% @challenges.reverse!.each do |userobj| %>
 			<div class='col-md-4'>
-			
 				<%if (userobj.objective.completed_percentage<100) %>
 					<div class='challenge'>
 						<div class='challengeImage-wrapper'>
@@ -13,13 +12,13 @@
 				  	<% if userobj.objective.objective_type != 0 %>
 
 		                <div class='challengeFriends'>
-		                	<% userobj.objective.user_objectives.each do |line|%>
+		                	<% userobj.objective.user_objectives.reject{|c| c.user_id == current_user.id }.first(3).each do |line|%>
 								<%unless line.user.id == current_user.id %>
 									<%= link_to image_tag(line.user.photo.url(:nav), :class=>"img-responsive"), public_profile_path(line.user.id), :class => "friendPicture" %>
 								<%end%>
 							<%end%>
 							<% if userobj.objective.user_objectives.length > 3 %>
-								<a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'><%= userobj.objective.user_objectives.length %></a>
+								<a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'><%= userobj.objective.user_objectives.length - 4 %></a>
 							<% end %>
 		                </div>
 					<% end %>
@@ -81,7 +80,7 @@
 			<div class='col-md-12'>
 			  <div class='noChallenges'>
 			    <p>
-			      Ainda não tens nenhum desafio nesta categoria. 
+			      Ainda não tens nenhum desafio nesta categoria. Podes sempre <%= link_to 'criar um novo desafio', new_objective_path %>!
 			    </p>
 			  </div>
 			</div>

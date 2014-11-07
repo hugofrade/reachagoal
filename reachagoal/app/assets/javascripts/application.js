@@ -140,37 +140,6 @@ function loadObjectives(estado,cat_id) {
 
 
 
-/*
-$(".filtro_obj_pp").on("click", function(evt) { 
-	var estado = $(this).data('estado');
-	var cat_id = $(this).data('catid');
-	if (estado ==undefined){
-		estado = "aaa";}
-	if (cat_id == undefined){
-		cat_id = "aaa";}
-	loadObjectivespp(estado,cat_id);
-	$(".active").removeClass("active");
-	$(this).parent().addClass("active");
-});
-
-function loadObjectivespp(estado,cat_id) {
-
-	$.ajax({
-		url: "ajax_challenges/",
-		data: "estado="+estado+"&catid="+cat_id,
-		contentType: 'application/json; charset=utf-8',
-		success: function (result) {
-            $("#challenges").html(result);
-        },
-        error: function (err) {
-            console.log("AJAX error in request: " + JSON.stringify(err, null, 2));
-        }
-	});
-	
-}
-*/
-
-
 
 var completeBadgeWidth = $('.completedBadge .textWrapper').width();
 function completeBadge() {
@@ -241,7 +210,8 @@ function pagination_friends() {
 
 		var url = $(this).attr("href");
 		if (publicprofile.test(url)){
-			url = url.replace("publicprofile/", "ajax_friends/");}
+			url = url.replace("publicprofile/", "ajax_friends/");
+}
 		else { if (!ajax.test(url)){
 				url = "ajax_friends/" + url.replace("/","");
 			}

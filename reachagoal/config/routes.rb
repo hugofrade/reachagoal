@@ -47,6 +47,8 @@ Reachagoal::Application.routes.draw do
   get "ajax_values/:id" => "objectives#ajax_values"
   get "ajax_badges/:id" => "private#ajax_badges"
   get "ajax_badges/" => "private#ajax_badges"
+    
+  get "ajax_friends/:id" => "private#ajax_friends"
   get "ajax_friends/" => "private#ajax_friends"
   
   

@@ -5,7 +5,7 @@ class PrivateController < ApplicationController
 		@user_badges = UserBadges.where("receiver_id = ?", current_user.id).order("id DESC")
 		@user_badges_paginate = UserBadges.where("receiver_id = ?", current_user.id).order("id DESC").paginate(:page => params[:page], :per_page => 3)
 		@last_values_added = ObjectiveValue.where("user_id = ?", current_user.id).order("id DESC").first(5)
-		@user_friends=current_user.friends.paginate(:page => params[:page], :per_page => 5)
+		@user_friends=current_user.friends.paginate(:page => params[:page], :per_page => 3)
 	end
 	
 	def public_profile
@@ -13,7 +13,7 @@ class PrivateController < ApplicationController
 		@badges = Badge.all
 		@user_badges = UserBadges.where("receiver_id = ?", @user.id).order("id DESC")
 		@user_badges_paginate = UserBadges.where("receiver_id = ?", @user.id).order("id DESC").paginate(:page => params[:page], :per_page => 3)
-		@user_friends=@user.friends.paginate(:page => params[:page], :per_page => 1)
+		@user_friends=@user.friends.paginate(:page => params[:page], :per_page => 3)
 		@last_values_added = ObjectiveValue.where("user_id = ?", @user.id).order("id DESC").first(5)
 
 	end
@@ -46,33 +46,6 @@ class PrivateController < ApplicationController
 	end
 	
 	
-	def ajax_challenges_pp
-		user_objectives = UserObjective.where("user_id=?", params[:id])
-		@challenges = []
-		if params["estado"] != "aaa"
-			if params["estado"] == "1"
-				user_objectives.each do |user_objective|
-				  @challenges << user_objective if user_objective.objective.completed_percentage < 100
-				end
-			elsif params["estado"] == "2"
-				
-				user_objectives.each do |user_objective|
-				  @challenges << user_objective if user_objective.objective.completed_percentage == 100
-				end
-			else
-				@challenges = user_objectives
-			end
-		elsif params["catid"] != "aaa"
-			user_objectives.each do |user_objective|
-			  @challenges << user_objective if (user_objective.objective.category_id.to_i == params["catid"].to_i)
-			end
-		else
-			@challenges = user_objectives
-		end
-		
-		render :template => "layouts/_challenge", :layout => false
-	end
-	
 	def ajax_badges
 		unless params[:id].blank?
 			@user_badges = UserBadges.where("receiver_id = ?", params[:id]).order("id DESC")
@@ -88,9 +61,9 @@ class PrivateController < ApplicationController
 	def ajax_friends
 		unless params[:id].blank?
 			@user = User.find(params[:id])
-			@user_friends=@user.friends.paginate(:page => params[:page], :per_page => 1)
+			@user_friends=@user.friends.paginate(:page => params[:page], :per_page => 3)
 		else
-			@user_friends=current_user.friends.paginate(:page => params[:page], :per_page => 5)
+			@user_friends=current_user.friends.paginate(:page => params[:page], :per_page => 3)
 		end
 		render template: "private/_friends", layout: false
 

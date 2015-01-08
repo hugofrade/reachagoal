@@ -49,10 +49,5 @@
 		<div class='col-md-6' id='left'>
 			<div class="pagination_badges pagination-wrapper"><%= will_paginate @user_badges_paginate,  :inner_window => 1, :outer_window => 2 %></div>
 		</div>
-		<% if params[:action] == "public_profile"%>
-			<div class='col-md-6' id='right'>
-				<button class='btn btn-primary' data-dismiss='modal' data-keyboard='true' data-target='#newAward-modal' data-toggle='modal' type='button'>Oferecer</button>
-			</div>
-		 <%end%>
 	</div>
 </div>

@@ -42,6 +42,25 @@ class ObjectivesController < ApplicationController
 		@values_per_user = Hash[hash1.sort_by{|k, v| v}.reverse]
 		
 		
+		values_current_user = @objective.objective_values.reject{|obj| obj.value if obj.user_id!=current_user.id}.map{|obj| obj.value}
+				
+		labelsset_user = @objective.objective_values.reject{|c| c.user_id != current_user.id}.map do |obj|  
+			if ((((Time.now - obj.created_at) / 1.hour).round) <= 72 ) 
+				obj.created_at
+			else 
+				obj.created_at.to_date 
+			end
+		end 
+		
+		@hash2 = Hash[labelsset_user.uniq.map{|v| [v,0]}]
+		labelsset_user.each_with_index{|v,i| @hash2[v] = @hash2[v] + values_current_user[i] }
+	    @dataset_user = @hash2.values
+	    @labelsset_user = @hash2.keys
+
+		
+		
+		
+		
 		@user_friends=current_user.friends.paginate(:page => params[:page], :per_page => 5)
 		@values = ObjectiveValue.where("objective_id=?",@objective.id).order("id DESC").paginate(:page => params[:page], :per_page => 5)	
 	
@@ -69,7 +88,6 @@ class ObjectivesController < ApplicationController
     @objective = Objective.new(objective_params)
     @objective.start_day=DateTime.now
 	@objective.privacy= "1"
-	@objective.objective_type= "0"
     @objective.user_id = current_user.id
       if @objective.save
         @user_objective=UserObjective.new(user_id: @objective.user_id, objective_id: @objective.id)

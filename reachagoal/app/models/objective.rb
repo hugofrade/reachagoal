@@ -11,6 +11,13 @@ class Objective < ActiveRecord::Base
 	has_many :objective_values
 	has_many :user_objectives	
 	has_many :objective_comments
+	
+	  validates_presence_of :name
+	  validates_presence_of :price
+	  validates_presence_of :objective_type
+	  validates_presence_of :category_id
+	  validates :price, numericality: true
+
 
 	
 	def missing_value
@@ -32,13 +39,25 @@ class Objective < ActiveRecord::Base
 			hash = Hash[users.uniq.map{|v| [v,0]}]
 			users.each_with_index{|v,i| hash[v] = hash[v] + values[i] }
 			values_user = Hash[hash.sort_by{|k,v| v}.reverse]
-			return price-values_user[user_id]
+			if values_user[user_id].blank?
+				return price
+			else	
+				return price-values_user[user_id]
+			end
 		else
-			price
+			return price
 		end
 	end
 	
 	def completed_percentage_shared(user_id)
-		return (((self.price-self.missing_value_shared(user_id))/self.price)*100)
+		completed = ((self.price-self.missing_value_shared(user_id))/self.price)*100
+		
+		if completed.blank?
+			return 0
+		else 
+			return completed
+		end
+		
+		 
 	end
 end

@@ -3,7 +3,7 @@
 class Enumerators
 
 	Privacy={
-		(PRIVACY_PUBLIC = 1) => "Publico",
+		(PRIVACY_PUBLIC = 1) => "Público",
 		(PRIVACY_PRIVATE = 0) => "Privado"
 	}
 	

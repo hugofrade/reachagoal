@@ -173,22 +173,33 @@
       <article class='challengeActivity'>
         <div class='container'>
 			
-			<%if @labelsset.length>10%>
-			  <div class='row'>
-				  	<div class='col-md-12' id='chartContainer' style="height: 400px;">
-					  	<canvas id='chart'></canvas>
+			<%if @objective.objective_type == 0%>
+				<%if @labelsset.length>10%>
+				  <div class='row'>
+					  	<div class='col-md-12' id='chartContainer' style="height: 400px;">
+						  	<canvas id='chart'></canvas>
+						  </div>
 					  </div>
-				  </div>
+				<%end%>
+			<%else%>
+				<%if @labelsset_user.length>10%>
+				  <div class='row'>
+					  	<div class='col-md-12' id='chartContainer' style="height: 400px;">
+						  	<canvas id='chart'></canvas>
+						  </div>
+					  </div>
+				<%end%>
 			<%end%>
-
 			<div class='row'>
           
             	<div class='col-md-6'>
             	
 					<div class='row'>
-					  	<%if @labelsset.length<=10%>
-	               			<%if @labelsset.length < 2 %>
-				   				<div class='col-md-12' id='chartContainer'>
+						
+						<%if @objective.objective_type == 0%>
+						  	<%if @labelsset.length<=10%>
+		               			<%if @labelsset.length < 2 %>
+					   				<div class='col-md-12' id='chartContainer'>
 									<div id='chartOff'>
 										<div class='wrapper'>
 										  <h1 class='h3'>Ritmo de poupança</h1>
@@ -197,13 +208,30 @@
 									</div>
 									<canvas id='chartRandom'></canvas>
 								</div>
-
-							<%else %>
-								<div class='col-md-12' id='chartContainer' style="height: 400px">
-									<canvas id='chart'></canvas>
-								</div>
+								<%else %>
+									<div class='col-md-12' id='chartContainer' style="height: 400px">
+										<canvas id='chart'></canvas>
+									</div>
+								<%end%>
 							<%end%>
-
+						<%else%>
+						<%if @labelsset_user.length<=10%>
+		               			<%if @labelsset_user.length < 2 %>
+					   				<div class='col-md-12' id='chartContainer'>
+									<div id='chartOff'>
+										<div class='wrapper'>
+										  <h1 class='h3'>Ritmo de poupança</h1>
+										  <p>Tens de progredir mais no teu desafio para teres acesso ao gráfico.</p>
+										</div>
+									</div>
+									<canvas id='chartRandom'></canvas>
+								</div>
+								<%else %>
+									<div class='col-md-12' id='chartContainer' style="height: 400px">
+										<canvas id='chart'></canvas>
+									</div>
+								<%end%>
+							<%end%>
 						<%end%>
 					
 						<div class='col-md-12 userEntries'>
@@ -312,7 +340,7 @@
 									<div class='commentArea'>
 										<%= image_tag current_user.photo.url(:nav), :class => "avatar"%>
 										<div class='inputWrap'>
-											<%= text_area_tag :comment %>
+											<%= text_area_tag :comment,nil,{:placeholder => "Escreve um comentário..."} %>
 										</div>
 										<%= submit_tag "#{t('submit').capitalize}", :class=>"sr-only"%>
 									</div>
@@ -346,31 +374,46 @@
       </article>
       
     </section>
-
 <% content_for :js do %>
 	<%= javascript_include_tag "Chart.min.js" %>
 	
 	<script>
 		<%if @labelsset.length >= 2 %>
+			<% if @objective.objective_type != 0%>
 
-			var lineChartData = {
-				labels : ["<%= @labelsset.map{ |date| "#{time_ago_in_words(date)} #{t('ago')}" }.join('", "').html_safe %>"],    
-				<% unless @objective.objective_type == 1%>
-				datasets: [{
-					label: "Savings Graph",
-					fillColor : "rgba(220,220,220,0.2)",
-					strokeColor : "rgba(220,220,220,1)",
-					pointColor : "rgba(220,220,220,1)",
-					pointStrokeColor : "#fff",
-					pointHighlightFill : "#fff",
-					pointHighlightStroke : "rgba(220,220,220,1)",
-					data : [<%= @dataset.join(", ") %>]
-			
-					}]
-				<%else%>
+				var lineChartData = {
+					labels : ["<%= @labelsset_user.map{ |date| "#{time_ago_in_words(date)} #{t('ago')}" }.join('", "').html_safe %>"],    
+					datasets: [{
+						label: "Savings Graph",
+						fillColor : "rgba(220,220,220,0.2)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [<%= @dataset_user.join(", ") %>]
+				
+						}]
 	
-				<%end%>
-			};
+				};
+			<%else%>
+	
+				var lineChartData = {
+					labels : ["<%= @labelsset.map{ |date| "#{time_ago_in_words(date)} #{t('ago')}" }.join('", "').html_safe %>"],    
+					datasets: [{
+						label: "Savings Graph",
+						fillColor : "rgba(220,220,220,0.2)",
+						strokeColor : "rgba(220,220,220,1)",
+						pointColor : "rgba(220,220,220,1)",
+						pointStrokeColor : "#fff",
+						pointHighlightFill : "#fff",
+						pointHighlightStroke : "rgba(220,220,220,1)",
+						data : [<%= @dataset.join(", ") %>]
+				
+						}]
+	
+				};
+			<%end%>
 			
 			var options = {
 			    tooltipTemplate: " Guardaste <%%= value %> €",

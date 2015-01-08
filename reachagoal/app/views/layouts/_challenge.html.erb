@@ -17,7 +17,7 @@
 									<%= link_to image_tag(line.user.photo.url(:nav), :class=>"img-responsive"), public_profile_path(line.user.id), :class => "friendPicture" %>
 								<%end%>
 							<%end%>
-							<% if userobj.objective.user_objectives.length > 3 %>
+							<% if userobj.objective.user_objectives.length > 4 %>
 								<a alt='Nome do amigo' class='friendPicture viewMore' href='javascript:;'><%= userobj.objective.user_objectives.length - 4 %></a>
 							<% end %>
 		                </div>

@@ -8,16 +8,14 @@
               <%= form_for @objective , :html => { :multipart => true } do |f| %>
   
 				  <% if @objective.errors.any? %>
-				    <div id="error_explanation">
-				      <h2><%= pluralize(@objective.errors.count, "error") %> prohibited this objective from being saved:</h2>
-				
-				      <ul>
-				      <% @objective.errors.full_messages.each do |msg| %>
-				        <li><%= msg %></li>
-				      <% end %>
-				      </ul>
-				    </div>
+				        <div class='col-md-4 col-md-offset-4' id="error_explanation">
+					      <h1 class="h4">Não foi possível criar o objectivo. Ocorram os seguintes erros:</h1>
+					      <% @objective.errors.full_messages.each do |msg| %>
+						  	<ul><%= msg %></ul>
+						  <% end %>
+					    </div>
 				  <% end %>
+				  
 					<div class='row'>
 						<div class='form-group col-md-12'>
 							<%= f.label 	:category_id, t('newobjtype').capitalize %>
@@ -49,11 +47,18 @@
 	                  <div class='form-group col-md-12'>
 	                  	<%= f.label :end_day, t('enddate').capitalize %>
 	                    <div class='wrapper'>
-							<%= f.date_field :end_day, :placeholder => "DD-MM-AAAA ou AAAA-MM-DD", :class=> 'form-control input-lg' %>
+							<%= f.date_field :end_day, :placeholder => "DD-MM-AAAA", :class=> 'form-control input-lg' %>
 							<i class='fa fa-2x fa-calendar-o'></i>
 	                    </div>
 	                  </div>
 	                </div>
+	                
+	                <div class='row'>
+					  <div class='col-md-12 form-group'>
+						<%= f.label :objective_type, t('objectivetype').capitalize %><br>
+						<%= f.select :objective_type, Enumerators::ObjectiveType.map{ |t| [t[1],t[0]] },{}, {:class =>'form-control input-lg'} %>
+					  </div>
+					</div>
 
 				  
 				  <div class="field">

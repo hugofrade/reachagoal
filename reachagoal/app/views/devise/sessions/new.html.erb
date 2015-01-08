@@ -47,7 +47,7 @@
 				            <% if devise_mapping.rememberable? -%>
 								<div class='pull-left' id='remeberUser'>
 									<%= f.check_box :remember_me, :id =>'user_remember_me'%> 
-									<%= f.label :remember_me %>
+									<%= f.label :remember_me, t("remember_me")%>
 								</div>
 							<% end -%>
 							<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
